@@ -1,0 +1,57 @@
+ADMIN
+dashboard
+meals
+menu
+orders
+order view
+purchase
+
+FRONTEND
+meal routine - show meal days
+==============NOTDONE====================
+ FRONTEND
+homecooking
+foodstuff purchase - 
+cakes and pastries
+event catering
+training
+
+cart
+checkout
+
+
+
+login and 
+registration
+
+
+USER
+dashboard
+profile
+preferences
+orders
+meal plan
+transactions
+
+while creating menu, 
+If any food item is non-veg
+then menu is non-veg
+if all food item is veg
+diet is veg
+if all food item is vegan
+diet is vegan
+
+while filtering menu, 
+If all food item is chinese
+then origin is chinese
+if all food item is italian
+then origin is italian
+if all food item is vegan
+diet is vegan
+
+
+after user filtering and food is not available,
+show no-meal, and show: would you like to be notified when this meal is available? button= yes.
+
+type the food and the menu online
+
