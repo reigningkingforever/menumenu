@@ -12,14 +12,14 @@
                     <div class="col-xs-12 col-md-5">
                         <h1>Login</h1>
                         <span class="mb-5 visible-lg"></span>
-                        <form class="p-5">
+                        <form class="p-5" >
                             <div class="form-group">
                                 <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" />
                             </div>
                             
                             <input type="password" name="password" placeholder="Password" autocomplete="current-password"/>
                             <input type="submit" name="signup_submit" value="Login" />
-                            <p><a href="#">Create an account</a></p>
+                            <span class="visible-lg visible-md visible-sm visible-xs mt-3"><a href="#">Create an account</a></span>
                         </form>    
                     </div>
                     <div class="col-xs-12 col-md-1">
