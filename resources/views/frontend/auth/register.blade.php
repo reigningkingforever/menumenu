@@ -6,17 +6,38 @@
 <div id="features" class="text-center">
 	<div class="container">
 	  	<div class="section-title">
-			<h2>WELCOME</h2>
+			<h2>REGISTER</h2>
             <div id="login-box">
                 <div class="row">
                     <div class="col-xs-12 col-md-5">
-                        <h1>Login</h1>
-                        <span class="mb-5 visible-lg"></span>
-                        <form class="p-5">
-                            <input type="type" name="name" placeholder="Your Name" autocomplete="no-name" />
+                        {{-- <h1>Register</h1> --}}
+                        {{-- <span class="mb-5 visible-lg"></span> --}}
+                        <form class="px-4 py-5" action="{{route('register')}}" method="POST">@csrf
+                            @if ($errors->has('name'))
+                                <span class="small text-danger" role="alert">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
+                            <input type="text" name="name" placeholder="Your Name" autocomplete="no-name" />
+                            @if ($errors->has('email'))
+                                <span class="small text-danger" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                             @endif                            
                             <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" />
+                            @if ($errors->has('phone'))
+                                <span class="small text-danger" role="alert">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
+                             @endif                            
+                            <input type="text" name="phone" placeholder="Phone number" autocomplete="no-email" />
+                            @if ($errors->has('password'))
+                                    <span class="small text-danger" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                            @endif
                             <input type="password" name="password" placeholder="Password" autocomplete="current-password"/>
-                            <input type="password" name="confirm-password" placeholder="Repeat Password" autocomplete="current-password"/>
+                            <input type="password" name="password_confirmation" placeholder="Repeat Password" autocomplete="current-password"/>
                             <input type="submit" name="signup_submit" value="Sign me up" />
                             
                         </form>    
@@ -31,6 +52,7 @@
                             <button class="social-signin facebook">Register with facebook</button>
                             <button class="social-signin twitter">Register with Twitter</button>
                             <button class="social-signin google">Register with Google+</button>
+                            <a href="{{route('login')}}">Back to Login</a>
                             </form>
                         </div>
                     </div>

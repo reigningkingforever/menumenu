@@ -12,14 +12,22 @@
                     <div class="col-xs-12 col-md-5">
                         <h1>Login</h1>
                         <span class="mb-5 visible-lg"></span>
-                        <form class="p-5" >
-                            <div class="form-group">
-                                <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" />
-                            </div>
+                        <form class="p-5" action="{{route('login')}}" method="POST">@csrf
+                            @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" />
                             
+                            @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             <input type="password" name="password" placeholder="Password" autocomplete="current-password"/>
                             <input type="submit" name="signup_submit" value="Login" />
-                            <span class="visible-lg visible-md visible-sm visible-xs mt-3"><a href="#">Create an account</a></span>
+                            <span class="visible-lg visible-md visible-sm visible-xs mt-3"><a href="{{route('register')}}">Create an account</a></span>
                         </form>    
                     </div>
                     <div class="col-xs-12 col-md-1">

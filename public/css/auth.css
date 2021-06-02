@@ -48,6 +48,8 @@ input[type="password"] {
 input[type="text"]:focus,input[type="email"]:focus,
 input[type="password"]:focus {
   border-bottom: 2px solid #16a085;
+  border-top: 0px;
+  outline: none;
   color: #16a085;
   transition: 0.2s ease;
 }
