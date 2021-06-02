@@ -18,16 +18,16 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                            <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" />
+                            <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" required />
                             
                             @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                            <input type="password" name="password" placeholder="Password" autocomplete="current-password"/>
+                            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required/>
                             <input type="submit" name="signup_submit" value="Login" />
-                            <span class="visible-lg visible-md visible-sm visible-xs mt-3"><a href="{{route('register')}}">Create an account</a></span>
+                            <span class="visible-lg visible-md visible-sm visible-xs mt-3"><a href="{{route('password.request')}}">forgot your password?</a></span>
                         </form>    
                     </div>
                     <div class="col-xs-12 col-md-1">
@@ -40,6 +40,7 @@
                             <button class="social-signin facebook">Log in with facebook</button>
                             <button class="social-signin twitter">Log in with Twitter</button>
                             <button class="social-signin google">Log in with Google+</button>
+                            <a href="{{route('register')}}">Create an account</a>
                             </form>
                         </div>
                     </div>

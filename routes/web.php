@@ -30,7 +30,6 @@ Route::get('blog','PostController@index')->name('blog');
 Route::get('post/{post}', 'PostController@view')->name('post');
 
 Route::get('cart','MenuController@cart')->name('cart');
-
 Auth::routes();
 Route::get('home', 'HomeController@dashboard')->name('home');
 Route::group(['prefix'=>'user','as'=>'user.'],function(){

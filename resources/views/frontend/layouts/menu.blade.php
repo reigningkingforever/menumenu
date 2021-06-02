@@ -34,7 +34,7 @@
           @else
             <li class="nav-item dropdown">
                 <div class="hidden-xs">
-                  <a class="nav-link dropdown-toggle pb-0  nohover" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle pb-0 bg-transparent nohover" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
                     <img src="{{asset('img/avatar.jpg')}}" class="rounded-circle" height="34px">
                   </a>
                   <!--DESKTOP USER MENU-->

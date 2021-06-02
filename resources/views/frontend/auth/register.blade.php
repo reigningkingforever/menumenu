@@ -18,26 +18,26 @@
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                             @endif
-                            <input type="text" name="name" placeholder="Your Name" autocomplete="no-name" />
+                            <input type="text" name="name" placeholder="Your Name" autocomplete="no-name"  required/>
                             @if ($errors->has('email'))
                                 <span class="small text-danger" role="alert">
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                              @endif                            
-                            <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" />
+                            <input type="email" name="email" placeholder="E-mail" autocomplete="no-email" required/>
                             @if ($errors->has('phone'))
                                 <span class="small text-danger" role="alert">
                                     <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
                              @endif                            
-                            <input type="text" name="phone" placeholder="Phone number" autocomplete="no-email" />
+                            <input type="text" name="phone" placeholder="Phone number" autocomplete="no-email" required/>
                             @if ($errors->has('password'))
                                     <span class="small text-danger" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                             @endif
-                            <input type="password" name="password" placeholder="Password" autocomplete="current-password"/>
-                            <input type="password" name="password_confirmation" placeholder="Repeat Password" autocomplete="current-password"/>
+                            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required/>
+                            <input type="password" name="password_confirmation" placeholder="Repeat Password" autocomplete="current-password" required/>
                             <input type="submit" name="signup_submit" value="Sign me up" />
                             
                         </form>    
