@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserMenusTable extends Migration
+class CreateBookmarksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateUserMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_menus', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('meal_id');
-            $table->string('period');
-            $table->date('day');
+            $table->unsignedBigInteger('eatable_id');
+            $table->string('eatable_type');
+            $table->string('period')->nullable();
+            $table->date('day')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateUserMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_menus');
+        Schema::dropIfExists('bookmarks');
     }
 }

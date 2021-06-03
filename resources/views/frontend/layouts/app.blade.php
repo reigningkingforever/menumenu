@@ -33,6 +33,7 @@ Varieties of food served includes local dishes, intercontinental dishes, pastrie
 <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
 
 <link rel="stylesheet" href="{{asset('css/shop.css')}}">
+<link rel="stylesheet" href="{{asset('css/floatingcart.css')}}">
 @stack('styles')
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -43,6 +44,7 @@ Varieties of food served includes local dishes, intercontinental dishes, pastrie
     @include('frontend.layouts.header')
 @endif
 @yield('main')
+
 @include('frontend.layouts.footer')
 
 <script type="text/javascript" src="{{asset('js/jquery.1.11.1.js')}}"></script> 

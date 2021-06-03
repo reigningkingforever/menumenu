@@ -6,9 +6,7 @@ use App\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
-{
-    
-    
+{   
     /** FRONTEND*/
      
     public function index()

@@ -2,24 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
+use App\Http\Traits\CartTrait;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+
+class CartController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
+    use CartTrait;
+
+    public function addtocart(Request $request){
+        $cart = $this->addToCartSession($request->item, $request->item_id);
+        if(Auth::check())
+        $this->addToCartDb($request->item, $request->item_id);
+        return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list()
+
+    public function removefromcart(Request $request){
+        $cart = $this->removeFromCartSession($request->item, $request->item_id);
+        if(Auth::check())
+        $this->removeFromCartDb($request->item, $request->item_id);
+        return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
+    }
+    
+    public function index()
     {
-        $users = User::all();
-        return view('backend.users.list',compact('users'));
+        //
     }
 
     /**
@@ -86,14 +94,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function addToBookmark(Request $request){
-        $wish = $this->addBookmark($product);
-        return response()->json(['wish_count'=> count((array)$wish)],200);
-    }
-    public function removeFromBookmark(Request $request){
-        $wish = $this->removeBookmark($product);
-        return response()->json(['wish_count'=> count((array)$wish)],200);
     }
 }

@@ -1,0 +1,35 @@
+.float-button-wrapper {
+    position: fixed;
+    z-index: 20;
+    right: 30px;
+    bottom: 30px;
+}
+
+.pulse {
+    box-shadow: 0 0 0 rgba(92,168,44, 0.4);
+    animation: pulse 2s infinite;
+}
+
+img.float-button {
+    width: 60px;
+}
+
+
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(92,168,44, 0.5);
+    box-shadow: 0 0 0 0 rgba(92,168,44, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 10px rgba(92,168,44, 0);
+      box-shadow: 0 0 0 30px rgba(92,168,44, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(92,168,44, 0);
+      box-shadow: 0 0 0 0 rgba(92,168,44, 0);
+  }
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+}

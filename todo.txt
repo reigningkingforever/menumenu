@@ -8,7 +8,10 @@ purchase
 
 FRONTEND
 meal routine - show meal days
+login and 
+registration
 ==============NOTDONE====================
+
  FRONTEND
 homecooking
 foodstuff purchase - 
@@ -18,11 +21,6 @@ training
 
 cart
 checkout
-
-
-
-login and 
-registration
 
 
 USER

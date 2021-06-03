@@ -18,32 +18,28 @@ Route::view('cake-and-pastries','frontend.pastries')->name('cake-pastries');
 Route::view('foodstuff-purchase','frontend.foodstuff')->name('foodstuff-purchase');
 Route::view('event-catering','frontend.catering')->name('catering');
 Route::view('training','frontend.training')->name('training');
+
 Route::get('meals','MealController@index')->name('meals');
 Route::get('meal/{meal}', 'MealController@view')->name('meal.view');
+Route::post('add-to-cart','CartController@addtocart')->name('cart.add');
+Route::post('remove-from-cart','CartController@removefromcart')->name('cart.remove');
+
+
 Route::post('menus','MenuController@index')->name('menus');
-Route::get('menu/{menu}', 'MenuController@view')->name('menu.view');    
-
-
-
+Route::get('menu/{menu}', 'MenuController@view')->name('menu.view');
+Route::post('menu/add-to-cart','MenuController@addtocart')->name('menu.addtocart');
+Route::post('menu/remove-from-cart','MenuController@removefromcart')->name('menu.removefromcart');
 
 Route::get('blog','PostController@index')->name('blog');
 Route::get('post/{post}', 'PostController@view')->name('post');
 
-Route::get('cart','MenuController@cart')->name('cart');
+Route::get('cart','PaymentController@cart')->name('cart');
+
+Route::get('checkout','PaymentController@checkout')->name('checkout');
+
 Auth::routes();
 Route::get('home', 'HomeController@dashboard')->name('home');
-Route::group(['prefix'=>'user','as'=>'user.'],function(){
-    Route::get('dashboard', 'HomeController@user')->name('home');
-    Route::get('profile', 'UserController@index')->name('profile');
-    Route::post('profile/update', 'UserController@update')->name('profile');
-    Route::post('profile/preference', 'UserController@preference')->name('preference');
-    Route::get('meal-plan','UserController@mealplan')->name('orders');
-    Route::get('saves','UserController@savedMeals')->name('saved.meals');
-    Route::get('transactions','UserController@transactions')->name('transactions');
-    Route::get('order','OrderController@index')->name('orders');
-    Route::get('order/view/{order}','OrderController@show')->name('order.show');
-    Route::post('checkout','PaymentController@checkout')->name('checkout');
-});
+include('user.php');
 include('admin.php');
 
 

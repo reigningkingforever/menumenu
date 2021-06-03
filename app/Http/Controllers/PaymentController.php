@@ -15,6 +15,16 @@ class PaymentController extends Controller
         //
     }
 
+    public function cart()
+    {
+        //
+    }
+
+    public function checkout()
+    {
+        //
+    }
+
     /**
      * Show the form for creating a new resource.
      *

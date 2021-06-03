@@ -1,3 +1,10 @@
+<div class="float-button-wrapper rounded-circle pulse">
+	<div class="box-shadow rounded-circle">
+		<a href="#" rel="noreferrer noopener">
+			<img class="float-button" src="{{asset('img/cart.png')}}" alt="whatsapp">
+		</a>
+	</div>
+</div>
 <div id="footer">
     <div class="container text-center">
       <div class="col-md-6">
@@ -13,4 +20,4 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
