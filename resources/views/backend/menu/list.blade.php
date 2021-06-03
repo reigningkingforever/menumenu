@@ -45,28 +45,28 @@
                                                 <span class="text-muted">Type</span>
                                                 <div class="form-check form-check-radio mt-3">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="food-type" id="food" value="food" checked>
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="food" value="food" checked>
                                                         <span class="form-check-sign"></span>
                                                         Food
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-radio mt-3">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="food-type" id="drink" value="drink" >
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="drink" value="drink" >
                                                         <span class="form-check-sign"></span>
                                                         Drink
                                                     </label>
                                                 </div> 
                                                 <div class="form-check form-check-radio mt-3">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="food-type" id="fruit" value="fruit">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="fruit" value="fruit">
                                                         <span class="form-check-sign"></span>
                                                         Fruit
                                                     </label>
                                                 </div>   
                                                 <div class="form-check form-check-radio mt-3">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="food-type" id="pastries" value="pastries">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="pastries" value="pastries">
                                                         <span class="form-check-sign"></span>
                                                         Pastries
                                                     </label>
@@ -85,7 +85,7 @@
                                                 </div> --}}
                                                 <div class="col-md-6">
                                                     <label class="">Item Origin</label>
-                                                    <select name="" id="" class="form-control">
+                                                    <select name="origin" id="" class="form-control">
                                                         <option>Intercontinental</option>
                                                         <option>Local</option>
                                                         <option>Chinese</option>
@@ -96,7 +96,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="">Diet</label>
-                                                    <select name="" id="" class="form-control">
+                                                    <select name="diet" id="" class="form-control">
                                                         <option value="vegan">Vegan</option>
                                                         <option value="veg">Vegetarian</option>
                                                         <option value="nonveg">Non-Vegetarian</option>
@@ -108,12 +108,12 @@
                                             <div class="companydocument">
                                                 <label class="">Size</label>
                                                 <div class="input-group mb-3">
-                                                    <select class="input-group-prepend border rounded">
+                                                    <select name="size" class="input-group-prepend border rounded">
                                                         <option>Small</option>
                                                         <option>Medium</option>
                                                         <option>Large</option>    
                                                     </select>    
-                                                    <input name="image" type="file" class="form-control" placeholder="image">
+                                                    <input name="file" type="file" class="form-control" placeholder="image">
                                                 </div>
                                                 <div class="form-group">
                                                     <input name="price" type="number" class="form-control" placeholder="Amount in naira">
@@ -123,7 +123,7 @@
                                             <div class="form-group">
                                                 <label>Featured Image</label>
                                                 <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:250px;" class="w-100" data-format="image" id="featured">
-                                                <input type="file" name="file" id="cover" required>
+                                                <input type="file" name="file" id="cover">
                                             </div>
                                             <div class="form-group">
                                                 <button class="btn btn-primary btn-block " type="submit" style="cursor:pointer">

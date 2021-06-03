@@ -6,7 +6,7 @@ Route::group(['prefix'=> 'admin','as'=>'admin.'],function(){
     Route::post('menu/save','MenuController@store')->name('menu.save');
     Route::get('menu/edit/{menu}','MenuController@edit')->name('menu.edit');
     Route::post('menu/update','MenuController@update')->name('menu.update');
-    Route::post('menu/delete','MenuController@destroy')->name('menu.delete');
+    Route::post('menu/delete/{menu}','MenuController@destroy')->name('menu.delete');
 
     Route::get('meals','MealController@list')->name('meal.list');
     Route::get('meal/create','MealController@create')->name('meal.create');

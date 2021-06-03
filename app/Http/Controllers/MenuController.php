@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Traits\MediaManagementTrait;
 
 class MenuController extends Controller
 {
+    use MediaManagementTrait;
     //type, size, diet, origin
     public function index(Request $request){
         if($q = $request->search){
@@ -38,15 +41,23 @@ class MenuController extends Controller
         $menus = Menu::all();
         return view('backend.menu.list',compact('menus'));
     }
-    
-    public function create()
-    {
-        //
-    }
 
     public function store(Request $request)
     {
-        //
+        $menu = new Menu;
+        $menu->name = $request->name;
+        $menu->code = $request->name;
+        $menu->description = $request->description;
+        $menu->type = $request->type;
+        $menu->origin = $request->origin;
+        $menu->diet = $request->diet;
+        $menu->size = $request->size;
+        $menu->price = $request->price;
+        $menu->save();
+        if($request->hasFile('file') || $request->link){
+            $this->uploadMedia($request,$menu->id,get_class($menu));
+        }
+        return redirect()->back();
     }
 
     public function show($id)
@@ -83,9 +94,14 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-        //
+        if($menu->media){
+            Storage::delete('public/meals/'.$menu->media->name);
+            $menu->media->delete();
+        }
+        $menu->delete();
+        return redirect()->back();
     }
 
 }
