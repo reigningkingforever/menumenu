@@ -44,18 +44,21 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
-        $menu = new Menu;
-        $menu->name = $request->name;
-        $menu->code = $request->name;
-        $menu->description = $request->description;
-        $menu->type = $request->type;
-        $menu->origin = $request->origin;
-        $menu->diet = $request->diet;
-        $menu->size = $request->size;
-        $menu->price = $request->price;
-        $menu->save();
-        if($request->hasFile('file') || $request->link){
-            $this->uploadMedia($request,$menu->id,get_class($menu));
+        // dd($request->size);
+        for($i = 0; $i < count($request->size); $i++){
+            $menu = new Menu;
+            $menu->name = $request->name;
+            $menu->code = $request->name;
+            $menu->description = $request->description;
+            $menu->type = $request->type;
+            $menu->origin = $request->origin;
+            $menu->diet = $request->diet;
+            $menu->size = $request->size[$i];
+            $menu->price = $request->price[$i];
+            $menu->save();
+            if($request->hasFile('file.'.$i)){
+                $this->multipleUpload($request->file[$i],$menu->id,get_class($menu));
+            }
         }
         return redirect()->back();
     }
@@ -88,12 +91,6 @@ class MenuController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Menu $menu)
     {
         if($menu->media){

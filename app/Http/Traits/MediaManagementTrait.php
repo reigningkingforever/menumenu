@@ -25,20 +25,16 @@ trait MediaManagementTrait
         }
     }
 
-    protected function multipleUpload(Request $request,$mediable_id,$mediable_type){
-        if($request->hasFile('media'))
-        {
-            foreach ($request->file('media') as $file) {
-                $this->processUpload($file,$mediable_id,$mediable_type);
-            }
-        }
+    protected function multipleUpload($file,$mediable_id,$mediable_type){
+        $this->processUpload($file,$mediable_id,$mediable_type);
     }
 
     protected function processUpload($file,$mediable_id,$mediable_type){
         $ext = $file->getClientOriginalExtension();
         $format = strstr($file->getClientMimeType(),'/',true);
         $mediaName = rand().time().'.'.$ext;
-        $file->storeAs('public/'.$format.'s/',$mediaName);//save the file to public folder
+        $location = $mediable_type == 'App\Post'? 'posts': 'meals';
+        $file->storeAs('public/'.$location.'/',$mediaName);//save the file to public folder
         $this->saveToDatabase($mediaName,$format,false,$mediable_id,$mediable_type);
     }
 

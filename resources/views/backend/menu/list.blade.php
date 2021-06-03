@@ -108,23 +108,23 @@
                                             <div class="companydocument">
                                                 <label class="">Size</label>
                                                 <div class="input-group mb-3">
-                                                    <select name="size" class="input-group-prepend border rounded">
+                                                    <select name="size[]" class="input-group-prepend border rounded">
                                                         <option>Small</option>
                                                         <option>Medium</option>
                                                         <option>Large</option>    
                                                     </select>    
-                                                    <input name="file" type="file" class="form-control" placeholder="image">
+                                                    <input name="file[]" type="file" class="form-control" placeholder="image">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input name="price" type="number" class="form-control" placeholder="Amount in naira">
+                                                    <input name="price[]" type="number" class="form-control" placeholder="Amount in naira" required>
                                                 </div>
                                             </div>
                                             <button type="button" class="d-block my-2 addmore">Add New Sizes</button>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label>Featured Image</label>
                                                 <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:250px;" class="w-100" data-format="image" id="featured">
                                                 <input type="file" name="file" id="cover">
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <button class="btn btn-primary btn-block " type="submit" style="cursor:pointer">
                                                     Save Item
@@ -201,7 +201,7 @@
                                                     @default
                                                         
                                                 @endswitch
-                                                    <small class="card-category text-muted"> 1000ml</small>
+                                                    <small class="card-category text-muted"> {{$menu->size}}</small>
                                                 </h4>
                                                 <h5>{{$menu->description}}</h5>    
                                             </td>
@@ -306,17 +306,17 @@
         var product =         `<div class="companydocument">
                                     <label class="">Size</label>
                                     <div class="input-group mb-3">
-                                        <select class="input-group-prepend border rounded">
-                                            <option>Very Small</option>
+                                        <select name="size[]" class="input-group-prepend border rounded">
+                                            
                                             <option>Small</option>
                                             <option>Medium</option>
                                             <option>Large</option>
-                                            <option>Very Large</option>
+                                            
                                         </select>    
-                                        <input name="image" type="file" class="form-control" placeholder="image">
+                                        <input name="file[]" type="file" class="form-control" placeholder="image">
                                     </div>
                                     <div class="input-group">
-                                        <input name="price" type="number" class="form-control" placeholder="Amount in naira">
+                                        <input name="price[]" type="number" class="form-control" placeholder="Amount in naira">
                                         <button type="button" class="btn btn-danger input-group-text input-group-append input-group-addon removemore border">
                                             <i class="fa fa-times mr-1 "></i>Delete Size & Price
                                         </button>
