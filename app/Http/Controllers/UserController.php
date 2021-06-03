@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Traits\BookmarkTrait;
 
 class UserController extends Controller
 {
+    use BookmarkTrait;
     public function __construct()
     {
         $this->middleware('auth');
@@ -89,11 +91,11 @@ class UserController extends Controller
     }
 
     public function addToBookmark(Request $request){
-        $wish = $this->addBookmark($product);
+        $wish = $this->addBookmark($request->item,$request->item_id);
         return response()->json(['wish_count'=> count((array)$wish)],200);
     }
     public function removeFromBookmark(Request $request){
-        $wish = $this->removeBookmark($product);
+        $wish = $this->removeBookmark($request->item,$request->item_id);
         return response()->json(['wish_count'=> count((array)$wish)],200);
     }
 }
