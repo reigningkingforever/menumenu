@@ -31,7 +31,9 @@ class Menu extends Model
     }
 
     public function media(){
-        return $this->morphOne(Media::class, 'mediable');
+        return $this->morphOne(Media::class, 'mediable')->withDefault([
+            'name' => 'meal-no-image.jpg',
+        ]);
     }
 
     public function comments(){

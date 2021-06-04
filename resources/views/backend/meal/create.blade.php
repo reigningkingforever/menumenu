@@ -24,35 +24,25 @@
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 {{-- <label class="">Title</label> --}}
-                                                <input type="text" name="title" class="form-control" placeholder="Title">
+                                                <input type="text" name="title" class="form-control" placeholder="Title" required>
                                                 <small class="form-text text-muted">Title of the meal</small>
                                             </div>
                                             <div class="form-group">
                                                 {{-- <label class="">Sub Title</label> --}}
-                                                <input type="text" name="title" class="form-control" placeholder="Sub Title">
-                                                <small class="form-text text-muted">Title of the meal</small>
+                                                <input type="text" name="subtitle" class="form-control" placeholder="Sub Title" required>
+                                                <small class="form-text text-muted">Subtitle of the meal</small>
                                             </div>
 
                                             <div class="form-group companydocument">
-                                                <label class="">Select Meals</label>
-                                                <select class="form-control select2" multiple>
-                                                    @foreach ($meals as $meal)
-                                                        <option label="{{$meal->media->name}}"> {{$meal->description}} </option>
+                                                <label class="">Select Meal Items</label>
+                                                <select name="menu[]" class="form-control select2" multiple required>
+                                                    @foreach ($menus as $menu)
+                                                        <option label="{{$menu->media->name}}" value="{{$menu->id}}"> {{$menu->description}} </option>
                                                     @endforeach
                                                     
                                                 </select>
                                             </div>
-                                            {{-- <div class="input-group companydocument mb-2">
-                                                
-                                                <select class="form-control" name="types[]">
-                                                    <option selected disabled>Select Type</option>
-
-                                                </select>
-                                                
-                                                <button type="button" class="input-group-text input-group-append input-group-addon removemore">
-                                                    <i class="fa fa-times mr-1 "></i>Del
-                                                </button>
-                                            </div> --}}
+                                            
                                             
                                             {{-- <button type="button" class="d-block mb-2 addmore">Add Other Meal</button> --}}
                                             
@@ -62,30 +52,28 @@
                                                 
                                                 <div class="col-md-4">
                                                     <label class="">Day</label>
-                                                    <select name="" id="" class="form-control">
-                                                        <option>Not Set</option>
-                                                        <option>Monday</option>
-                                                        <option>Tuesday</option>
-                                                        <option>Wednesday</option>
-                                                        <option>Thursday</option>
-                                                        <option>Friday</option>
-                                                        <option>Saturday</option>
-                                                        <option>Sunday</option>
+                                                    <select name="day" id="day" class="form-control" required>
+                                                        <option value="monday">Monday</option>
+                                                        <option value="tuesday">Tuesday</option>
+                                                        <option value="wednesday">Wednesday</option>
+                                                        <option value="thursday">Thursday</option>
+                                                        <option value="friday">Friday</option>
+                                                        <option value="saturday">Saturday</option>
+                                                        <option value="sunday">Sunday</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label class="">Meal Time</label>
-                                                    <select name="" id="" class="form-control">
-                                                        <option>Not Set</option>
-                                                        <option>Breakfast</option>
-                                                        <option>Lunch</option>
-                                                        <option>Dinner</option>
-                                                        <option>Snacks</option>
+                                                    <select name="period" id="period" class="form-control" required>
+                                                        <option value="breakfast">Breakfast</option>
+                                                        <option value="lunch">Lunch</option>
+                                                        <option value="dinner">Dinner</option>
+                                                        <option value="dessert">Dessert</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label class="">Price</label>
-                                                    <input type="number" name="price" class="form-control" placeholder="0.0">   
+                                                    <input type="number" name="price" class="form-control" placeholder="0.0" required>   
                                                 </div>                                     
                                             </div>                                
                                         </div>
@@ -162,7 +150,7 @@
                 return state.text;
             }
             // {{asset('img/gallery/01.jpg')}}
-            var baseUrl = "{{asset('img/gallery/')}}";
+            var baseUrl = "{{asset('storage/meals/')}}";
             var $state = $(
                 '<span><img src="' + baseUrl + '/'+ state.element.label+'" class="thumbnail mr-2" /> ' + state.text + '</span>'
             );
@@ -176,7 +164,7 @@
                 return state.text;
             }
             // {{asset('img/gallery/01.jpg')}}
-            var baseUrl = "{{asset('img/gallery/')}}";
+            var baseUrl = "{{asset('storage/meals/')}}";
             var $state = $(
                 '<span><img src="' + baseUrl +'/'+ state.element.label+ '" class="thumbnail mr-2" /> </span>'
             );

@@ -31,13 +31,7 @@ orders
 meal plan
 transactions
 
-while creating menu, 
-If any food item is non-veg
-then menu is non-veg
-if all food item is veg
-diet is veg
-if all food item is vegan
-diet is vegan
+
 
 while filtering menu, 
 If all food item is chinese

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Meal;
+use App\Menu;
 use Illuminate\Http\Request;
+use App\Http\Traits\MediaManagementTrait;
 
 class MealController extends Controller
 {
+    use MediaManagementTrait;
+
     public function index(){
         // dd(request()->query());
         if($q = request()->query('search')){
@@ -50,27 +54,38 @@ class MealController extends Controller
     
     public function create()
     {
-        $meals = Meal::all();
-        return view('backend.meal.create',compact('meals'));
+        $menus = Menu::all();
+        return view('backend.meal.create',compact('menus'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $meal = new Meal;
+        $meal->title = $request->title;
+        $meal->subtitle = $request->subtitle;
+        $meal->period = $request->period;
+        $meal->day = $request->day;
+        $meal->diet = $this->getMealDiet($request->menu);
+        $meal->price = $request->price;
+        $meal->save();
+        $meal->items()->attach($request->menu);
+        if($request->hasFile('file')){
+            $this->uploadMedia($request,$meal->id,get_class($meal));
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function getMealDiet(Array $ids){
+        $diet = ''; 
+        $menus = Menu::whereIn('id',$ids)->get()->pluck('diet')->toArray();
+        if(in_array('nonveg',$menus))
+        $diet = 'nonveg';
+        elseif(in_array('veg',$menus))
+        $diet = 'veg';
+        else
+        $diet = 'vegan';
+        return $diet;
+    }
+
     public function show($id)
     {
         //
