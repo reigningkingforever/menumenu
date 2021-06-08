@@ -22,6 +22,7 @@ class HomeController extends Controller
     }
 
     public function front(){
+    //    dd(request()->session()->get('cart'));
         $menus = Menu::where('size','medium')->get();
         $filter = ['itemtype'=>  ['food','drinks','fruits','pastries'],
                     'origin' => ['local','intercontinental','chinese','italian'],

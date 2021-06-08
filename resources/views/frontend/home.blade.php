@@ -438,34 +438,9 @@
                     'item': item
                 },
                 success:function(data) {
-                  alert('success');
-                    // $('#cart-notification').html(data.cart_count);
-                    // $('#cart-notification,.shopping-cart').show();
-                    // var cart_total = 0;
-                    // var listing;
-                    // $('#shopping_list').html('');
-                    // $.each( data.cart, function( key, value ) {
-                    //     listing =  `<li  id="cartlist`+key+`">
-                    //                     <div class="media">
-                    //                         <a href="#">
-                    //                             <img alt="" class="mr-3"
-                    //                                 src="/storage/media/image/`+value['image']+`">
-                    //                         </a>
-                    //                         <div class="media-body">
-                    //                             <a href="#">
-                    //                                 <h4>`+value['name']+`</h4>
-                    //                             </a>
-                    //                             <h4><span>`+value['quantity']+` x `+value['amount']+`</span></h4>
-                    //                         </div>
-                    //                     </div>
-                    //                     <div class="close-circle">
-                    //                         <a href="javascript:void(0)" class="remove-from-cart" data-product="`+key+`product"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    //                     </div>
-                    //                 </li>`;
-                    //     cart_total += parseInt(value['quantity']) * parseInt(value['amount']);
-                    //     $('#shopping_list').prepend(listing);
-                    // });
-                    // $('#cart_total').html(cart_total);
+                    $('.cart-count').html(data.cart_count);
+                    $('.cart-count,.pulse').show();
+                    console.log(data.cart);
                 },
                 error: function (data, textStatus, errorThrown) {
                 console.log(data);

@@ -12,7 +12,7 @@
       
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav col-xs-6 col-md-10">
+        <ul class="nav navbar-nav col-xs-6 col-md-10 d-md-inline-flex justify-content-center">
           <li>
             <a @if(url()->current() == url('/')) href="#features" @else href="{{url('/')}}#features" @endif class="page-scroll">Services</a></li>
           <li>

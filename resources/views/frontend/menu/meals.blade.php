@@ -172,7 +172,8 @@
                                                 
                                             </div>
 											<div class="d-flex">
-                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$monday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$monday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+                                            	<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$monday->id}}" class="btn btn-primary mr-2">Order Now</a>
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$monday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -250,7 +251,8 @@
                                                 
                                             </div>
                                             <div class="d-flex">
-                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$tuesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$tuesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$tuesday->id}}" class="btn btn-primary mr-2">Order Now</a>
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$tuesday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -326,7 +328,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$wednesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$wednesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+                                            	<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$wednesday->id}}" class="btn btn-primary mr-2">Order Now</a>
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$wednesday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -403,7 +406,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$thursday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$thursday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$thursday->id}}" class="btn btn-primary mr-2">Order Now</a>
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$thursday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -480,7 +484,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$friday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$friday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$friday->id}}" class="btn btn-primary mr-2">Order Now</a>
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$friday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -557,7 +562,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$saturday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$saturday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$saturday->id}}" class="btn btn-primary mr-2">Order Now</a>
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$saturday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -634,7 +640,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$sunday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$sunday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$sunday->id}}" class="btn btn-primary mr-2">Order Now</a>
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$sunday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -714,34 +721,8 @@
 				'item': item
 			},
 			success:function(data) {
-			  alert('success');
-				// $('#cart-notification').html(data.cart_count);
-				// $('#cart-notification,.shopping-cart').show();
-				// var cart_total = 0;
-				// var listing;
-				// $('#shopping_list').html('');
-				// $.each( data.cart, function( key, value ) {
-				//     listing =  `<li  id="cartlist`+key+`">
-				//                     <div class="media">
-				//                         <a href="#">
-				//                             <img alt="" class="mr-3"
-				//                                 src="/storage/media/image/`+value['image']+`">
-				//                         </a>
-				//                         <div class="media-body">
-				//                             <a href="#">
-				//                                 <h4>`+value['name']+`</h4>
-				//                             </a>
-				//                             <h4><span>`+value['quantity']+` x `+value['amount']+`</span></h4>
-				//                         </div>
-				//                     </div>
-				//                     <div class="close-circle">
-				//                         <a href="javascript:void(0)" class="remove-from-cart" data-product="`+key+`product"><i class="fa fa-times" aria-hidden="true"></i></a>
-				//                     </div>
-				//                 </li>`;
-				//     cart_total += parseInt(value['quantity']) * parseInt(value['amount']);
-				//     $('#shopping_list').prepend(listing);
-				// });
-				// $('#cart_total').html(cart_total);
+				$('.cart-count').html(data.cart_count);
+				$('.cart-count,.pulse').show();
 			},
 			error: function (data, textStatus, errorThrown) {
 			console.log(data);

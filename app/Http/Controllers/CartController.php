@@ -15,14 +15,16 @@ class CartController extends Controller
         $cart = $this->addToCartSession($request->item, $request->item_id);
         if(Auth::check())
         $this->addToCartDb($request->item, $request->item_id);
-        return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
+        // return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
+        return response()->json(['cart_count'=> collect($cart)->sum('quantity'),'cart'=> $cart],200);
     }
 
     public function removefromcart(Request $request){
         $cart = $this->removeFromCartSession($request->item, $request->item_id);
         if(Auth::check())
         $this->removeFromCartDb($request->item, $request->item_id);
-        return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
+        // return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
+        return response()->json(['cart_count'=> collect($cart)->sum('quantity'),'cart'=> $cart],200);
     }
     
     public function index()
