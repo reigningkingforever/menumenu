@@ -37,7 +37,7 @@
                                                 <label class="">Select Meal Items</label>
                                                 <select name="menu[]" class="form-control select2" multiple required>
                                                     @foreach ($menus as $menu)
-                                                        <option label="{{$menu->media->name}}" value="{{$menu->id}}"> {{$menu->description}} </option>
+                                                        <option label="{{$menu->media->name}}" value="{{$menu->id}}"> {{$menu->name.'('.$menu->size.') : '.Illuminate\Support\Str::words($menu->description,5, '...')}} </option>
                                                     @endforeach
                                                     
                                                 </select>

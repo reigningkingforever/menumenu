@@ -11,65 +11,56 @@
         </div>
       
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          @if(url()->current() == url('/'))
-          <li><a href="#features" class="page-scroll">Services</a></li>
-          <li><a href="#about" class="page-scroll">About</a></li>
-          <li><a href="#restaurant-menu" class="page-scroll">Menu</a></li>
-          <li><a href="{{route('meals')}}" class="page-scroll">Meals</a></li>
-          {{-- <li><a href="#subscribe" class="page-scroll">Subscribe</a></li> --}}
-          <li><a href="{{route('blog')}}" class="page-scroll">Blog</a></li>
-          @else
-          <li><a href="{{url('/')}}#features" class="page-scroll">Services</a></li>
-          <li><a href="{{url('/')}}#about" class="page-scroll">About</a></li>
-          <li><a href="{{url('/')}}#restaurant-menu" class="page-scroll">Menu</a></li>
+      <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav col-xs-6 col-md-10">
+          <li>
+            <a @if(url()->current() == url('/')) href="#features" @else href="{{url('/')}}#features" @endif class="page-scroll">Services</a></li>
+          <li>
+            <a @if(url()->current() == url('/'))  href="#about" @else href="{{url('/')}}#about" @endif class="page-scroll">About</a></li>
+          <li>
+            <a @if(url()->current() == url('/'))  href="#restaurant-menu" @else href="{{url('/')}}#restaurant-menu" @endif>Menu</a></li>
+          
           <li><a href="{{route('meals')}}" class="page-scroll">Meals</a></li>
           <li><a href="{{route('blog')}}" class="page-scroll">Blog</a></li>
-          @endif
+          
         </ul>
-        <ul class="nav navbar-nav pull-right">
+        <ul class="nav navbar-nav col-xs-6 col-md-1">
           @guest
-            <li><a href="{{route('login')}}" class="">Login</a></li>
+            <li><a href="{{route('login')}}" class="page-scroll">Login</a></li>
           @else
-            <li class="nav-item dropdown">
-                <div class="hidden-xs">
-                  <a class="nav-link dropdown-toggle pb-0 bg-transparent nohover" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <img src="{{asset('img/avatar.jpg')}}" class="rounded-circle" height="34px">
-                  </a>
-                  <!--DESKTOP USER MENU-->
-                  <ul class="dropdown-menu">
-                      <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Saves</a></li> 
-                      <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li>
-                      <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">Log out</a>
-                          <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
-                              @csrf                                        </form>
-                      </li>
-                  </ul>
-                </div>
-                <div class="hidden-lg">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">
-                      Oluwadamilola Idera
-                    </a>
-                    <!--MOBILE USER MENU-->
-                    <ul class="nav navbar-nav">
-                      <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Saves</a></li> 
-                      <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li>
-                      <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">Log out</a>
-                          <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
-                              @csrf                                        </form>
-                      </li>
-                    </ul>
-                </div>   
+          
+          <li class="nav-item dropdown hidden-xs">
+              
+            <a class="nav-link dropdown-toggle pb-0 bg-transparent nohover " href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img src="{{asset('img/avatar.jpg')}}" class="rounded-circle" height="34px">
+            </a>
+            <!--DESKTOP USER MENU-->
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Saves</a></li> 
+              <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li>
+              <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">Log out</a>
+                  <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+                      @csrf                                        </form>
+              </li>
+            </ul>
+          </li>
+          <div class="navbar-nav visible-xs">
+            <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Saves</a></li> 
+            <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li>
+            <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">Log out</a>
+                <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
+          </div>
           @endguest
         </ul>
       </div>

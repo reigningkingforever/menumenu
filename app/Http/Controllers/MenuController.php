@@ -35,7 +35,7 @@ class MenuController extends Controller
         return view('frontend.menu.list');
     }
 
-    
+    //BACKEND
     public function list()
     {
         $menus = Menu::all();
@@ -63,20 +63,11 @@ class MenuController extends Controller
         return redirect()->back();
     }
 
-    public function show($id)
+    
+    public function edit(Menu $menu)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $menus = Menu::all();
+        return view('backend.menu.edit',compact('menus','menu'));
     }
 
     /**
@@ -86,9 +77,22 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Menu $menu)
     {
-        //
+        $menu->name = $request->name;
+        $menu->code = $request->name;
+        $menu->description = $request->description;
+        $menu->type = $request->type;
+        $menu->origin = $request->origin;
+        $menu->diet = $request->diet;
+        $menu->price = $request->price[$i];
+        $menu->save();
+        if($request->hasFile('file')){
+            Storage::delete('public/meals/'.$menu->media->name);
+            $menu->media->delete();
+            $this->uploadMedia($request,$menu->id,get_class($menu));
+        }
+        return redirect()->back();
     }
 
     public function destroy(Menu $menu)

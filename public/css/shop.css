@@ -427,9 +427,9 @@
     text-align: left;
     border-bottom: 0;
   }
-  .shop__sorting > li {
+  /* .shop__sorting > li {
     display: block;
-  }
+  } */
   .shop__sorting > li > a {
     padding: 10px 15px;
     margin-bottom: 10px;
@@ -736,3 +736,39 @@
   box-shadow: 0 5px 10px rgba(0,0,0,.3);
   transform: translateY(-2px);
 }
+
+@media (max-width: 767px) { 
+  #menuq {
+    position: relative !important;
+    top: 0;
+    left: 0; 
+  }
+  
+  .slidenav {
+    /* Here you must place the markup for the fixed left sidenav  and put the markup below into a @media query defining the breakpoint for displaying the btn and moving the sidenav to the left outside of the view*/
+    width: 80%;
+    background-color: #fff;
+    border: 1px solid rgb(0,0,0,0.4);
+    border-radius:10px;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    position: absolute;
+    top: -2%;
+    left: -80%;
+    z-index: 99; /* important with   further content*/
+  }
+  
+  .slidenav.slideIn {
+    left: 0%;
+    /*margin-left: -145px; .animate width*/
+  }
+  
+  .slidenav.slideOut {
+    left: -80%;
+    /*margin-left: 0; */
+  }
+}
+    

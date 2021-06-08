@@ -93,7 +93,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         foreach($post->media as $media){
-            Storage::delete('public/'.$media->format.'s/'.$media->name);
+            Storage::delete('public/posts/'.$media->name);
             $media->delete();
         }
         $post->delete();

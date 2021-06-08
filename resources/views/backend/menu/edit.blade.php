@@ -25,63 +25,93 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="{{route('admin.meal.save')}}" enctype="multipart/form-data"> @csrf
+                            <form method="post" action="{{route('admin.menu.update',$menu)}}" enctype="multipart/form-data"> @csrf
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="">Meal Name</label>
-                                                <input type="text" name="name" class="form-control" required>
-                                                <small class="form-text text-muted">The name of the meal</small>
+                                                <label class="">Item Name</label>
+                                                <input type="text" name="name" value="{{$menu->name}}" class="form-control" required>
+                                                <small class="form-text text-muted">The name of the item</small>
                                             </div>
                                             <div class="form-group">
                                                 <label class="">Description</label>
-                                                <textarea name="description" class="form-control" rows="4" style="height: unset" required></textarea>
+                                                <textarea name="description" class="form-control" rows="2" style="height: unset" required>{{$menu->description}}</textarea>
                                             </div>
                                             <div class="form-group d-flex">
                                                 <span class="text-muted">Type</span>
                                                 <div class="form-check form-check-radio mt-3">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="food-type" id="food" value="food">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="food" value="food" @if($menu->type == 'food') checked @endif>
                                                         <span class="form-check-sign"></span>
                                                         Food
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-radio mt-3">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="food-type" id="drink" value="drink" checked="">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="drink" value="drink" @if($menu->type == 'drink') checked @endif >
                                                         <span class="form-check-sign"></span>
                                                         Drink
                                                     </label>
+                                                </div> 
+                                                <div class="form-check form-check-radio mt-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="fruit" value="fruit" @if($menu->type == 'fruit') checked @endif>
+                                                        <span class="form-check-sign"></span>
+                                                        Fruit
+                                                    </label>
+                                                </div>   
+                                                <div class="form-check form-check-radio mt-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="pastries" value="pastries" @if($menu->type == 'pastries') checked @endif>
+                                                        <span class="form-check-sign"></span>
+                                                        Pastries
+                                                    </label>
                                                 </div>    
                                             </div>
-                                            <label class="">Size</label>
-                                            <div class="input-group mb-3">
-                                                <input type="number" name="size" placeholder="Enter Size" class="form-control">
-                                                <select class="input-group-append border rounded">
-                                                    <option>ml</option>
-                                                    <option>liters</option>
-                                                    <option>small</option>
-                                                    <option>medium</option>
-                                                    <option>large</option>
-                                                </select>    
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <label class="">Item Origin</label>
+                                                    <select name="origin" id="" class="form-control">
+                                                        <option @if($menu->origin == 'intercontinental') selected @endif value="intercontinental">Intercontinental</option>
+                                                        <option @if($menu->origin == 'local') selected @endif value="local">Local</option>
+                                                        <option @if($menu->origin == 'chinese') selected @endif value="chinese">Chinese</option>
+                                                        <option @if($menu->origin == 'italian') selected @endif value="italian">Italian</option>
+                                                        <option @if($menu->origin == 'russian') selected @endif value="russian">Russian</option>                        
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="">Diet</label>
+                                                    <select name="diet" id="" class="form-control">
+                                                        <option @if($menu->diet == 'vegan') selected @endif value="vegan">Vegan</option>
+                                                        <option @if($menu->diet == 'veg') selected @endif value="veg">Vegetarian</option>
+                                                        <option @if($menu->diet == 'nonveg') selected @endif value="nonveg">Non-Vegetarian</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                
                                             </div>
-                                            <div class="form-group">
-                                                <label class="">Price</label>
-                                                <input name="price" type="number" class="form-control" placeholder="Amount in naira">
+                                            <div class="companydocument">
+                                                <label class="">Size</label>
+                                                <div class="input-group mb-3">
+                                                    <select name="size" class="input-group-prepend border rounded readonly">
+                                                        <option @if($menu->diet == 'small') selected @endif value="small">Small</option>
+                                                        <option @if($menu->diet == 'medium') selected @endif value="medium">Medium</option>
+                                                        <option @if($menu->diet == 'large') selected @endif value="large">Large</option>    
+                                                    </select>    
+                                                    <input name="file" type="file" class="form-control" placeholder="image">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="price" value="{{$menu->price}}" type="number" class="form-control" placeholder="Amount in naira" required>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Upload Meal Photo</label>
-                                                <input type="file" name="file" id="cover" required>
-                                                <label class="mt-3"> Image </label>
-                                                <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:250px;" class="w-100" data-format="image" id="featured">
-                                            </div>
+                                            {{-- <button type="button" class="d-block my-2 addmore">Add New Sizes</button> --}}
                                             <div class="form-group">
                                                 <button class="btn btn-primary btn-block " type="submit" style="cursor:pointer">
-                                                    Save Meal
+                                                    Save Item
                                                 </button>
                                             </div>
                                               
@@ -94,10 +124,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card data-tables strpied-tabled-with-hover">
                         <div class="card-header ">
-                            <h4 class="card-title">Meal</h4>
+                            <h4 class="card-title">Menu Item</h4>
                             <p class="card-category">Here is a subtitle for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive dataTable dtr-inline">
@@ -121,7 +151,7 @@
                                     <th >Action</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($meals as $meal)
+                                    @foreach ($menus as $menu)
                                         <tr>
                                             <td>
                                                 <div class="form-check checkbox-inline">
@@ -132,16 +162,20 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                @if(!$meal->media)
+                                                @if(!$menu->media)
+                                                <div class="meal">
                                                     <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
+                                                </div>
                                                 @else
-                                                    <img src="{{asset('storage/images/'.$menu->media->name)}}" class="avatar rounded">
+                                                <div class="meal">
+                                                    <img src="{{asset('storage/meals/'.$menu->media->name)}}" class="avatar rounded">
+                                                </div>
                                                 @endif
                                             </td>
                                             <td>
                                                 <h4 class="mt-0">
-                                                    <a href="#">{{$meal->name}}</a>
-                                                    @switch($meal->type)
+                                                    <a href="#">{{$menu->name}}</a>
+                                                    @switch($menu->type)
                                                     @case('food')
                                                         <i class="fa fa-cutlery"></i>
                                                         @break
@@ -151,39 +185,39 @@
                                                     @default
                                                         
                                                 @endswitch
-                                                    <small class="card-category text-muted"> 1000ml</small>
+                                                    <small class="card-category text-muted"> {{$menu->size}}</small>
                                                 </h4>
-                                                <h5>{{$meal->description}}</h5>    
+                                                <h5>{{$menu->description}}</h5>    
                                             </td>
                                             
                                             <td>
-                                                <h5>₦{{$meal->price}}</h5>
+                                                <h5>₦{{$menu->price}}</h5>
                                                 
                                             </td>
                                             <td class="d-block">
                                                 <div class="">
-                                                    <a href="{{route('admin.meal.edit',$meal)}}" rel="tooltip" title="edit meal" data-placement="left" class="btn btn-info btn-outline btn-sm mb-2 rounded">
+                                                    <a href="{{route('admin.menu.edit',$menu)}}" rel="tooltip" title="edit item" data-placement="left" class="btn btn-info btn-outline btn-sm mb-2 rounded">
                                                         <span class="btn-label">
                                                             <i class="fa fa-pencil"></i>
                                                         </span>  
                                                     </a>
                                                     <br>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#delete-meal{{$meal->id}}" class="btn btn-danger btn-outline btn-sm rounded" rel="tooltip" title="delete meal" data-placement="left">
+                                                    <a href="#" type="button" data-toggle="modal" data-target="#delete-item{{$menu->id}}" class="btn btn-danger btn-outline btn-sm rounded" rel="tooltip" title="delete item" data-placement="left">
                                                         <span class="btn-label">
                                                             <i class="fa fa-trash"></i>
                                                         </span>
                                                     </a>
-                                                    <div class="modal fade modal-mini modal-primary" id="delete-meal{{$meal->id}}" tabindex="-1" role="dialog" aria-labelledby="delete-meal{{$meal->id}}" aria-hidden="true">
+                                                    <div class="modal fade modal-mini modal-primary" id="delete-item{{$menu->id}}" tabindex="-1" role="dialog" aria-labelledby="delete-item{{$menu->id}}" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header justify-content-center">
-                                                                    <p>Delete meal</p>
+                                                                    <p>Delete item</p>
                                                                 </div>
                                                                 <div class="modal-body text-center">
-                                                                    <p>Are you sure you want to delete this meal</p>
+                                                                    <p>Are you sure you want to delete this item</p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form class="d-inline" action="{{route('admin.meal.delete',$meal)}}" method="POST">@csrf
+                                                                    <form class="d-inline" action="{{route('admin.menu.delete',$menu)}}" method="POST">@csrf
                                                                         <button type="submit" class="btn btn-danger">Yes</button>
                                                                     </form>
                                                                     <button type="button" class="btn btn-link btn-simple" style="cursor:pointer" data-dismiss="modal">Close</button>
@@ -250,6 +284,36 @@
             $('.venue').hide();
         else $('.venue').show();
     })
+</script>
+<script>
+    $(document).on('click','.addmore',function(){
+        var product =         `<div class="companydocument">
+                                    <label class="">Size</label>
+                                    <div class="input-group mb-3">
+                                        <select name="size[]" class="input-group-prepend border rounded">
+                                            
+                                            <option>Small</option>
+                                            <option>Medium</option>
+                                            <option>Large</option>
+                                            
+                                        </select>    
+                                        <input name="file[]" type="file" class="form-control" placeholder="image">
+                                    </div>
+                                    <div class="input-group">
+                                        <input name="price[]" type="number" class="form-control" placeholder="Amount in naira">
+                                        <button type="button" class="btn btn-danger input-group-text input-group-append input-group-addon removemore border">
+                                            <i class="fa fa-times mr-1 "></i>Delete Size & Price
+                                        </button>
+                                    </div>
+                                </div>`;
+        $('.companydocument').last().after(product);
+    });
+    
+    $(document).on('click','.removemore',function(){
+        if($('.companydocument').length > 1){
+            $(this).closest('.companydocument').remove();
+        }
+    });
 </script>
 @endpush
 

@@ -38,7 +38,7 @@ class MealController extends Controller
                     'diet' => ['vegan','veg','nonveg'],
                       'cost' => 0,500];
         }
-        // dd($filter);
+        //dd($meals->where('day','sunday'));
         return view('frontend.menu.meals',compact('meals','filter'));
     }
 

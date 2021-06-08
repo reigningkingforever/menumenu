@@ -173,7 +173,7 @@
           </div>
           
           <div class="row" id="menuq">
-            <div class="col-sm-4 col-md-3 mb-2">
+            <div class="col-sm-4 col-md-3 mb-2 slidenav py-3 py-sm-0">
               <form class="shop_menu" id="shop_search" method="POST">
                 <div class="well">
                   <div class="row">
@@ -286,7 +286,7 @@
   
   
   <!-- Team Section -->
-  <div id="subscribe">
+  {{-- <div id="subscribe">
     <div class="container">
       <div id="row">
         <div class="col-md-6">
@@ -303,7 +303,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
   
   <!-- Contact Section -->
   <div id="contact" class="text-center">

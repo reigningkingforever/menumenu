@@ -9,8 +9,8 @@
 		  <h2>Meals</h2>
 		</div>
 		
-		<div class="row">
-			<div class="col-sm-4 col-md-3 mb-2">
+		<div class="row" id="menuq">
+            <div class="col-sm-4 col-md-3 mb-2 slidenav py-3 py-sm-0">
 				<form id="search" action="{{route('meals')}}" method="GET">
 					<div class="well">
 					  <div class="row">
@@ -239,7 +239,7 @@
                                                     <span style="font-weight:bold;text-decoration:underline;display:block;text-align:center">Items</span>	
                                                 </div>
                                                 <div class="options-colors">
-													@foreach ($tuesday->meals as $item)
+													@foreach ($tuesday->items as $item)
 														
 														 <span>{{$item->name}}</span> 
 														 @if(!$loop->last)+ @endif
@@ -315,7 +315,7 @@
 													<span style="font-weight:bold;text-decoration:underline;display:block;text-align:center">Items</span>	
 												</div>
 												<div class="options-colors">
-													@foreach ($wednesday->meals as $item)
+													@foreach ($wednesday->items as $item)
 														
 														<span>{{$item->name}}</span> 
 														@if(!$loop->last)+ @endif
@@ -392,7 +392,7 @@
 													<span style="font-weight:bold;text-decoration:underline;display:block;text-align:center">Items</span>	
 												</div>
 												<div class="options-colors">
-													@foreach ($thursday->meals as $item)
+													@foreach ($thursday->items as $item)
 														
 														<span>{{$item->name}}</span> 
 														@if(!$loop->last)+ @endif
@@ -469,7 +469,7 @@
 													<span style="font-weight:bold;text-decoration:underline;display:block;text-align:center">Items</span>	
 												</div>
 												<div class="options-colors">
-													@foreach ($friday->meals as $item)
+													@foreach ($friday->items as $item)
 														
 														<span>{{$item->name}}</span> 
 														@if(!$loop->last)+ @endif
@@ -546,7 +546,7 @@
 													<span style="font-weight:bold;text-decoration:underline;display:block;text-align:center">Items</span>	
 												</div>
 												<div class="options-colors">
-													@foreach ($saturday->meals as $item)
+													@foreach ($saturday->items as $item)
 														
 														<span>{{$item->name}}</span> 
 														@if(!$loop->last)+ @endif
@@ -623,7 +623,7 @@
 													<span style="font-weight:bold;text-decoration:underline;display:block;text-align:center">Items</span>	
 												</div>
 												<div class="options-colors">
-													@foreach ($sunday->meals as $item)
+													@foreach ($sunday->items as $item)
 														
 														<span>{{$item->name}}</span> 
 														@if(!$loop->last)+ @endif

@@ -21,3 +21,23 @@ function displays(display){
 		$('.grid[data-foodtype='+value+']').removeClass('hidemeal');
 	})
 }
+$(document).on('click','#openfilter',function() {
+	$([document.documentElement, document.body]).animate({
+        scrollTop: $("#restaurant-menu").offset().top
+    }, 2000);
+	 $(".slidenav").removeClass("slideOut");
+	 $(".slidenav").addClass("slideIn");
+	 $(this).removeAttr("id").attr('id','closefilter');
+ });
+
+$(document).on('click','#closefilter',function() {
+    $(".slidenav").removeClass("slideIn");
+    $(".slidenav").addClass("slideOut");
+    $(this).removeAttr("id").attr('id','openfilter');
+});
+
+$(document).on('click','#to-top',function() {
+	$([document.documentElement, document.body]).animate({
+        scrollTop: $("#page-top").offset().top
+    }, 2000);
+})
