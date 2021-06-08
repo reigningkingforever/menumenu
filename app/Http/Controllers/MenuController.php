@@ -83,9 +83,10 @@ class MenuController extends Controller
         $menu->code = $request->name;
         $menu->description = $request->description;
         $menu->type = $request->type;
+        $menu->size = $request->size;
         $menu->origin = $request->origin;
         $menu->diet = $request->diet;
-        $menu->price = $request->price[$i];
+        $menu->price = $request->price;
         $menu->save();
         if($request->hasFile('file')){
             Storage::delete('public/meals/'.$menu->media->name);
