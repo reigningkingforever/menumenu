@@ -63,10 +63,10 @@
                             </figure>
                             <section class="details">
                                 <div class="d-flex justify-content-between">
-                                    <h5>{{$meal->title}} </h5>
+                                    <h5>{{$meal->name}} </h5>
                                     <h5 class="price">₦{{$meal->price}}</h5>
                                 </div>
-                                <small class="text-muted">{{$meal->subtitle}}</small>
+                                <small class="text-muted">{{$meal->subname}}</small>
                                     
                                 
                                 <div class="options mb-1">

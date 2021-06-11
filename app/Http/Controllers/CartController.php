@@ -29,8 +29,9 @@ class CartController extends Controller
     
     public function index()
     {
-        //
+        return view('frontend.cart');
     }
+
 
     /**
      * Show the form for creating a new resource.

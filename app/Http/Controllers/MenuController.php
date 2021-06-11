@@ -70,13 +70,6 @@ class MenuController extends Controller
         return view('backend.menu.edit',compact('menus','menu'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Menu $menu)
     {
         $menu->name = $request->name;
@@ -98,11 +91,13 @@ class MenuController extends Controller
 
     public function destroy(Menu $menu)
     {
-        if($menu->media){
-            Storage::delete('public/meals/'.$menu->media->name);
-            $menu->media->delete();
+        if($menu->orders->isEmpty() && $menu->bookmarks->isEmpty()){
+            if($menu->media){
+                Storage::delete('public/meals/'.$menu->media->name);
+                $menu->media->delete();
+            }
+            $menu->delete();
         }
-        $menu->delete();
         return redirect()->back();
     }
 

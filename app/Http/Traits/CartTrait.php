@@ -18,7 +18,7 @@ trait CartTrait
         if(!$cart) {
             $cart = [
                     $product->id => [
-                        "name" => $item == 'App\Meal' ? $product->title:$product->name,
+                        "name" => $product->name,
                         "quantity" => request()->quantity ? request()->quantity :1,
                         "type" => $item,
                     ]
@@ -32,7 +32,7 @@ trait CartTrait
             }else{
                 // if item not exist in cart then add to cart with quantity = 1
                 $cart[$product->id] = [
-                    "name" => $item == 'App\Meal' ? $product->title:$product->name,
+                    "name" => $product->name,
                     "quantity" => request()->quantity ? request()->quantity : 1,
                     "type" => $item,
                 ];

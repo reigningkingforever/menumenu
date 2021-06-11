@@ -23,7 +23,7 @@
                                 {{-- <a href="{{route('admin.testimony.create')}}" class="btn btn-primary mr-5">Add New</a> --}}
                             </div>
                             
-                            <p class="card-category">Here is a subtitle for this table</p>
+                            <p class="card-category">Here is a subname for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive">
                             <table class="table table-hover ">
@@ -46,7 +46,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <h4 class="mt-0"><a href="{{route('testimonies.show',$testimony)}}">{{$testimony->title}} </a>
+                                                <h4 class="mt-0"><a href="{{route('testimonies.show',$testimony)}}">{{$testimony->name}} </a>
                                                     <span class="small text-muted">
                                                         @if($testimony->status) <i class="fa fa-check"> @else <i class="fa fa-warning"> @endif </i></span>
                                                 </h4>
@@ -92,7 +92,7 @@
                                                                 <form class="d-inline" action="{{route('admin.testimony.update',$testimony)}}" method="POST">@csrf
                                                                     <div class="modal-body text-center">
                                                                         <div class="form-group">
-                                                                            <input name="title" value="{{$testimony->title}}" class="form-control">
+                                                                            <input name="title" value="{{$testimony->name}}" class="form-control">
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <textarea name="body" class="form-control" rows="5" style="height: unset">{{$testimony->body}}</textarea>

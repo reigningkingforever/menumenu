@@ -15,14 +15,13 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth')->except('front');
+        $this->middleware('auth')->except('front');
     }
     protected function dashboard(){
         return redirect()->route(Auth::user()->role == "admin" ? 'admin.home':'user.home');
     }
 
     public function front(){
-    //    dd(request()->session()->get('cart'));
         $menus = Menu::where('size','medium')->get();
         $filter = ['itemtype'=>  ['food','drinks','fruits','pastries'],
                     'origin' => ['local','intercontinental','chinese','italian'],
@@ -33,8 +32,9 @@ class HomeController extends Controller
     }
 
     public function user()
-    {
-        return view('user.dashboard');
+    {   
+        $user = Auth::user();
+        return view('user.dashboard',compact('user'));
     }
     public function backend()
     {

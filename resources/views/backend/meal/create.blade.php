@@ -24,13 +24,13 @@
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 {{-- <label class="">Title</label> --}}
-                                                <input type="text" name="title" class="form-control" placeholder="Title" required>
+                                                <input type="text" name="name" class="form-control" placeholder="Title" required>
                                                 <small class="form-text text-muted">Title of the meal</small>
                                             </div>
                                             <div class="form-group">
                                                 {{-- <label class="">Sub Title</label> --}}
-                                                <input type="text" name="subtitle" class="form-control" placeholder="Sub Title" required>
-                                                <small class="form-text text-muted">Subtitle of the meal</small>
+                                                <input type="text" name="subname" class="form-control" placeholder="Sub Title" required>
+                                                <small class="form-text text-muted">subname of the meal</small>
                                             </div>
 
                                             <div class="form-group companydocument">

@@ -14,8 +14,8 @@ class MealController extends Controller
     public function index(){
         // dd(request()->query());
         if($q = request()->query('search')){
-            $meals = Meal::where('title','LIKE',"%$q%")
-            ->orWhere('subtitle','LIKE',"%$q%")
+            $meals = Meal::where('name','LIKE',"%$q%")
+            ->orWhere('subname','LIKE',"%$q%")
             //->orWhere('tags','LIKE',"%$q%")
             ->orWhereHas('meals', function ($query) use($q) {
                 $query->where('name', 'like', "%$q%")->orWhere('description', 'like', "%$q%");
@@ -61,8 +61,8 @@ class MealController extends Controller
     public function store(Request $request)
     {
         $meal = new Meal;
-        $meal->title = $request->title;
-        $meal->subtitle = $request->subtitle;
+        $meal->name = $request->name;
+        $meal->subname = $request->subname;
         $meal->period = $request->period;
         $meal->day = $request->day;
         $meal->diet = $this->getMealDiet($request->menu);
@@ -86,42 +86,31 @@ class MealController extends Controller
         return $diet;
     }
 
-    public function show($id)
+    public function show(Meal $meal)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Meal $meal)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Meal $meal)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    
+    public function destroy(Meal $meal)
     {
-        //
+        if($meal->orders->isEmpty() && $meal->bookmarks->isEmpty()){
+            if($meal->media){
+                Storage::delete('public/meals/'.$meal->media->name);
+                $meal->media->delete();
+            }
+            $meal->delete();
+        }
+        return redirect()->back();
     }
 }

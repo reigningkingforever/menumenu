@@ -33,9 +33,7 @@ Route::post('menu/remove-from-cart','MenuController@removefromcart')->name('menu
 Route::get('blog','PostController@index')->name('blog');
 Route::get('post/{post}', 'PostController@view')->name('post');
 
-Route::get('cart','PaymentController@cart')->name('cart');
-
-Route::get('checkout','PaymentController@checkout')->name('checkout');
+Route::get('cart','CartController@index')->name('cart');
 
 Auth::routes();
 Route::get('home', 'HomeController@dashboard')->name('home');

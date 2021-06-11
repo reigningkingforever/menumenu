@@ -23,7 +23,7 @@
                                 <a href="{{route('admin.post.create')}}" class="btn btn-primary mr-5">Add New</a>
                             </div>
                             
-                            <p class="card-category">Here is a subtitle for this table</p>
+                            <p class="card-category">Here is a subname for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive">
                             <table class="table table-hover ">

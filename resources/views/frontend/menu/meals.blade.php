@@ -146,14 +146,14 @@
                                     <div class="product">
                                         <figure>
 											@if(!$monday->media)
-                                            <img src="{{asset('img/no-image.jpg')}}" alt="{{$monday->title}}">
+                                            <img src="{{asset('img/no-image.jpg')}}" alt="{{$monday->name}}">
 											@else
-                                            <img src="{{asset('storage/meals/'.$monday->media->name)}}" alt="{{$monday->title}}">
+                                            <img src="{{asset('storage/meals/'.$monday->media->name)}}" alt="{{$monday->name}}">
 											@endif
                                         </figure>
                                         <section class="details">
                                             <div class="min-details">
-                                                <h5>{{$monday->title}}<span>{{$monday->subtitle}}</span></h5>
+                                                <h5>{{$monday->name}}<span>{{$monday->subname}}</span></h5>
                                                 <h5 class="price">₦{{$monday->price}}</h5>
                                             </div>
                                             <div class="options">
@@ -225,14 +225,14 @@
                                     <div class="product">
                                         <figure>
 											@if(!$tuesday->media)
-                                            <img src="{{asset('img/no-image.jpg')}}" alt="{{$tuesday->title}}">
+                                            <img src="{{asset('img/no-image.jpg')}}" alt="{{$tuesday->name}}">
 											@else
-                                            <img src="{{asset('storage/meals/'.$tuesday->media->name)}}" alt="{{$tuesday->title}}">
+                                            <img src="{{asset('storage/meals/'.$tuesday->media->name)}}" alt="{{$tuesday->name}}">
 											@endif
                                         </figure>
                                         <section class="details">
                                             <div class="min-details">
-                                                <h5>{{$tuesday->title}}<span>{{$tuesday->subtitle}}</span></h5>
+                                                <h5>{{$tuesday->name}}<span>{{$tuesday->subname}}</span></h5>
                                                 <h5 class="price">₦{{$tuesday->price}}</h5>
                                             </div>
                                             <div class="options">
@@ -302,14 +302,14 @@
 									<div class="product">
 										<figure>
 											@if(!$wednesday->media)
-											<img src="{{asset('img/no-image.jpg')}}" alt="{{$wednesday->title}}">
+											<img src="{{asset('img/no-image.jpg')}}" alt="{{$wednesday->name}}">
 											@else
-											<img src="{{asset('storage/meals/'.$wednesday->media->name)}}" alt="{{$wednesday->title}}">
+											<img src="{{asset('storage/meals/'.$wednesday->media->name)}}" alt="{{$wednesday->name}}">
 											@endif
 										</figure>
 										<section class="details">
 											<div class="min-details">
-												<h5>{{$wednesday->title}}<span>{{$wednesday->subtitle}}</span></h5>
+												<h5>{{$wednesday->name}}<span>{{$wednesday->subname}}</span></h5>
 												<h5 class="price">₦{{$wednesday->price}}</h5>
 											</div>
 											<div class="options">
@@ -380,14 +380,14 @@
 									<div class="product">
 										<figure>
 											@if(!$thursday->media)
-											<img src="{{asset('img/no-image.jpg')}}" alt="{{$thursday->title}}">
+											<img src="{{asset('img/no-image.jpg')}}" alt="{{$thursday->name}}">
 											@else
-											<img src="{{asset('storage/meals/'.$thursday->media->name)}}" alt="{{$thursday->title}}">
+											<img src="{{asset('storage/meals/'.$thursday->media->name)}}" alt="{{$thursday->name}}">
 											@endif
 										</figure>
 										<section class="details">
 											<div class="min-details">
-												<h5>{{$thursday->title}}<span>{{$thursday->subtitle}}</span></h5>
+												<h5>{{$thursday->name}}<span>{{$thursday->subname}}</span></h5>
 												<h5 class="price">₦{{$thursday->price}}</h5>
 											</div>
 											<div class="options">
@@ -458,14 +458,14 @@
 									<div class="product">
 										<figure>
 											@if(!$friday->media)
-											<img src="{{asset('img/no-image.jpg')}}" alt="{{$friday->title}}">
+											<img src="{{asset('img/no-image.jpg')}}" alt="{{$friday->name}}">
 											@else
-											<img src="{{asset('storage/meals/'.$friday->media->name)}}" alt="{{$friday->title}}">
+											<img src="{{asset('storage/meals/'.$friday->media->name)}}" alt="{{$friday->name}}">
 											@endif
 										</figure>
 										<section class="details">
 											<div class="min-details">
-												<h5>{{$friday->title}}<span>{{$friday->subtitle}}</span></h5>
+												<h5>{{$friday->name}}<span>{{$friday->subname}}</span></h5>
 												<h5 class="price">₦{{$friday->price}}</h5>
 											</div>
 											<div class="options">
@@ -536,14 +536,14 @@
 									<div class="product">
 										<figure>
 											@if(!$saturday->media)
-											<img src="{{asset('img/no-image.jpg')}}" alt="{{$saturday->title}}">
+											<img src="{{asset('img/no-image.jpg')}}" alt="{{$saturday->name}}">
 											@else
-											<img src="{{asset('storage/meals/'.$saturday->media->name)}}" alt="{{$saturday->title}}">
+											<img src="{{asset('storage/meals/'.$saturday->media->name)}}" alt="{{$saturday->name}}">
 											@endif
 										</figure>
 										<section class="details">
 											<div class="min-details">
-												<h5>{{$saturday->title}}<span>{{$saturday->subtitle}}</span></h5>
+												<h5>{{$saturday->name}}<span>{{$saturday->subname}}</span></h5>
 												<h5 class="price">₦{{$saturday->price}}</h5>
 											</div>
 											<div class="options">
@@ -614,14 +614,14 @@
 									<div class="product">
 										<figure>
 											@if(!$sunday->media)
-											<img src="{{asset('img/no-image.jpg')}}" alt="{{$sunday->title}}">
+											<img src="{{asset('img/no-image.jpg')}}" alt="{{$sunday->name}}">
 											@else
-											<img src="{{asset('storage/meals/'.$sunday->media->name)}}" alt="{{$sunday->title}}">
+											<img src="{{asset('storage/meals/'.$sunday->media->name)}}" alt="{{$sunday->name}}">
 											@endif
 										</figure>
 										<section class="details">
 											<div class="min-details">
-												<h5>{{$sunday->title}}<span>{{$sunday->subtitle}}</span></h5>
+												<h5>{{$sunday->name}}<span>{{$sunday->subname}}</span></h5>
 												<h5 class="price">₦{{$sunday->price}}</h5>
 											</div>
 											<div class="options">

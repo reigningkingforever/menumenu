@@ -1,5 +1,5 @@
 <?php
-Route::group(['prefix'=> 'admin','as'=>'admin.'],function(){
+Route::group(['prefix'=> 'admin','as'=>'admin.','middleware'=> ['auth','admin']],function(){
     Route::get('dashboard', 'HomeController@backend')->name('home');
 
     Route::get('menu','MenuController@list')->name('menu.list');
@@ -47,10 +47,6 @@ Route::group(['prefix'=> 'admin','as'=>'admin.'],function(){
 
     Route::get('payment','PaymentController@list')->name('payment.list');
     Route::post('payment/delete/{payment}','PaymentController@destroy')->name('payment.delete');
-
-    
-
-    
 
     Route::get('users','UserController@list')->name('user.list');
 });

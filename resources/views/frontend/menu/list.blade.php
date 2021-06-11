@@ -7,7 +7,7 @@
 			  @if(!$menu->media)
 			  <img src="{{asset('img/no-image.jpg')}}" alt="{{$menu->name}}">
 			  @else
-			  <img src="{{asset('storage/meals/'.$menu->media->name)}}" alt="{{$menu->title}}">
+			  <img src="{{asset('storage/meals/'.$menu->media->name)}}" alt="{{$menu->name}}">
 			  @endif
 			</figure>
 			<section class="details">
@@ -25,7 +25,7 @@
 				
 			  </div>
 			  <div class="d-flex">
-				{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Menu" data-item_id="{{$menu->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
+				<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Menu" data-item_id="{{$menu->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
 				
 				<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20menu%20{{$menu->id}}" class="btn btn-primary mr-2">Order Now</a>
 				@auth

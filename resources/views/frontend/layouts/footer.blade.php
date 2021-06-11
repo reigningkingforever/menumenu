@@ -6,7 +6,7 @@
         <li>
           <a href="{{route('cart')}}" class="btn btn-default btn-block">CART
             <span class="mx-2"><i class="fa fa-shopping-cart"></i></span>
-            <span class="cart-count" @if(!Session('cart')) style="display:none;" @endif>{{count((array) session('cart'))}}</span>
+            <span class="cart-count" @if(!Session('cart')) style="display:none;" @endif>{{collect((array) session('cart'))->sum('quantity')}}</span>
           </a>
         </li> 
         <li><a href="javascript:void(0)" class="btn btn-default btn-block" id="to-top">TOP<span class="mx-2"><i class="fa fa-arrow-up"></i></span></a></li> 
@@ -14,9 +14,9 @@
     </div>
 </nav>
 
-<div class="float-button-wrapper rounded-circle pulse visible-lg" @if(!Session('cart')) style="display:none;" @endif>
+<div class="float-button-wrapper rounded-circle pulse @if(Session('cart') || collect((array) session('cart'))->sum('quantity') > 1) visible-lg @endif" style="display:none;">
 	<div class="box-shadow rounded-circle" style="position:relative;">
-    <span class="cart-count" style="position:absolute;right:0px;background-color:#464545;color:white;padding:5px 12px 5px;border-radius:50px;">{{count((array) session('cart'))}}</span>
+    <span class="cart-count" style="position:absolute;right:0px;background-color:#464545;color:white;padding:5px 12px 5px;border-radius:50px;">{{collect((array) session('cart'))->sum('quantity')}}</span>
 		<a href="#" rel="noreferrer noopener">
 			<img class="float-button" src="{{asset('img/cart.png')}}" alt="cart">
 		</a>

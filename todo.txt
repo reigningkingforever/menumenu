@@ -10,6 +10,7 @@ FRONTEND
 meal routine - show meal days
 login and 
 registration
+cart
 ==============NOTDONE====================
 
  FRONTEND
@@ -18,9 +19,6 @@ foodstuff purchase -
 cakes and pastries
 event catering
 training
-
-cart
-checkout
 
 
 USER
@@ -33,13 +31,7 @@ transactions
 
 
 
-while filtering menu, 
-If all food item is chinese
-then origin is chinese
-if all food item is italian
-then origin is italian
-if all food item is vegan
-diet is vegan
+
 
 
 after user filtering and food is not available,

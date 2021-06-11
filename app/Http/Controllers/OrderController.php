@@ -26,7 +26,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        //
+        return view('user.order',compact('order'));
     }
 
     public function edit(Order $order)
