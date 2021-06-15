@@ -17,7 +17,7 @@ class Meal extends Model
 
     public function media(){
         return $this->morphOne(Media::class, 'mediable')->withDefault([
-            'name' => 'meal-no-image.jpg',
+            'name' => 'no-image.jpg',
         ]);
     }
 

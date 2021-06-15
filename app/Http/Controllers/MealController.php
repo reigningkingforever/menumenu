@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Meal;
 use App\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\MediaManagementTrait;
 
 class MealController extends Controller
@@ -93,12 +94,28 @@ class MealController extends Controller
 
     public function edit(Meal $meal)
     {
-        //
+        $menus = Menu::all();
+        return view('backend.meal.edit',compact('menus','meal')); 
     }
 
     public function update(Request $request, Meal $meal)
     {
-        //
+        $meal->name = $request->name;
+        $meal->subname = $request->subname;
+        $meal->period = $request->period;
+        $meal->day = $request->day;
+        $meal->diet = $this->getMealDiet($request->menu);
+        $meal->price = $request->price;
+        $meal->save();
+        $meal->items()->sync($request->menu);
+        if($request->hasFile('file')){
+            if($meal->media){
+                Storage::delete('public/meals/'.$meal->media->name);
+                $meal->media->delete();
+            }
+            $this->uploadMedia($request,$meal->id,get_class($meal));
+        }
+        return redirect()->back();
     }
 
     

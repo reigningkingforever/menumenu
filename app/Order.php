@@ -26,6 +26,8 @@ class Order extends Model
     }
 
     public function media(){
-        return $this->morphOne(Media::class, 'mediable');
+        return $this->morphOne(Media::class, 'mediable')->withDefault([
+            'name' => 'no-image.jpg',
+        ]);
     }
 }

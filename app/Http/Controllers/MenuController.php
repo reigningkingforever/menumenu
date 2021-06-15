@@ -82,8 +82,10 @@ class MenuController extends Controller
         $menu->price = $request->price;
         $menu->save();
         if($request->hasFile('file')){
-            Storage::delete('public/meals/'.$menu->media->name);
-            $menu->media->delete();
+            if($menu->media){
+                Storage::delete('public/meals/'.$menu->media->name);
+                $menu->media->delete();
+            }
             $this->uploadMedia($request,$menu->id,get_class($menu));
         }
         return redirect()->back();
