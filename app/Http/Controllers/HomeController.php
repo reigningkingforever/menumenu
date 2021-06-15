@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Menu;
+use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,10 +36,13 @@ class HomeController extends Controller
     public function user()
     {   
         $user = Auth::user();
-        return view('user.dashboard',compact('user'));
+        $states = State::where('status',true)->get();
+        $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
+        return view('user.dashboard',compact('user','states','cities'));
     }
     public function backend()
     {
         return view('backend.dashboard');
     }
+
 }

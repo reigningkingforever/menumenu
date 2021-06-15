@@ -172,8 +172,8 @@
                                                 
                                             </div>
 											<div class="d-flex">
-                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$monday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
-                                            	<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$monday->id}}" class="btn btn-primary mr-2">Order Now</a>
+                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$monday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$monday->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$monday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -251,8 +251,8 @@
                                                 
                                             </div>
                                             <div class="d-flex">
-                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$tuesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
-												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$tuesday->id}}" class="btn btn-primary mr-2">Order Now</a>
+                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$tuesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+												{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$tuesday->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$tuesday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -328,8 +328,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$wednesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
-                                            	<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$wednesday->id}}" class="btn btn-primary mr-2">Order Now</a>
+                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$wednesday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+                                            	{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$wednesday->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$wednesday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -406,8 +406,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$thursday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
-												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$thursday->id}}" class="btn btn-primary mr-2">Order Now</a>
+                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$thursday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+												{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$thursday->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$thursday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -484,8 +484,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$friday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
-												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$friday->id}}" class="btn btn-primary mr-2">Order Now</a>
+                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$friday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+												{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$friday->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$friday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -562,8 +562,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$saturday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
-												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$saturday->id}}" class="btn btn-primary mr-2">Order Now</a>
+                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$saturday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+												{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$saturday->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$saturday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth
@@ -640,8 +640,8 @@
 												
 											</div>
 											<div class="d-flex">
-                                            	{{-- <a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$sunday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a> --}}
-												<a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$sunday->id}}" class="btn btn-primary mr-2">Order Now</a>
+                                            	<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$sunday->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+												{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$sunday->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 												@auth
                                             	<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$sunday->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 												@endauth

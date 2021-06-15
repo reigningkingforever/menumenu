@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-4">
           <div class="features-item">
-            <a href="{{route('meals')}}"><h3>Meal Routine Subscription</h3></a>
+            <a href="{{route('meals')}}"><h3>Meal Routine</h3></a>
             <img src="{{asset('img/specials/1.jpg')}}" class="img-responsive" alt="">
             <p>Tired of eating the same kind of meals everyday? Join our daily delivery of various kinds of cooked breakfast, lunch and dinner, for a complete nutritional value.</p>
           </div>
@@ -18,7 +18,7 @@
           <div class="features-item">
             <h3>Home Cooking / Delivery</h3>
             <img src="{{asset('img/specials/2.jpg')}}" class="img-responsive" alt="">
-            <p>We routinely supply several sets of cooked meals and soup that will last you for short periods of time. Meals are either cooked at your home or delivered.</p>
+            <p>We supply several sets of cooked meals and soup that will last you for short periods of time. Meals are either cooked at your home or delivered.</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
@@ -39,7 +39,7 @@
           <div class="features-item">
             <h3>Event Catering</h3>
             <img src="{{asset('img/specials/2.jpg')}}" class="img-responsive" alt="">
-            <p>We routinely supply several sets of cooked meals and soup that will last you for short periods of time. Meals are either cooked at your home or delivered.</p>
+            <p>We cater several sets of cooked meals and soup that will last you for short periods of time. Meals are either cooked at your home or delivered.</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">

@@ -11,7 +11,8 @@ class OrderController extends Controller
      
     public function index()
     {
-        //
+        // $orders = Auth::user();
+        // return view('')
     }
 
     public function create()
@@ -41,7 +42,13 @@ class OrderController extends Controller
 
     public function delete(Order $order)
     {
-        //
+        if($order->status == 'completed'){
+            foreach($order->details as $detail){
+                $detail->delete();
+            }
+            $order->delete();
+        }
+        return redirect()->back();
     }
 
     /**

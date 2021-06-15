@@ -17,24 +17,29 @@ trait CartTrait
         // if cart is empty then this is the first product
         if(!$cart) {
             $cart = [
-                    $product->id => [
-                        "name" => $product->name,
-                        "quantity" => request()->quantity ? request()->quantity :1,
+                    $item.'-'.$product->id => [
+                        "id" => $item_id,
                         "type" => $item,
+                        "product" => $product,
+                        "quantity" => request()->quantity ? request()->quantity :1,
+                        
                     ]
             ];
             request()->session()->put('cart', $cart);
         }else{
             // if cart not empty then check if this product exist then increment quantity
-            if(isset($cart[$product->id])) {
-                $cart[$product->id]['quantity']++;
+            if(isset($cart[$item.'-'.$product->id])) {
+                $cart[$item.'-'.$product->id]['quantity']++;
                 request()->session()->put('cart', $cart);
             }else{
                 // if item not exist in cart then add to cart with quantity = 1
-                $cart[$product->id] = [
-                    "name" => $product->name,
-                    "quantity" => request()->quantity ? request()->quantity : 1,
+                $cart[$item.'-'.$product->id] = [
+                    "id" => $item_id,
                     "type" => $item,
+                    "product" => $product,
+                    "quantity" => request()->quantity ? request()->quantity : 1,
+                    
+                    
                 ];
                 request()->session()->put('cart', $cart);
             }
@@ -45,7 +50,7 @@ trait CartTrait
     protected function removeFromCartSession($item,$item_id){
         $product = $this->getItem($item,$item_id);
         $oldcart = request()->session()->get('cart');
-        $cart = Arr::except($oldcart, ["$product->id"]);
+        $cart = Arr::except($oldcart, ["$item.'-'.$product->id"]);
         request()->session()->put('cart', $cart);
         return $cart;
     }

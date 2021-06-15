@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -40,6 +41,33 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('frontend.auth.login');
+    }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $cart = session('cart');
+
+        $request->session()->regenerate();
+
+        session(['cart' => $cart]);
+
+        $this->clearLoginAttempts($request);
+
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
+    }
+
+    public function logout(Request $request)
+    {
+        $data = session()->get('cart');
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        session()->put('cart', $data);
+        
+        return $this->loggedOut($request) ?: redirect('/');
     }
 
     

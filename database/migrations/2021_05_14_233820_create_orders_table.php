@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->float('amount')->default(0);
             $table->timestamp('required_at');
-            $table->timestamp('delivery_date')->nullable();
+            $table->timestamp('delivered_at')->nullable();
             $table->string('delivery_address');
             $table->string('status');
             $table->timestamps();

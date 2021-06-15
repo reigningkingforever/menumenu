@@ -81,7 +81,7 @@
                                             </td>
                                             <td>
                                                 <h5 class="my-0">
-                                                    <a href="{{route('admin.order.view',$order)}}">{{$order->details->first()->meal->name}} </a>
+                                                    <a href="{{route('admin.order.view',$order)}}">{{$order->details->first()->itemable->name}} </a>
                                                     <small class="card-category text-muted"> @if($order->details->count() > 1) + {{$order->details->count() - 1}} more @endif</small>
                                                 </h5>
                                                 <small class="d-block"><i class="fa fa-user"></i>{{$order->user->name}}</small>    

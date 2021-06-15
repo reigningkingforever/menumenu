@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Meal;
+use App\Menu;
 use Illuminate\Http\Request;
 use App\Http\Traits\CartTrait;
+use App\Http\Traits\BookmarkTrait;
 use Illuminate\Support\Facades\Auth;
 
 
 class CartController extends Controller
 {
-    use CartTrait;
-
+    use CartTrait,BookmarkTrait;
+    
     public function addtocart(Request $request){
         $cart = $this->addToCartSession($request->item, $request->item_id);
         if(Auth::check())
@@ -26,10 +29,24 @@ class CartController extends Controller
         // return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
         return response()->json(['cart_count'=> collect($cart)->sum('quantity'),'cart'=> $cart],200);
     }
+
+    public function addToBookmark(Request $request){
+        $wish = $this->addBookmark($request->item,$request->item_id);
+        return response()->json(['wish_count'=> count((array)$wish)],200);
+    }
+    public function removeFromBookmark(Request $request){
+        $wish = $this->removeBookmark($request->item,$request->item_id);
+        return response()->json(['wish_count'=> count((array)$wish)],200);
+    }
     
     public function index()
     {
-        return view('frontend.cart');
+        $cart = request()->session()->get('cart');
+        // dd($cart);
+        return view('frontend.cart',compact('cart'));
+    }
+    public function bookmark(){
+        
     }
 
 

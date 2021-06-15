@@ -1,12 +1,16 @@
 <div class="dashboard-sidebar">
     <div class="profile-top">
         <div class="profile-image">
-            <img src="{{asset('img/avatar.jpg')}}" alt="" class="img-fluid">
+            @if($user->media)
+            <img src="{{asset('storage/users/'.$user->media->name)}}" alt="" class="img-fluid">
+            @else
+            <img src="https://ui-avatars.com/api/?name={{$user->name}}" alt="" class="img-fluid">
+            @endif
         </div>
         <div class="profile-detail">
-            <h5>Fashion Store</h5>
-            <h6>750 followers | 10 review</h6>
-            <h6>mark.enderess@mail.com</h6>
+            <h5>{{$user->name}}</h5>
+            
+            <h6>{{$user->email}}</h6>
         </div>
     </div>
     <div class="faq-tab">
@@ -17,8 +21,7 @@
             </li>
             <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#transactions">Transactions</a>
             </li>
-            <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#preferences">Preferences</a>
-            </li>
+            {{-- <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#preferences">Preferences</a></li> --}}
             <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#profile">Profile</a>
             </li>
             

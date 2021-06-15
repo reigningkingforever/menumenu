@@ -17,7 +17,7 @@ class CreatePurchasesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('vendor_id');
             $table->float('amount')->default(0);
-            $table->timestamp('delivery_date')->nullable();
+            $table->timestamp('delivered_at')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');

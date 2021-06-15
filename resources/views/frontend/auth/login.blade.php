@@ -40,7 +40,7 @@
                             <button class="social-signin facebook">Log in with facebook</button>
                             <button class="social-signin twitter">Log in with Twitter</button>
                             <button class="social-signin google">Log in with Google+</button>
-                            <a href="{{route('register')}}">Create an account</a>
+                            <a href="{{route('register')}}" class="d-block">Create an account</a>
                             </form>
                         </div>
                     </div>

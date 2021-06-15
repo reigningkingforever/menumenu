@@ -12,7 +12,7 @@ class MealController extends Controller
     use MediaManagementTrait;
 
     public function index(){
-        // dd(request()->query());
+        // dd(\Auth::user()->carts);
         if($q = request()->query('search')){
             $meals = Meal::where('name','LIKE',"%$q%")
             ->orWhere('subname','LIKE',"%$q%")

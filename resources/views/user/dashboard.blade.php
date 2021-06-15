@@ -21,7 +21,7 @@
 									<div class="counter-box">
 										<img src="{{asset('img/order.png')}}" class="img-fluid">
 										<div>
-											<h3>25</h3>
+											<h3>{{$user->bookmarks->count()}}</h3>
 											<h5>total Saved</h5>
 										</div>
 									</div>
@@ -30,7 +30,7 @@
 									<div class="counter-box">
 										<img src="{{asset('img/sale.png')}}" class="img-fluid">
 										<div>
-											<h3>50</h3>
+											<h3>{{$user->orders->count()}}</h3>
 											<h5>total Orders</h5>
 										</div>
 									</div>
@@ -39,8 +39,8 @@
 									<div class="counter-box">
 										<img src="{{asset('img/homework.png')}}" class="img-fluid">
 										<div>
-											<h3>12500</h3>
-											<h5>total spent</h5>
+											<h3>{{$user->orderDetails->count()}}</h3>
+											<h5>total meals</h5>
 										</div>
 									</div>
 								</div>
@@ -52,38 +52,39 @@
 								<div class="card dashboard-table">
 									<div class="card-body">
 										<h3>Saved Menu</h3>
-										<table class="table mb-0">
+										<table class="table mb-0 text-left">
 											<thead>
 												<tr>
 													<th scope="col">image</th>
 													<th scope="col">product name</th>
+													<th scope="col">size</th>
 													<th scope="col">price</th>
-													<th scope="col">sales</th>
+													
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>neck velvet dress</td>
-													<td>₦205</td>
-													<td>1000</td>
-												</tr>
-												<tr>
-													<th scope="row"><img
-															src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>belted trench coat</td>
-													<td>₦350</td>
-													<td>800</td>
-												</tr>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>man print tee</td>
-													<td>₦150</td>
-													<td>750</td>
-												</tr>
+												@forelse ($user->bookmarks->where('eatable_type','App\Menu') as $menu)
+													<tr>
+														<th scope="row">
+															@if(!$menu->eatable->media)
+																<img src="{{asset('img/no-image.jpg')}}" alt="{{$menu->eatable->name}}" class="blur-up lazyloaded">
+																@else
+																<img src="{{asset('storage/meals/'.$menu->eatable->media->name)}}" alt="{{$menu->eatable->name}}" class="blur-up lazyloaded">
+															@endif
+														</th>
+														<td>{{$menu->eatable->name}}</td>
+														<td>{{$menu->eatable->type.' :'.$menu->eatable->size}}</td>
+														<td>₦{{$menu->eatable->price}}</td>
+														
+													</tr>
+												@empty
+													<tr>
+														<th colspan="4">No Saved Menu</th>
+														
+													</tr>
+												@endforelse
+												
+												
 											</tbody>
 										</table>
 									</div>
@@ -93,38 +94,37 @@
 								<div class="card dashboard-table">
 									<div class="card-body">
 										<h3>Saved Meals</h3>
-										<table class="table mb-0">
+										<table class="table mb-0 text-left">
 											<thead>
 												<tr>
 													<th scope="col">image</th>
 													<th scope="col">product name</th>
+													<th scope="col">Day/Period</th>
 													<th scope="col">price</th>
-													<th scope="col">sales</th>
+													
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>neck velvet dress</td>
-													<td>₦205</td>
-													<td>1000</td>
-												</tr>
-												<tr>
-													<th scope="row"><img
-															src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>belted trench coat</td>
-													<td>₦350</td>
-													<td>800</td>
-												</tr>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>man print tee</td>
-													<td>₦150</td>
-													<td>750</td>
-												</tr>
+												@forelse ($user->bookmarks->where('eatable_type','App\Meal') as $meal)
+													<tr>
+														<th scope="row">
+															@if(!$meal->eatable->media)
+																<img src="{{asset('img/no-image.jpg')}}" alt="{{$meal->eatable->name}}" class="blur-up lazyloaded">
+																@else
+																<img src="{{asset('storage/meals/'.$meal->eatable->media->name)}}" alt="{{$meal->eatable->name}}" class="blur-up lazyloaded">
+															@endif
+														</th>
+														<td>{{$meal->eatable->name}}</td>
+														<td>{{$meal->eatable->day.' :'.$meal->eatable->period}}</td>
+														<td>₦{{$meal->eatable->price}}</td>
+														
+													</tr>
+												@empty
+													<tr>
+														<th colspan="4">No Saved Meal</th>
+														
+													</tr>
+												@endforelse
 											</tbody>
 										</table>
 									</div>
@@ -142,93 +142,56 @@
 											<h3>Orders</h3>
 											{{-- <a href="#" class="btn btn-sm btn-solid">add product</a> --}}
 										</div>
-										<table class="table-responsive-md table mb-0">
+										<table class="table-responsive-md table mb-0 text-left">
 											<thead>
 												<tr>
-													<th scope="col">image</th>
-													<th scope="col">product name</th>
-													<th scope="col">category</th>
-													<th scope="col">price</th>
-													<th scope="col">stock</th>
-													<th scope="col">sales</th>
+													<th scope="col">Order</th>
+													<th scope="col">Items </th>
+													<th scope="col">Count</th>
+													<th scope="col">Amount</th>
+													<th scope="col">Delivery</th>
+													<th scope="col">Status</th>
 													<th scope="col">edit/delete</th>
 												</tr>
 											</thead>
 											<tbody>
+												@forelse ($user->orders as $order)
 												<tr>
-													<th scope="row"><img
-															src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>neck velvet dress</td>
-													<td>women clothes</td>
-													<td>₦205</td>
-													<td>1000</td>
-													<td>2000</td>
-													<td><i class="fa fa-pencil-square-o mr-1"
-															aria-hidden="true"></i><i class="fa fa-trash-o ml-1"
-															aria-hidden="true"></i></td>
+													<td>{{$order->id}}</td>
+													<td>{{$order->details->first()->itemable->name}}</td>
+													<td>{{$order->details->count()}} items</td>
+													<td>₦{{$order->amount}}</td>
+													<td>{{$order->delivered_at->format('d.m.y h:i:A')}}</td>
+													<td>{{$order->status}}</td>
+													<td>
+														<a href="{{route('user.order.show',$order)}}" class="text-primary">
+															<i class="fa fa-eye mr-1" aria-hidden="true"></i>View
+														</a>|
+														<a href="javascript:void(0)" class="text-danger" data-toggle="modal" data-target="#delete-order{{$order->id}}">
+															<i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
+														</a>
+														<div class="modal fade modal-primary" id="delete-order{{$order->id}}" tabindex="-1" role="dialog" aria-labelledby="delete-order{{$order->id}}" aria-hidden="true">
+															<div class="modal-dialog modal-sm">
+																<div class="modal-content ">
+																	<div class="modal-header justify-content-center">
+																			<p>Delete Order</p>																		
+																	</div>
+																	<div class="modal-body text-center">
+																		<p>Are you sure you want to delete this order</p>
+																		<form class="d-inline" action="{{route('user.order.delete',$order)}}" method="POST">@csrf
+																			<button type="submit" class="btn btn-danger">Yes</button>
+																		</form>
+																		<button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Close</button>
+																	</div>
+																	
+																</div>
+															</div>
+														</div>
+													</td>
 												</tr>
-												<tr>
-													<th scope="row"><img
-															src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>belted trench coat</td>
-													<td>women clothes</td>
-													<td>₦350</td>
-													<td>800</td>
-													<td>350</td>
-													<td><i class="fa fa-pencil-square-o mr-1"
-															aria-hidden="true"></i><i class="fa fa-trash-o ml-1"
-															aria-hidden="true"></i></td>
-												</tr>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>men print tee</td>
-													<td>men clothes</td>
-													<td>₦150</td>
-													<td>750</td>
-													<td>150</td>
-													<td><i class="fa fa-pencil-square-o mr-1"
-															aria-hidden="true"></i><i class="fa fa-trash-o ml-1"
-															aria-hidden="true"></i></td>
-												</tr>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>woman print tee</td>
-													<td>women clothes</td>
-													<td>₦150</td>
-													<td>750</td>
-													<td>150</td>
-													<td><i class="fa fa-pencil-square-o mr-1"
-															aria-hidden="true"></i><i class="fa fa-trash-o ml-1"
-															aria-hidden="true"></i></td>
-												</tr>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>men print tee</td>
-													<td>men clothes</td>
-													<td>₦150</td>
-													<td>750</td>
-													<td>150</td>
-													<td><i class="fa fa-pencil-square-o mr-1"
-															aria-hidden="true"></i><i class="fa fa-trash-o ml-1"
-															aria-hidden="true"></i></td>
-												</tr>
-												<tr>
-													<th scope="row"><img src="{{asset('img/meal-no-image.jpg')}}"
-															class="blur-up lazyloaded"></th>
-													<td>men print tee</td>
-													<td>men clothes</td>
-													<td>₦150</td>
-													<td>750</td>
-													<td>150</td>
-													<td><i class="fa fa-pencil-square-o mr-1"
-															aria-hidden="true"></i><i class="fa fa-trash-o ml-1"
-															aria-hidden="true"></i></td>
-												</tr>
+												@empty
+													<tr><td colspan="7">No Order</td></tr>
+												@endforelse
 											</tbody>
 										</table>
 									</div>
@@ -249,66 +212,26 @@
 											<thead>
 												<tr>
 													<th scope="col">order id</th>
-													<th scope="col">product details</th>
+													<th scope="col">payment id</th>
+													<th scope="col">payment method</th>
 													<th scope="col">status</th>
-													<th scope="col">price</th>
+													<th scope="col">amount</th>
 												</tr>
 											</thead>
 											<tbody>
+												@forelse ($user->payments as $payment)
 												<tr>
-													<th scope="row">#125021</th>
-													<td>neck velvet dress</td>
-													<td>shipped</td>
-													<td>₦205</td>
+													<td>{{$payment->order_id}}</td>
+													<td>{{$payment->id}}</td>
+													<td>{{$payment->details->first()->itemable->name}}</td>
+													<td>{{$payment->status}}</td>
+													<td>₦{{$payment->amount}}</td>
+													
 												</tr>
-												<tr>
-													<th scope="row">#521214</th>
-													<td>belted trench coat</td>
-													<td>shipped</td>
-													<td>₦350</td>
-												</tr>
-												<tr>
-													<th scope="row">#521021</th>
-													<td>men print tee</td>
-													<td>pending</td>
-													<td>₦150</td>
-												</tr>
-												<tr>
-													<th scope="row">#245021</th>
-													<td>woman print tee</td>
-													<td>shipped</td>
-													<td>₦150</td>
-												</tr>
-												<tr>
-													<th scope="row">#122141</th>
-													<td>men print tee</td>
-													<td>canceled</td>
-													<td>₦150</td>
-												</tr>
-												<tr>
-													<th scope="row">#125015</th>
-													<td>men print tee</td>
-													<td>pending</td>
-													<td>₦150</td>
-												</tr>
-												<tr>
-													<th scope="row">#245021</th>
-													<td>woman print tee</td>
-													<td>shipped</td>
-													<td>₦150</td>
-												</tr>
-												<tr>
-													<th scope="row">#122141</th>
-													<td>men print tee</td>
-													<td>canceled</td>
-													<td>₦150</td>
-												</tr>
-												<tr>
-													<th scope="row">#125015</th>
-													<td>men print tee</td>
-													<td>pending</td>
-													<td>₦150</td>
-												</tr>
+												@empty
+													<tr><td colspan="7">No Transaction</td></tr>
+												@endforelse
+												
 											</tbody>
 										</table>
 									</div>
@@ -316,7 +239,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="preferences">
+					{{-- <div class="tab-pane fade" id="preferences">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="card mt-0">
@@ -448,7 +371,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 					<div class="tab-pane fade" id="profile">
 						<div class="row">
 							<div class="col-md-12">
@@ -457,101 +380,176 @@
 										<div class="dashboard-box">
 											<div class="dashboard-title">
 												<h4>profile</h4>
-												<span data-toggle="modal" data-target="#edit-profile">edit</span>
+												
 											</div>
-											<div class="dashboard-detail">
-												<ul>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>company name</h6>
+											<div class="row my-5">
+												<form class="mt-5" action="{{route('user.profile')}}" method="POST" enctype="multipart/form-data">@csrf
+													<div class="col-md-12 d-flex flex-column flex-md-row">
+														<div class="d-flex flex-column flex-md-row">
+															<div class="text-center">
+																<img @if($user->media) src="{{asset('storage/users/'.$user->media->name)}}" @else src="{{asset('img/no-image.jpg')}}" @endif class="avatar rounded my-0" width="200px" height="200px" id="featured">
+																<a href="javascript:void(0)" class="text-muted d-block" id="set_cover">Upload Picture</a>
+																<input type="file" name="file" id="cover" style="display:none;">
 															</div>
-															<div class="right">
-																<h6>Fashion Store</h6>
+															<div class="d-flex flex-column">
+																<div class="d-flex flex-column flex-md-row">
+																	<div class="form-group mx-3 w-100">
+																		<label>Name</label>
+																		<input type="text" name="name" value="{{$user->name ?? old('name')}}" class="form-control" placeholder="Name">
+																		@error('name')
+																			<span class="invalid-feedback" role="alert">
+																				<strong>{{ $message }}</strong>
+																			</span>
+																		@enderror
+																	</div>
+																	<div class="form-group mx-3 w-100">
+																		<label>Phone</label>
+																		<input type="text" name="phone" class="form-control" value="{{$user->phone ?? old('phone')}}" placeholder="Phone">
+																		@error('phone')
+																			<span class="invalid-feedback" role="alert">
+																				<strong>{{ $message }}</strong>
+																			</span>
+																		@enderror
+																	</div>
+																</div>
+																<div class=" d-flex flex-column flex-md-row">
+																	<div class="form-group mx-3">
+																		<label>Date of Birth</label>
+																		<input type="date" name="birthday" class="form-control" value="{{$user->birthday->format('Y-m-d') ?? old('birthday')}}" placeholder="Birthday">
+																		@error('birthday')
+																			<span class="invalid-feedback" role="alert">
+																				<strong>{{ $message }}</strong>
+																			</span>
+																		@enderror
+																	</div>
+																	<div class="form-group mx-3">
+																		<label>Wedding Anniversary (optional)</label>
+																		<input type="date" name="anniversary" class="form-control" value="{{$user->wedding_anniversary->format('Y-m-d') ?? old('anniversary')}}" placeholder="Wedding">
+																		@error('anniversary')
+																			<span class="invalid-feedback" role="alert">
+																				<strong>{{ $message }}</strong>
+																			</span>
+																		@enderror
+																	</div>
+																</div>
+																<div class="d-flex flex-column flex-md-row justify-content-center">
+																	<button type="submit" class="btn btn-primary">Save Profile</button>
+																</div>
+															</div>	
+														</div>
+														
+													</div>
+												</form>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<h4>Password</h4>
+													<form class="mt-5" action="{{route('user.password')}}" method="POST">@csrf
+														<div class="d-flex flex-column flex-md-row justify-content-between">
+															<div class="form-group mx-2">
+																<label>Old Password</label>
+																<input type="password" name="oldpassword" class="form-control" placeholder="Old Password">
+																@error('oldpassword')
+																	<span class="invalid-feedback" role="alert">
+																		<strong>{{ $message }}</strong>
+																	</span>
+																@enderror
+															</div>
+															<div class="form-group mx-2">
+																<label>New Password</label>
+																<input type="password" name="password" class="form-control" placeholder="New Password">
+																@error('password')
+																	<span class="invalid-feedback" role="alert">
+																		<strong>{{ $message }}</strong>
+																	</span>
+																@enderror
+															</div>
+															<div class="form-group mx-2">
+																<label>Repeat Password</label>
+																<input type="password" class="form-control" name="password_confirmation">
+															</div>
+															<div class="d-flex flex-column justify-content-center">
+																<button type="submit" class="btn btn-primary">Change</button>
+																
+															</div>
+																
+														</div>
+														
+													</form>
+												</div>
+												
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<h4>Addresses</h4>
+													<form class="mt-5" action="{{route('user.address')}}" method="POST">@csrf
+														@forelse ($user->addresses as $place)
+															<div class="row row-no-gutter mb-4 companydocument">
+																<div class="mx-3">
+																	<div class="input-group d-flex flex-column flex-md-row">
+																		<span class="input-group-addon w-100 w-md-50">
+																			<span class="mx-2">Default</span><input type="radio" name="status[]" @if($place->status) checked @endif value="1" required aria-label="...">
+																		</span>
+																		
+																		<input type="text" class="form-control" name="address[]" value="{{$place->address ?? old('address')}}" placeholder="Address" required>
+																		<select name="city[]" class="form-control city" required>
+																			@foreach ($cities as $city)
+																				<option value="{{$city->name}}" @if($place->city) checked @endif>{{$city->name}}</option>
+																			@endforeach
+																		</select>
+																		<select name="state[]" class="form-control state" required>
+																			@foreach ($states as $state)
+																				<option value="{{$state->name}}" @if($place->state) checked @endif>{{$state->name}}</option>
+																			@endforeach
+																		</select>
+																		@if(!$loop->first)<a href="javascript:void(0)" class="btn btn-danger btn-sm removemore">Remove</a>@endif
+																	</div>
+																</div>
+															</div>
+														@empty
+														<div class="row row-no-gutter mb-4 companydocument">
+															<div class="mx-3">
+																<div class="input-group d-flex flex-column flex-md-row">
+																	<span class="input-group-addon w-100 w-md-50">
+																		<span class="mx-2">Default</span><input type="radio" name="status[]" value="1" required aria-label="...">
+																	</span>
+																	
+																	<input type="text" class="form-control" name="address[]" placeholder="Address" required>
+																	<select name="city[]" class="form-control city" required>
+																		@foreach ($cities as $city)
+																			<option value="{{$city->name}}">{{$city->name}}</option>
+																		@endforeach
+																	</select>
+																	<select name="state[]" class="form-control" required>
+																		@foreach ($states as $state)
+																			<option value="{{$state->name}}">{{$state->name}}</option>
+																		@endforeach
+																		
+																		<option>Lagos</option>
+																	</select>
+																	
+																</div>
 															</div>
 														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>email address</h6>
+														@endforelse
+														
+
+														
+														
+														<div class="row">
+															<div class="col-md-6 col-lg-push-6 mb-3">
+																<a href="javascript:void(0)" class="btn btn-primary addmore">Add New Address</a>
 															</div>
-															<div class="right">
-																<h6>mark.enderess@mail.com</h6>
+															<div class="col-md-6 col-lg-pull-6">
+																<button class="btn btn-success btn-block">Save</button>
 															</div>
+															
 														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>Country / Region</h6>
-															</div>
-															<div class="right">
-																<h6>Downers Grove, IL</h6>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>Year Established</h6>
-															</div>
-															<div class="right">
-																<h6>2018</h6>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>Total Employees</h6>
-															</div>
-															<div class="right">
-																<h6>101 - 200 People</h6>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>category</h6>
-															</div>
-															<div class="right">
-																<h6>clothing</h6>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>street address</h6>
-															</div>
-															<div class="right">
-																<h6>549 Sulphur Springs Road</h6>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>city/state</h6>
-															</div>
-															<div class="right">
-																<h6>Downers Grove, IL</h6>
-															</div>
-														</div>
-													</li>
-													<li>
-														<div class="details">
-															<div class="left">
-																<h6>zip</h6>
-															</div>
-															<div class="right">
-																<h6>60515</h6>
-															</div>
-														</div>
-													</li>
-												</ul>
+														  
+														
+													</form>
+												</div>
+												
 											</div>
 										</div>
 									</div>
@@ -616,5 +614,64 @@
                 },
             });
         });
+	</script>
+	<script>
+        $("#set_cover").click(function() {
+            $('#cover').trigger('click');
+        });
+		$("#cover").change(function() {
+			readURL(this,'featured');
+			// $('#remove_image').show();
+		});
+		function readURL(input,output) {
+			console.log(input.id);
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+				$('#'+output).attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
+	<script>
+		var cities = @JSON($cities);
+		var states = @JSON($states);
+		var state_options = '';
+		var city_options = '';
+		for(var i=0;i<states.length;i++){
+			state_options += '<option value="'+states[i].name+'">'+states[i].name+'</option>';
+		}
+		for(var i=0;i<cities.length;i++){
+			city_options += '<option value="'+cities[i].name+'">'+cities[i].name+'</option>';
+		}
+		$(document).on('click','.addmore',function(){
+			var product =  	`<div class="row row-no-gutter mb-4 companydocument">
+								<div class="mx-3">
+									<div class="input-group d-flex flex-column flex-md-row">
+										<span class="input-group-addon w-100 w-md-50">
+											<span class="mx-2">Default</span><input type="radio" name="status[]" value="1" required aria-label="...">
+										</span>
+										
+										<input type="text" class="form-control" name="address[]" placeholder="Address" required>
+										<select name="city[]" class="form-control city" required>`+
+											city_options+`
+										</select>
+										<select name="state[]" class="form-control" required>`+
+											state_options+`
+										</select>
+										<a href="javascript:void(0)" class="btn btn-danger btn-sm removemore">Remove</a>
+									</div>
+								
+								</div>
+							</div>`;
+			$('.companydocument').last().after(product);
+		});
+		
+		$(document).on('click','.removemore',function(){
+			if($('.companydocument').length > 1){
+				$(this).closest('.companydocument').remove();
+			}
+		});
 	</script>
 @endpush

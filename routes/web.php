@@ -35,6 +35,8 @@ Route::get('post/{post}', 'PostController@view')->name('post');
 
 Route::get('cart','CartController@index')->name('cart');
 
+Route::post('pay', 'PaymentController@redirectToGateway')->name('pay');
+
 Auth::routes();
 Route::get('home', 'HomeController@dashboard')->name('home');
 include('user.php');

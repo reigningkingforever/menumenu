@@ -3,20 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Address;
 use Illuminate\Http\Request;
-use App\Http\Traits\BookmarkTrait;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Traits\MediaManagementTrait;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    use BookmarkTrait;
-    public function __construct()
+    use MediaManagementTrait;
+    /*** FRONTEND.*/
+    public function profile(Request $request)
     {
-        $this->middleware('auth');
+        // dd($request->all());
+        $user = Auth::user();
+        if($request->filled("name")) $user->name = $request->name;
+        if($request->filled("phone")) $user->phone = $request->phone;
+        if($request->filled("birthday")) $user->birthday = $request->birthday;
+        if($request->filled("anniversary")) $user->wedding_anniversary = $request->anniversary;
+        $user->save();
+        if($request->hasFile('file') || $request->link){
+            $this->uploadMedia($request,$user->id,get_class($user));
+        }
+        return redirect()->back();
     }
+
+    public function password(Request $request)
+    {
+        dd($request->all());
+        $user = Auth::user();
+        $validator = Validator::make($request->all(), [
+            'oldpassword' => 'required|string',
+            'password' => 'required','string','confirmed'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput()
+                        ->with(['flash_type' => 'danger','flash_msg'=>'Something went wrong']);
+        }
+        if(Hash::check($request->oldpassword, $user->password)){
+            $user->password = Hash::make($request->password);
+            $user->save();
+            // $user->notify(new UserChangesNotification('password'));
+            return redirect()->back()->with(['flash_type' => 'success','flash_msg'=>'Password changed successfully']); //with success
+        }
+        else return redirect()->back()->withErrors(['oldpassword' => 'Your old password is wrong'])->with(['flash_type' => 'danger','flash_msg'=>'Something went wrong']);
+
+    }
+
+    public function addresses(Request $request)
+    {
+        $user = Auth::user();
+        foreach($user->addresses as $place){
+            $place->delete();
+        }
+        for($i = 0; $i < count($request->address); $i++){
+            $location = new Address;
+            $location->user_id = $user->id;
+            $location->address = $request->address[$i];
+            $location->city = $request->city[$i];
+            $location->state = $request->state[$i];
+            $location->status = (array_key_exists($i, $request->status))?true:false;
+            $location->save();
+        }
+        return redirect()->back();
+        //
+    }
+
     /**
-     * Display a listing of the resource.
+     * BACKEND.
      *
-     * @return \Illuminate\Http\Response
      */
     public function list()
     {
@@ -24,78 +82,32 @@ class UserController extends Controller
         return view('backend.users.list',compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
 
-    public function addToBookmark(Request $request){
-        $wish = $this->addBookmark($request->item,$request->item_id);
-        return response()->json(['wish_count'=> count((array)$wish)],200);
-    }
-    public function removeFromBookmark(Request $request){
-        $wish = $this->removeBookmark($request->item,$request->item_id);
-        return response()->json(['wish_count'=> count((array)$wish)],200);
-    }
+    
+
+
 }

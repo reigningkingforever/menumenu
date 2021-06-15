@@ -1,3 +1,4 @@
+@if(url()->current() == url('/') || url()->current() == url('/meals'))
 <nav class="navbar navbar-inverse navbar-fixed-bottom visible-xs">
     <div class="p-3 text-center">
       <ul class="list-inline">
@@ -13,15 +14,17 @@
       </ul>
     </div>
 </nav>
-
+@endif
+@if(url()->current() != url('/cart'))
 <div class="float-button-wrapper rounded-circle pulse @if(Session('cart') || collect((array) session('cart'))->sum('quantity') > 1) visible-lg @endif" style="display:none;">
 	<div class="box-shadow rounded-circle" style="position:relative;">
     <span class="cart-count" style="position:absolute;right:0px;background-color:#464545;color:white;padding:5px 12px 5px;border-radius:50px;">{{collect((array) session('cart'))->sum('quantity')}}</span>
-		<a href="#" rel="noreferrer noopener">
+		<a href="{{route('cart')}}" rel="noreferrer noopener">
 			<img class="float-button" src="{{asset('img/cart.png')}}" alt="cart">
 		</a>
 	</div>
 </div>
+@endif
 
 <div id="footer">
     <div class="container text-center">

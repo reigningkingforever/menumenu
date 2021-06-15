@@ -33,13 +33,11 @@ trait MediaManagementTrait
         $ext = $file->getClientOriginalExtension();
         $format = strstr($file->getClientMimeType(),'/',true);
         $mediaName = rand().time().'.'.$ext;
-        $location = $mediable_type == 'App\Post'? 'posts': 'meals';
+        $location = $this->getLocation($mediable_type);
         $file->storeAs('public/'.$location.'/',$mediaName);//save the file to public folder
         $this->saveToDatabase($mediaName,$format,false,$mediable_id,$mediable_type);
     }
-
-    
-    
+  
     protected function saveToDatabase($name,$format,$external,$mediable_id,$mediable_type){
         $media = new Media;
         $media->name = $name;
@@ -48,6 +46,17 @@ trait MediaManagementTrait
         $media->mediable_id = $mediable_id;
         $media->mediable_type = $mediable_type;
         $media->save();
+    }
+
+    protected function getLocation($type){
+        switch($type){
+            case 'App\Post': return 'posts';
+            break;
+            case 'App\User': return 'users';
+            break;
+            default: return 'meals';
+            break;
+        }
     }
 }
 

@@ -10,8 +10,18 @@ FRONTEND
 meal routine - show meal days
 login and 
 registration
-cart
+dashboard
+transactions
+profile{
+    personal[name, email, phone, birthday, wedding anniversary, photo]
+    change passwords
+    addresses
+}
+move mobile footer to only home and menu page
 ==============NOTDONE====================
+cart - place the data to the page.. and then pay
+orders - pay now
+paystack, 
 
  FRONTEND
 homecooking
@@ -21,17 +31,16 @@ event catering
 training
 
 
-USER
-dashboard
-profile
-preferences
-orders
-meal plan
-transactions
-
-
-
-
+meal calendar[
+                BREAKFAST   LUNCH   DINNER     DESSERTS
+    MONDAY      
+    TUESDAY
+    WEDNESDAY
+    THURSDAY
+    FRIDAY
+    SATURDAY
+    SUNDAY
+]
 
 
 after user filtering and food is not available,

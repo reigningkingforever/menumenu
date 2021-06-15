@@ -2,89 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use Paystack;
 use App\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PaymentController extends Controller
 {
-    /**
-     *FRONTEND
-     */
-    public function index()
-    {
-        //
-    }
 
-    public function cart()
-    {
-        //
-    }
-
-    public function checkout()
-    {
-        //
+    public function redirectToGateway()
+    {//dd('i am nere');
+        dd(Paystack::getAuthorizationUrl());
+        try{
+            return Paystack::getAuthorizationUrl()->redirectNow();
+            dd(Paystack::getAuthorizationUrl());
+        }catch(\Exception $e) {
+            //dd($e);
+            return Redirect::back()->withMessage(['msg'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
+        }        
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Obtain Paystack payment information
+     * @return void
      */
+    public function handleGatewayCallback()
+    {
+        $paymentDetails = Paystack::getPaymentData();
+
+        dd($paymentDetails);
+        // Now you have the payment details,
+        // you can store the authorization_code in your db to allow for recurrent subscriptions
+        // you can then redirect or do whatever you want
+    }
+
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
    
-    public function destroy($id)
-    {
-        //
-    }
 
      /**
      * BACKEND
