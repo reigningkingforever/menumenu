@@ -73,6 +73,7 @@ class MealController extends Controller
         if($request->hasFile('file')){
             $this->uploadMedia($request,$meal->id,get_class($meal));
         }
+        return redirect()->route('admin.meal.list');
     }
 
     public function getMealDiet(Array $ids){
