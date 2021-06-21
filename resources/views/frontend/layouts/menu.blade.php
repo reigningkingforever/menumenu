@@ -40,11 +40,11 @@
             </a>
             <!--DESKTOP USER MENU-->
             <ul class="dropdown-menu">
-              <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{route('user.home')}}">Dashboard</a></li>
+              {{-- <li class="nav-item"><a class="nav-link" href="">Profile</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Saves</a></li> 
               <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li> --}}
               <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">Log out</a>
                   <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
@@ -53,11 +53,11 @@
             </ul>
           </li>
           <div class="navbar-nav visible-xs">
-            <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('user.home')}}">Dashboard</a></li>
+            {{-- <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Saves</a></li> 
             <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li> --}}
             <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Log out</a>
                 <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">

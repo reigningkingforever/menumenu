@@ -50,10 +50,6 @@
                                                 
                                                 
                                             </div>
-                                            
-                                            
-                                            
-                                            {{-- <small class="d-block">51, Kano street, Ebute-meta east, Lagos</small> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -87,25 +83,33 @@
                                                     @foreach ($order->details as $item)
                                                         <tr> 
                                                             <td>
-                                                                @if(!$item->meal->media)
+                                                                
                                                                 <div class="meal">
-                                                                    <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
+                                                                    <img src="{{asset('storage/meals/'.$item->itemable->media->name)}}" class="avatar rounded">
                                                                 </div>
-                                                                @else
-                                                                <div class="meal">
-                                                                    <img src="{{asset('storage/meals/'.$item->meal->media->name)}}" class="avatar rounded">
-                                                                </div>
-                                                                @endif
+                                                                
                                                             </td>
                                                             <td>
                                                                 <h5 class="my-0">
-                                                                    <a href="{{route('meal.view',$item->meal)}}">{{$item->meal->name}} </a>
-                                                                    <small>size: {{$item->meal->size}}</small> 
+                                                                    <a href="#">{{$item->itemable->name}} </a>
+                                                                    {{-- <small>size: {{$item->meal->size}}</small>  --}}
                                                                 </h5>
-                                                                <small class="d-none d-md-block">{{$item->meal->description}}</small>    
+                                                                <small class="d-none d-md-block">
+                                                                    {{-- {{$item->meal->description}} --}}
+                                                                    @if($item->itemable_type == 'App\Meal') 
+                                                            
+                                                                        @foreach($item->itemable->items as $food)
+                                                                            {{$food->name.' ('.$food->size.')'}}
+                                                                            @if(!$loop->last)+ @endif
+                                                                        @endforeach
+                                                                    @else
+                                                                        {{$item->itemable->description}}<br>
+                                                                        Size:{{ucwords($item->itemable->size)}}
+                                                                    @endif
+                                                                </small>    
                                                             </td>
-                                                            <td> 12 </td>
-                                                            <td>Armani Kitchen</td>
+                                                            <td> {{$item->quantity}} </td>
+                                                            <td>@if($item->vendor) {{$item->vendor->user->name}} @else unassigned @endif</td>
                                                             <td>
                                                                 <h5>{{$item->status}}</h5>
                                                             </td>

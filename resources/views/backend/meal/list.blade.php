@@ -59,7 +59,7 @@
                     <div class="col-sm-4 col-md-3 grid" data-foodtype="breakfast" data-origin="intercontinental" data-cost="500">
                         <div class="product">
                             <figure>
-                                <img src="{{asset('img/gallery/01.jpg')}}" alt="Spring Rolls">
+                                <img src="{{asset('storage/meals/'.$meal->media->name)}}" alt="Spring Rolls">
                             </figure>
                             <section class="details">
                                 <div class="d-flex justify-content-between">
@@ -90,39 +90,7 @@
                 @empty
                     <p class="text-center">No Meal</p>
                 @endforelse
-                {{-- <div class="col-sm-4 col-md-3 grid" data-foodtype="breakfast" data-origin="intercontinental" data-cost="500">
-                    <div class="product">
-                        <figure>
-                            <img src="{{asset('img/gallery/01.jpg')}}" alt="Spring Rolls">
-                        </figure>
-                        <section class="details">
-                            <div class="d-flex justify-content-between">
-                                <h5>Spring Rolls </h5>
-                                <h5 class="price">₦500</h5>
-                            </div>
-                            
-                                
-                            <small class="text-muted">and Samosa</small>
-                                
-                            
-                            <div class="options mb-1">
-                                <div class="options-size mb-1">
-                                    <span class="">Accessories:</span><span>Chicken</span>	
-                                </div>
-                                <div class="options-colors">
-                                    <span>Soup:</span><span>-</span>	
-                                </div>
-                                <div class="options-colors">
-                                    <span>Drink:</span><span>fanta</span>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <a href="#" class="btn btn-sm">edit</a>
-                                <a href="#" class="btn btn-sm bg-red">delete</a>
-                            </div>
-                        </section>
-                    </div>
-                </div> --}}
+                
 
                 
             </div>

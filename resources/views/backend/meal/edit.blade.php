@@ -149,7 +149,7 @@
             if (!state.id) {
                 return state.text;
             }
-            // {{asset('img/gallery/01.jpg')}}
+
             var baseUrl = "{{asset('storage/meals/')}}";
             var $state = $(
                 '<span><img src="' + baseUrl + '/'+ state.element.label+'" class="thumbnail mr-2" /> ' + state.text + '</span>'
@@ -163,7 +163,6 @@
             if (!state.id) {
                 return state.text;
             }
-            // {{asset('img/gallery/01.jpg')}}
             var baseUrl = "{{asset('storage/meals/')}}";
             var $state = $(
                 '<span><img src="' + baseUrl +'/'+ state.element.label+ '" class="thumbnail mr-2" /> </span>'

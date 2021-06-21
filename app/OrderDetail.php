@@ -15,7 +15,7 @@ class OrderDetail extends Model
     public function itemable(){
         return $this->morphTo();
     }
-    // public function media(){
-    //     return $this->morphOne(Media::class, 'mediable');
-    // }
+    public function vendor(){
+        return $this->belongsTo(Vendor::class);
+    }
 }

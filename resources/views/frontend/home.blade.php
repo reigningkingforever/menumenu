@@ -11,42 +11,42 @@
           <div class="features-item">
             <a href="{{route('meals')}}"><h3>Meal Routine</h3></a>
             <img src="{{asset('img/specials/1.jpg')}}" class="img-responsive" alt="">
-            <p>Tired of eating the same kind of meals everyday? Join our daily delivery of various kinds of cooked breakfast, lunch and dinner, for a complete nutritional value.</p>
+            <p>Tired of not knowing what to eat or eating the same kind of meals everyday? Follow our daily meal routine of breakfast, lunch, dinner and desserts</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="features-item">
-            <h3>Home Cooking / Delivery</h3>
+            <h3>Home Cooking Service</h3>
             <img src="{{asset('img/specials/2.jpg')}}" class="img-responsive" alt="">
-            <p>We supply several sets of cooked meals and soup that will last you for short periods of time. Meals are either cooked at your home or delivered.</p>
+            <p>You can request our highly esteemed cooks to prepare any or all of your choiced meals in your own kitchen at affordable rates.</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="features-item">
             <h3>Food Stuff Purchase</h3>
             <img src="{{asset('img/specials/3.jpg')}}" class="img-responsive" alt="">
-            <p>Want to follow Lara's Menu and still cook them yourself? We can help you get all kinds of food stuffs and ingredients and deliver to your home at your convenience.</p>
+            <p>We can assist you with information, purchase and delivery of food stuffs and ingredients necessary to prepare any of the meals on our menu</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="features-item">
             <h3>Cake and Pastries</h3>
             <img src="{{asset('img/specials/1.jpg')}}" class="img-responsive" alt="">
-            <p>Tired of eating the same kind of meals everyday? Join our daily delivery of various kinds of cooked breakfast, lunch and dinner, for a complete nutritional value.</p>
+            <p>Contact us for special orders of cakes, small chops, ice-creams, fries, chocolates, pies, doughnuts etc. We always trend in taste</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="features-item">
             <h3>Event Catering</h3>
             <img src="{{asset('img/specials/2.jpg')}}" class="img-responsive" alt="">
-            <p>We cater several sets of cooked meals and soup that will last you for short periods of time. Meals are either cooked at your home or delivered.</p>
+            <p>Contact us to cater your events of different sizes or themes and ceremonies. We have flexible rates that accommodates most people's budget</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="features-item">
             <h3>Trainings</h3>
             <img src="{{asset('img/specials/3.jpg')}}" class="img-responsive" alt="">
-            <p>Want to follow Lara's Menu and still cook them yourself? We can help you get all kinds of food stuffs and ingredients and deliver to your home at your convenience.</p>
+            <p>We train interested individuals on  at your convenience.</p>
           </div>
         </div>
       </div>

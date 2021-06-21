@@ -18,8 +18,10 @@ profile{
     addresses
 }
 move mobile footer to only home and menu page
+cart - place the data to the page.. 
 ==============NOTDONE====================
-cart - place the data to the page.. and then pay
+cart - increase qty, remove item,shipping address, calculate total on remove or increase
+cart then pay.
 orders - pay now
 paystack, 
 
