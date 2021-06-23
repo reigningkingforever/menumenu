@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Menu;
 use App\State;
+use App\Town;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,8 @@ class HomeController extends Controller
         $user = Auth::user();
         $states = State::where('status',true)->get();
         $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
-        return view('user.dashboard',compact('user','states','cities'));
+        $towns = Town::whereIn('city_id',$cities->pluck('id')->toArray())->with(['city'])->get();
+        return view('user.dashboard',compact('user','states','cities','towns'));
     }
     public function backend()
     {

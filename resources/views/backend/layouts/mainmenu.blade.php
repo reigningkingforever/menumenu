@@ -48,6 +48,12 @@
                     <p>Payments</p>
                 </a>
             </li>
+            <li>
+                <a class="nav-link" href="{{route('admin.coupon.list')}}">
+                    <i class="nc-icon nc-badge"></i>
+                    <p>Coupons</p>
+                </a>
+            </li>
             
             <li>
                 <a class="nav-link" href="{{route('admin.post.list')}}">
@@ -62,24 +68,25 @@
                     <p>Reviews</p>
                 </a>
             </li>
-            {{-- <li>
-                <a class="nav-link" href="{{route('admin.tag.list')}}">
-                    <i class="nc-icon nc-money-coins"></i>
-                    <p>Tags</p>
-                </a>
-            </li> --}}
             <li>
                 <a class="nav-link" href="{{route('admin.user.list')}}">
                     <i class="nc-icon nc-badge"></i>
                     <p>Users</p>
                 </a>
             </li>
+            <li>
+                <a class="nav-link" href="{{route('admin.setting.list')}}">
+                    <i class="nc-icon nc-money-coins"></i>
+                    <p>Settings</p>
+                </a>
+            </li>
+            
             
             
             {{-- <li class="nav-item active active-pro">
                 <a class="nav-link active" href="#">
                     <i class="nc-icon nc-notification-70"></i>
-                    <p>Broadcast</p>
+                    <p>Settings</p>
                 </a>
             </li> --}}
         </ul>

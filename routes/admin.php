@@ -49,4 +49,16 @@ Route::group(['prefix'=> 'admin','as'=>'admin.','middleware'=> ['auth','admin']]
     Route::post('payment/delete/{payment}','PaymentController@destroy')->name('payment.delete');
 
     Route::get('users','UserController@list')->name('user.list');
+
+    Route::get('coupons','CouponController@list')->name('coupon.list');
+    Route::get('coupon/create','CouponController@create')->name('coupon.create');
+    Route::post('coupon/save','CouponController@store')->name('coupon.save');
+    Route::get('coupon/edit/{coupon}','CouponController@edit')->name('coupon.edit');
+    Route::post('coupon/update/{coupon}','CouponController@update')->name('coupon.update');
+    Route::post('coupon/delete','CouponController@destroy')->name('coupon.delete');
+
+    Route::get('settings','SettingsController@list')->name('setting.list');
+    Route::post('settings/state','SettingsController@state')->name('setting.state');
+    Route::post('settings/cities','SettingsController@cities')->name('setting.cities');
+    Route::post('settings/towns','SettingsController@towns')->name('setting.towns');
 });

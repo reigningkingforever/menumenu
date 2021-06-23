@@ -22,7 +22,8 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        // dd(json_decode($request->item[0])->id);
     }
 
     public function show(Order $order)

@@ -63,8 +63,9 @@ class UserController extends Controller
             $location = new Address;
             $location->user_id = $user->id;
             $location->address = $request->address[$i];
-            $location->city = $request->city[$i];
-            $location->state = $request->state[$i];
+            $location->town_id = $request->town_id[$i];
+            $location->city_id = \App\Town::where('id',$request->town_id[$i])->first()->city_id;
+            $location->state_id = $request->state_id[$i];
             $location->status = (array_key_exists($i, $request->status))?true:false;
             $location->save();
         }

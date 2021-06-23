@@ -415,7 +415,7 @@
 																<div class=" d-flex flex-column flex-md-row">
 																	<div class="form-group mx-3">
 																		<label>Date of Birth</label>
-																		<input type="date" name="birthday" class="form-control" value="{{$user->birthday->format('Y-m-d') ?? old('birthday')}}" placeholder="Birthday">
+																		<input type="date" name="birthday" class="form-control" value="{{$user->birthday ? $user->birthday->format('Y-m-d') : old('birthday')}}" placeholder="Birthday">
 																		@error('birthday')
 																			<span class="invalid-feedback" role="alert">
 																				<strong>{{ $message }}</strong>
@@ -424,7 +424,7 @@
 																	</div>
 																	<div class="form-group mx-3">
 																		<label>Wedding Anniversary (optional)</label>
-																		<input type="date" name="anniversary" class="form-control" value="{{$user->wedding_anniversary->format('Y-m-d') ?? old('anniversary')}}" placeholder="Wedding">
+																		<input type="date" name="anniversary" class="form-control" value="{{$user->wedding_anniversary ? $user->wedding_anniversary->format('Y-m-d') : old('anniversary')}}" placeholder="Wedding">
 																		@error('anniversary')
 																			<span class="invalid-feedback" role="alert">
 																				<strong>{{ $message }}</strong>
@@ -492,14 +492,14 @@
 																		</span>
 																		
 																		<input type="text" class="form-control" name="address[]" value="{{$place->address ?? old('address')}}" placeholder="Address" required>
-																		<select name="city[]" class="form-control city" required>
-																			@foreach ($cities as $city)
-																				<option value="{{$city->name}}" @if($place->city) checked @endif>{{$city->name}}</option>
+																		<select name="town_id[]" class="form-control city" required>
+																			@foreach ($towns as $town)
+																				<option value="{{$town->id}}" @if($town->id == $place->town_id) checked @endif>{{$town->name.', '.$town->city->name.' LGA'}}</option>
 																			@endforeach
 																		</select>
-																		<select name="state[]" class="form-control state" required>
+																		<select name="state_id[]" class="form-control state" required>
 																			@foreach ($states as $state)
-																				<option value="{{$state->name}}" @if($place->state) checked @endif>{{$state->name}}</option>
+																				<option value="{{$state->id}}" @if($state->id == $place->state_id) checked @endif>{{$state->name}}</option>
 																			@endforeach
 																		</select>
 																		@if(!$loop->first)<a href="javascript:void(0)" class="btn btn-danger btn-sm removemore">Remove</a>@endif
@@ -515,17 +515,15 @@
 																	</span>
 																	
 																	<input type="text" class="form-control" name="address[]" placeholder="Address" required>
-																	<select name="city[]" class="form-control city" required>
-																		@foreach ($cities as $city)
-																			<option value="{{$city->name}}">{{$city->name}}</option>
+																	<select name="town_id[]" class="form-control city" required>
+																		@foreach ($towns as $town)
+																			<option value="{{$town->id}}">{{$town->name.', '.$town->city->name.' LGA'}}</option>
 																		@endforeach
 																	</select>
-																	<select name="state[]" class="form-control" required>
+																	<select name="state_id[]" class="form-control state" required>
 																		@foreach ($states as $state)
-																			<option value="{{$state->name}}">{{$state->name}}</option>
+																			<option value="{{$state->id}}">{{$state->name}}</option>
 																		@endforeach
-																		
-																		<option>Lagos</option>
 																	</select>
 																	
 																</div>
@@ -635,15 +633,17 @@
 		}
 	</script>
 	<script>
+		var towns = @JSON($towns);
 		var cities = @JSON($cities);
 		var states = @JSON($states);
 		var state_options = '';
-		var city_options = '';
+		var town_options = '';
+		console.log(towns[0].city.name);
 		for(var i=0;i<states.length;i++){
 			state_options += '<option value="'+states[i].name+'">'+states[i].name+'</option>';
 		}
-		for(var i=0;i<cities.length;i++){
-			city_options += '<option value="'+cities[i].name+'">'+cities[i].name+'</option>';
+		for(var i=0;i<towns.length;i++){
+			town_options += '<option value="'+towns[i].name+'">'+towns[i].name+', '+towns[i].city.name+' LGA</option>';
 		}
 		$(document).on('click','.addmore',function(){
 			var product =  	`<div class="row row-no-gutter mb-4 companydocument">
@@ -654,10 +654,10 @@
 										</span>
 										
 										<input type="text" class="form-control" name="address[]" placeholder="Address" required>
-										<select name="city[]" class="form-control city" required>`+
-											city_options+`
+										<select name="town_id[]" class="form-control city" required>`+
+											town_options+`
 										</select>
-										<select name="state[]" class="form-control" required>`+
+										<select name="state_id[]" class="form-control" required>`+
 											state_options+`
 										</select>
 										<a href="javascript:void(0)" class="btn btn-danger btn-sm removemore">Remove</a>

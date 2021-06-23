@@ -24,12 +24,12 @@
                     </thead>
                     <tbody>
                         @forelse ($cart as $item)
-                            <tr>
+                            <tr class="item" data-price="{{$item['product']->price}}" data-amount="{{$item['product']->price * $item['quantity']}}" data-qty="{{$item['quantity']}}">
                                 <td>
                                     <a href="#">
                                         <div class="meal d-flex flex-column">
                                             <img src="{{asset('storage/meals/'.$item['product']->media->name)}}" class="avatar rounded m-0" alt="">     
-                                            <a href="#" class="text-danger visible-xs" href="#"><u>Remove</u></a>
+                                            <a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="text-danger visible-xs remove-from-cart" href="#"><u>Remove</u></a>
                                         </div>
                                     </a>
                                 </td>
@@ -37,7 +37,7 @@
                                     <div class="d-flex flex-column">
                                         <div class="d-flex justify-content-between">
                                             <span>{{$item['product']->name}}</span>
-                                            <span class="visible-xs">₦{{$item['product']->price}}</span>
+                                            <span class="visible-xs">₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span></span>
                                         </div>
                                         <div class="d-flex justify-content-between mt-2 mt-sm-0">
                                             <span class="small">
@@ -54,8 +54,8 @@
                                             <span class="visible-xs">
                                                 <div class="qty-box">
                                                     <div class="form-group">
-                                                        <input type="number" name="quantity" class="form-control" style="width:50px;"
-                                                            value="{{$item['quantity']}}">
+                                                        <input type="number" name="quantity" class="form-control quantity" style="width:50px;"
+                                                            value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
                                                     </div>
                                                 </div>
                                             </span>
@@ -69,80 +69,32 @@
                                 <td class="hidden-xs">
                                     <div class="qty-box">
                                         <div class="">
-                                            <input type="number" name="quantity" class="form-control" style="width:70px;"
-                                                value="{{$item['quantity']}}">
+                                            <input type="number" name="quantity" class="form-control quantity" style="width:70px;"
+                                                value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
                                         </div>
                                     </div>
                                 </td>
-                                <td class="hidden-xs"><a href="#" class="icon text-danger"><i class="fa fa-times"></i></a></td>
+                                <td class="hidden-xs"><a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="icon text-danger remove-from-cart"><i class="fa fa-times"></i></a></td>
                                 <td class="hidden-xs">
-                                    ₦{{$item['product']->price * $item['quantity']}}
+                                    ₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span>
                                 </td>
                             </tr>
                         @empty
                             
                         @endforelse
-                        {{-- <tr>
-                            <td>
-                                <a href="#">
-                                    <div class="meal d-flex flex-column">
-                                        <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded m-0" alt="">     
-                                        <a href="#" class="text-danger visible-xs" href="#"><u>Remove</u></a>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column">
-                                    <div class="d-flex justify-content-between">
-                                        <span>This Product</span>
-                                        <span class="visible-xs">₦2,363.00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mt-2 mt-sm-0">
-                                        <span>This Product Description is good for eating</span>
-                                        <span class="visible-xs">
-                                            <div class="qty-box">
-                                                <div class="form-group">
-                                                    <input type="number" name="quantity" class="form-control" style="width:50px;"
-                                                        value="1">
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                    
-                                </div>
-                            </td>
-                            <td class="hidden-xs">
-                                ₦63.00
-                            </td>
-                            <td class="hidden-xs">
-                                <div class="qty-box">
-                                    <div class="">
-                                        <input type="number" name="quantity" class="form-control" style="width:70px;"
-                                            value="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="hidden-xs"><a href="#" class="icon"><i class="fa fa-times"></i></a></td>
-                            <td class="hidden-xs">
-                                ₦4539.00
-                            </td>
-                        </tr> --}}
+                        
                     </tbody>
                 </table>
                 <table class="table">
                     <tfoot>
                         <tr>
-                            <td>total price :</td>
+                            <td>Subtotal :</td>
                             <td class="text-right">
-                                @php $total = 0; @endphp
-                                    @foreach($cart as $item)
-                                        @php $total += $item['quantity'] * $item['product']->price  @endphp
-                                    @endforeach
-                                <h3>₦{{number_format($total)}}</h3>
+                                
+                                <h3>₦<span class="subtotal">{{number_format($order['subtotal'])}}</span></h3>
                             </td>
                         </tr>
                         <tr>
-                            
                             <td colspan="2" class="">
                                 <div class="d-flex justify-content-between">
                                     <a href="{{url('/')}}#restaurant-menu" class="btn btn-default">Add More Menu Items</a>
@@ -157,66 +109,79 @@
             <div class="col-xs-12 col-md-4 mb-4">
 				<h4 class="d-flex justify-content-between align-items-center mb-3">
 					<span class="text-muted">Your cart</span>
-					<span class="badge badge-secondary badge-pill">3</span>
+					<span class="badge badge-secondary badge-pill"><span class="cart_count">{{collect($cart)->sum('quantity')}}</span></span>
 				</h4>
 				<ul class="list-group mb-3">
 					<li class="list-group-item d-flex justify-content-between lh-condensed">
 					<div>
 						<h6 class="my-0 font-weight-bold">Items</h6>
-						<small class="text-muted">You have 15 items in your cart</small>
+						<small class="text-muted">You have <span class="cart_count">{{collect($cart)->sum('quantity')}}</span> items in your cart</small>
 					</div>
-					<span class="text-muted">₦12</span>
+					<span class="text-muted">₦<span class="subtotal">{{number_format($order['subtotal'])}}</span></span>
 					</li>
+                    @auth
 					<li class="list-group-item d-flex justify-content-between lh-condensed">
-					<div>
-						<h6 class="my-0 font-weight-bold">Delivery</h6>
-						<small class="text-muted">25, Surulere Street, off Kokoro Abu, Ikorodu Lagos</small>
-						<a class="small text-danger d-block" href="#">Set your delivery address</a>
-					</div>
-					<span class="text-muted">₦8</span>
+                        <div>
+                            <h6 class="my-0 font-weight-bold">Delivery</h6>
+                            @if(Auth::user()->addresses->isNotEmpty())
+                            <small class="text-muted">
+                                {{Auth::user()->addresses->where('status',true)->first()->address}} ,
+                                {{Auth::user()->addresses->where('status',true)->first()->town->name}}
+                                {{Auth::user()->addresses->where('status',true)->first()->city->name}} LGA,
+                                {{Auth::user()->addresses->where('status',true)->first()->state->name}}
+                            </small>
+                            @else
+                            
+                            <a class="small text-danger d-block" href="#" data-toggle="modal" data-target="#set-address">Set your delivery address</a>
+                            @endif
+                        </div>
+                        <span class="text-muted">₦<span class="delivery">{{$order['delivery']}}</span></span>
 					</li>
+                    @endauth()
 					<li class="list-group-item d-flex justify-content-between lh-condensed">
 					<div>
 						<h6 class="my-0">VAT</h6>
-						<small class="text-muted">7.5% of subtotal</small>
+						<small class="text-muted">{{$order['vat_percent']}}% of subtotal</small>
 					</div>
-					<span class="text-muted">₦5</span>
+					<span class="text-muted">₦<span class="vat">{{$order['vat']}}</span> </span>
 					</li>
 					<li class="list-group-item d-flex justify-content-between bg-light">
 					<div class="text-success">
 						<h6 class="my-0">Promo code</h6>
-						<small>EXAMPLECODE</small>
+						<small id="coupon_code">EXAMPLECODE</small>
 					</div>
-					<span class="text-success">-₦5</span>
+					<span class="text-success">-₦<span class="discount">0</span></span>
 					</li>
 					<li class="list-group-item d-flex justify-content-between">
-					<span>Total (USD)</span>
-					<strong>₦20</strong>
+					<span class="font-weight-bold">Total (NGN)</span>
+					<strong>₦<span class="grandtotal">{{$order['grandtotal']}}</span></strong>
 					</li>
 				</ul>
 			
 				<form class="card p-2">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Promo code">
+						<input type="text" class="form-control" placeholder="Promo code" name="coupon">
 						<div class="input-group-addon">
-							<button type="submit" class="btn btn-secondary btn-xs py-0">Redeem</button>
+							<button type="button" id="applycoupon" class="btn btn-secondary btn-xs py-0">Redeem</button>
 						</div>
 					</div>
 				</form>
+                <small id="coupon_description" class="d-block text-info text-center"></small>
 				<hr class="mb-4">
-                @guest <small class="d-block text-danger text-center">-------Please login-----------</small> @endguest
-                <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
-                    <input type="hidden" name="email" value="{{Auth::user()->name ?? 'null'}}"> {{-- required --}}
+                @guest <small class="d-block text-danger">-------Please login-----------</small> @endguest
+                <form method="POST" action="{{ route('checkout') }}">
+                    @csrf
+                    <input type="hidden" name="grandtotal" id="grandtotal" value="{{$order['grandtotal']}}">
+                    <input type="hidden" name="subtotal" id="subtotal" value="{{$order['subtotal']}}">
+                    <input type="hidden" name="vat" id="vat" value="{{$order['vat']}}">
+                    <input type="hidden" name="delivery" id="delivery" value="{{$order['delivery']}}">
+                    <input type="hidden" name="discount" id="discount" value="0">
                     
-                    <input type="hidden" name="amount" value="80000"> {{-- required in kobo --}}
-                    <input type="hidden" name="quantity" value="3">
-                    <input type="hidden" name="currency" value="NGN">
-                    <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
-                    {{--<input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">  required --}}
-                    {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
-
-                
-				<button class="btn btn-primary btn-lg btn-block @guest disabled @endguest" type="submit">Continue to checkout</button>
+                    @forelse($cart as $item)
+                    <input type="hidden" name="item[]" id="{{$item['product']->slug}}" value="{{ json_encode( $array = ['id' => $item['product']->id,'type'=>$item['type'],'quantity'=> $item['quantity'] ]  ) }}" >
+                    @empty
+                    @endforelse
+				    <button class="btn btn-primary btn-lg btn-block @guest disabled @endguest" type="submit">Continue to checkout</button>
                 </form>
 			</div>
         </div>
@@ -224,16 +189,92 @@
 		
 	</div>
 </div>
+<div class="modal fade modal-primary" id="set-address" tabindex="-1" role="dialog" aria-labelledby="set-addresss" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <p>Set Address</p>
+            </div>
+            <form action="{{route('user.address')}}" method="POST">@csrf
+                <input type="hidden" name="status[]" value="1" required aria-label="...">
+                <div class="modal-body text-center">
+                    <div class="form-group">
+                        <input name="address[]" value="" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select name="town_id[]" class="form-control">
+                                    @foreach ($towns as $town)
+                                        <option value="{{$town->id}}">{{$town->name.', '.$town->city->name.' LGA'}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select name="state_id[]" class="form-control">
+                                    @foreach ($states as $state)
+                                        <option value="{{$state->id}}" >{{$state->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @push('scripts')
-
+    <script>
+        function grandtotal(){
+            var subtotal = $('#subtotal').val();
+            var delivery = $('#delivery').val();
+            var vat = $('#vat').val();
+            var discount = $('#discount').val();
+            var grandtotal = 0;
+            grandtotal = parseInt(subtotal) + parseInt(delivery) + parseInt(vat) + parseInt(discount);
+            $('.grandtotal').html(grandtotal);
+            $('#grandtotal').val(grandtotal);
+        }
+        function subtotal(){
+            var subtotal = 0;
+            var cart_count = 0
+            $('.item').each(function(index){
+                subtotal += parseInt($(this).attr('data-amount'));
+                cart_count += parseInt($(this).attr('data-qty'));
+            });
+            $('.subtotal').html(subtotal);
+            $('#subtotal').val(subtotal);
+            $('.cart_count').html(cart_count);
+        }
+        
+        $(document).on('input','.quantity',function(){
+            var qty = $(this).val(); //get the quantity
+            var slug = $(this).attr('slug'); //get slug of the quantities 
+            $('input[slug="'+slug+'"]').val(qty); //give quantity to all quantity input box
+            $(this).closest('tr').attr('data-qty',qty); //place the quantity on the item row attribute
+            var input = $('input[id="'+slug+'"]').val(); //get input of item
+            input = JSON.parse(input);
+            input.quantity = qty; //replace quantity in the input
+            $('input[id="'+slug+'"]').val(JSON.stringify(input)); // return the new input
+            var amount = parseInt($(this).closest('tr').attr('data-price')) * parseInt(qty); //calculate new amount
+            $(this).closest('tr').attr('data-amount',amount); //place the amount on the item row attribute
+            $('.total[data-slug="'+slug+'"]').html(amount); //place the amount onthe item row
+            subtotal();
+            grandtotal();
+        })
+ 
+    </script>
 {{-- 
-//1.increase quantity and subtotal 
-//2.calculate total
-//3.remove item from cart
-//4.process discount
+
 //5.set address & delivery fee
-//6.calculate grandtotal
 //7.payment 
 --}}
 
@@ -241,6 +282,8 @@
 		$(document).on('click','.remove-from-cart',function(){
             var item = $(this).attr('data-item');
             var item_id = parseInt($(this).attr('data-item_id'));
+            var clicked = $(this).closest('tr');
+            var slug = $(this).attr('data-slug');
             $.ajax({
                 type:'POST',
                 dataType: 'json',
@@ -251,34 +294,14 @@
                     'item': item
                 },
                 success:function(data) {
-                  alert('success');
-                    // ₦('#cart-notification').html(data.cart_count);
-                    // ₦('#cart-notification,.shopping-cart').show();
-                    // var cart_total = 0;
-                    // var listing;
-                    // ₦('#shopping_list').html('');
-                    // ₦.each( data.cart, function( key, value ) {
-                    //     listing =  `<li  id="cartlist`+key+`">
-                    //                     <div class="media">
-                    //                         <a href="#">
-                    //                             <img alt="" class="mr-3"
-                    //                                 src="/storage/media/image/`+value['image']+`">
-                    //                         </a>
-                    //                         <div class="media-body">
-                    //                             <a href="#">
-                    //                                 <h4>`+value['name']+`</h4>
-                    //                             </a>
-                    //                             <h4><span>`+value['quantity']+` x `+value['amount']+`</span></h4>
-                    //                         </div>
-                    //                     </div>
-                    //                     <div class="close-circle">
-                    //                         <a href="javascript:void(0)" class="remove-from-cart" data-product="`+key+`product"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    //                     </div>
-                    //                 </li>`;
-                    //     cart_total += parseInt(value['quantity']) * parseInt(value['amount']);
-                    //     ₦('#shopping_list').prepend(listing);
-                    // });
-                    // ₦('#cart_total').html(cart_total);
+                $('.cart_count').val(data.cart_count);
+                //remove product from html
+                clicked.remove();
+                //remove product from input
+                $('input[id="'+slug+'"]').remove();
+                subtotal();
+                grandtotal();
+                   
                 },
                 error: function (data, textStatus, errorThrown) {
                 console.log(data);
@@ -286,4 +309,32 @@
             });
         });
 	</script>
+
+    <script>
+        $('#applycoupon').click(function (){
+            var coupon = $('input[name="coupon"]').val();
+            if(coupon != ''){
+                $.ajax({
+                    type:'POST',
+                    dataType: 'json',
+                    url:"{{route('applycoupon')}}",
+                    data:{
+                        '_token' : $('meta[name="csrf-token"]').attr('content'),
+                        'coupon': coupon,
+                    },
+                    success:function(data) {
+                        $('#discount').val(data.value);
+                        $('.discount').html(data.value);
+                        $('#coupon_description').html(data.description);
+                        if(data.value != 0)
+                        $('#coupon_code').html(coupon.toUpperCase());
+                        grandtotal();
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                    console.log(data);
+                    },
+                });
+            }
+        });
+    </script>
 @endpush

@@ -5967,7 +5967,7 @@ License - nucleoapp.com/license/
  .bootstrap-datetimepicker-widget.dropdown-menu.open {
      visibility: visible !important;
      opacity: 1 !important;
-     top: 120px !important;
+     /* top: 120px !important; */
      font-size: 14px !important;
  }
  

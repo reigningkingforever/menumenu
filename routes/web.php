@@ -21,19 +21,20 @@ Route::view('training','frontend.training')->name('training');
 
 Route::get('meals','MealController@index')->name('meals');
 Route::get('meal/{meal}', 'MealController@view')->name('meal.view');
-Route::post('add-to-cart','CartController@addtocart')->name('cart.add');
-Route::post('remove-from-cart','CartController@removefromcart')->name('cart.remove');
 
 
 Route::post('menus','MenuController@index')->name('menus');
 Route::get('menu/{menu}', 'MenuController@view')->name('menu.view');
-Route::post('menu/add-to-cart','MenuController@addtocart')->name('menu.addtocart');
-Route::post('menu/remove-from-cart','MenuController@removefromcart')->name('menu.removefromcart');
 
 Route::get('blog','PostController@index')->name('blog');
 Route::get('post/{post}', 'PostController@view')->name('post');
 
 Route::get('cart','CartController@index')->name('cart');
+Route::post('add-to-cart','CartController@addtocart')->name('cart.add');
+Route::post('remove-from-cart','CartController@removefromcart')->name('cart.remove');
+Route::post('applycoupon','CartController@applycoupon')->name('applycoupon');
+
+Route::post('checkout','OrderController@store')->name('checkout');
 
 Route::post('pay', 'PaymentController@redirectToGateway')->name('pay');
 

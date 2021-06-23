@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Meal;
-use App\Menu;
+
+use App\State;
+use App\Town;
+use App\City;
 use Illuminate\Http\Request;
 use App\Http\Traits\CartTrait;
+use App\Http\Traits\OrderTrait;
 use App\Http\Traits\BookmarkTrait;
 use Illuminate\Support\Facades\Auth;
 
 
 class CartController extends Controller
 {
-    use CartTrait,BookmarkTrait;
+    use BookmarkTrait,CartTrait,OrderTrait;
     
     public function addtocart(Request $request){
         $cart = $this->addToCartSession($request->item, $request->item_id);
@@ -42,11 +45,16 @@ class CartController extends Controller
     public function index()
     {
         $cart = request()->session()->get('cart');
-        // dd($cart);
-        return view('frontend.cart',compact('cart'));
+        $order = $this->getOrder();
+        $states = State::where('status',true)->get();
+        $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
+        $towns = Town::whereIn('city_id',$cities->pluck('id')->toArray())->with(['city'])->get();
+        return view('frontend.cart',compact('cart','order','states','towns'));
     }
-    public function bookmark(){
-        
+    
+    public function applycoupon(Request $request){
+        $coupon = $this->getCoupon($request->coupon);
+        return $coupon;
     }
 
 
@@ -60,57 +68,31 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

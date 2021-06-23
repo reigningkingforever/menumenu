@@ -50,7 +50,7 @@ trait CartTrait
     protected function removeFromCartSession($item,$item_id){
         $product = $this->getItem($item,$item_id);
         $oldcart = request()->session()->get('cart');
-        $cart = Arr::except($oldcart, ["$item.'-'.$product->id"]);
+        $cart = Arr::except($oldcart, $item.'-'.$product->id);
         request()->session()->put('cart', $cart);
         return $cart;
     }
