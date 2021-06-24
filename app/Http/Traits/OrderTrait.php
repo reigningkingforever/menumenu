@@ -13,7 +13,10 @@ trait OrderTrait
 {
     protected function getOrder(){
         $cart = request()->session()->get('cart');
-        $order = ['subtotal'=> $this->getSubtotal($cart),'delivery'=> $this->getDeliveryCharge(),'vat'=> $this->getVat($cart)/100 *$this->getSubtotal($cart),'vat_percent'=>$this->getVat($cart)];
+        if(!$cart)
+        $order = ['subtotal'=> 0,'delivery'=> $this->getDeliveryCharge(),'vat'=> 0,'vat_percent'=>$this->getVat()];
+        else
+        $order = ['subtotal'=> $this->getSubtotal($cart),'delivery'=> $this->getDeliveryCharge(),'vat'=> $this->getVat()/100 *$this->getSubtotal($cart),'vat_percent'=>$this->getVat()];
         $grandtotal = $order['subtotal'] + $order['delivery'] + $order['vat'];
         $order['grandtotal'] = $grandtotal;
         return $order;
@@ -44,7 +47,7 @@ trait OrderTrait
         return $delivery;
     }
 
-    protected function getVat(Array $cart){
+    protected function getVat(){
         $vat = Setting::where('name','vat')->first()->value;
         return $vat;
     }
@@ -57,6 +60,8 @@ trait OrderTrait
     }
     protected function getCoupon($code){
         $cart = request()->session()->get('cart');
+        if(!$cart)
+        return $this->getWorth('No items in your cart');
         $worth = [];
         $coupon = Coupon::where('code',$code)->first();
         if(!$coupon)

@@ -23,66 +23,71 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($cart as $item)
-                            <tr class="item" data-price="{{$item['product']->price}}" data-amount="{{$item['product']->price * $item['quantity']}}" data-qty="{{$item['quantity']}}">
-                                <td>
-                                    <a href="#">
-                                        <div class="meal d-flex flex-column">
-                                            <img src="{{asset('storage/meals/'.$item['product']->media->name)}}" class="avatar rounded m-0" alt="">     
-                                            <a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="text-danger visible-xs remove-from-cart" href="#"><u>Remove</u></a>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td>
-                                    <div class="d-flex flex-column">
-                                        <div class="d-flex justify-content-between">
-                                            <span>{{$item['product']->name}}</span>
-                                            <span class="visible-xs">₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span></span>
-                                        </div>
-                                        <div class="d-flex justify-content-between mt-2 mt-sm-0">
-                                            <span class="small">
-                                                @if($item['type'] == 'App\Meal')        
-                                                    @foreach($item['product']->items as $food)
-                                                        {{$food->name.' ('.$food->size.')'}}
-                                                        @if(!$loop->last)+ @endif
-                                                    @endforeach
-                                                @else
-                                                    {{$item['product']->description}}<br>
-                                                    <small>Size:{{ucwords($item['product']->size)}}</small>
-                                                @endif
-                                            </span>
-                                            <span class="visible-xs">
-                                                <div class="qty-box">
-                                                    <div class="form-group">
-                                                        <input type="number" name="quantity" class="form-control quantity" style="width:50px;"
-                                                            value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
+                        @if($cart)
+                            @foreach ($cart as $item)
+                                <tr class="item" data-price="{{$item['product']->price}}" data-amount="{{$item['product']->price * $item['quantity']}}" data-qty="{{$item['quantity']}}">
+                                    <td>
+                                        <a href="#">
+                                            <div class="meal d-flex flex-column">
+                                                <img src="{{asset('storage/meals/'.$item['product']->media->name)}}" class="avatar rounded m-0" alt="">     
+                                                <a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="text-danger visible-xs remove-from-cart" href="#"><u>Remove</u></a>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <div class="d-flex justify-content-between">
+                                                <span>{{$item['product']->name}}</span>
+                                                <span class="visible-xs">₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span></span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-2 mt-sm-0">
+                                                <span class="small">
+                                                    @if($item['type'] == 'App\Meal')        
+                                                        @foreach($item['product']->items as $food)
+                                                            {{$food->name.' ('.$food->size.')'}}
+                                                            @if(!$loop->last)+ @endif
+                                                        @endforeach
+                                                    @else
+                                                        {{$item['product']->description}}<br>
+                                                        <small>Size:{{ucwords($item['product']->size)}}</small>
+                                                    @endif
+                                                </span>
+                                                <span class="visible-xs">
+                                                    <div class="qty-box">
+                                                        <div class="form-group">
+                                                            <input type="number" name="quantity" class="form-control quantity" style="width:50px;"
+                                                                value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </span>
+                                                </span>
+                                            </div>
+                                            
                                         </div>
-                                        
-                                    </div>
-                                </td>
-                                <td class="hidden-xs">
-                                    ₦{{$item['product']->price}}
-                                </td>
-                                <td class="hidden-xs">
-                                    <div class="qty-box">
-                                        <div class="">
-                                            <input type="number" name="quantity" class="form-control quantity" style="width:70px;"
-                                                value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
+                                    </td>
+                                    <td class="hidden-xs">
+                                        ₦{{$item['product']->price}}
+                                    </td>
+                                    <td class="hidden-xs">
+                                        <div class="qty-box">
+                                            <div class="">
+                                                <input type="number" name="quantity" class="form-control quantity" style="width:70px;"
+                                                    value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="hidden-xs"><a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="icon text-danger remove-from-cart"><i class="fa fa-times"></i></a></td>
-                                <td class="hidden-xs">
-                                    ₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span>
-                                </td>
-                            </tr>
-                        @empty
-                            
-                        @endforelse
-                        
+                                    </td>
+                                    <td class="hidden-xs"><a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="icon text-danger remove-from-cart"><i class="fa fa-times"></i></a></td>
+                                    <td class="hidden-xs">
+                                        ₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span>
+                                    </td>
+                                </tr>   
+                            @endforeach
+                        @else
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        <p>No Items in your cart</p>
+                                    </td>
+                                </tr>
+                        @endif
                     </tbody>
                 </table>
                 <table class="table">
@@ -177,10 +182,11 @@
                     <input type="hidden" name="delivery" id="delivery" value="{{$order['delivery']}}">
                     <input type="hidden" name="discount" id="discount" value="0">
                     
-                    @forelse($cart as $item)
-                    <input type="hidden" name="item[]" id="{{$item['product']->slug}}" value="{{ json_encode( $array = ['id' => $item['product']->id,'type'=>$item['type'],'quantity'=> $item['quantity'] ]  ) }}" >
-                    @empty
-                    @endforelse
+                    @if($cart)
+                        @foreach($cart as $item)
+                        <input type="hidden" name="item[]" id="{{$item['product']->slug}}" value="{{ json_encode( $array = ['id' => $item['product']->id,'type'=>$item['type'],'quantity'=> $item['quantity'] ]  ) }}" >
+                        @endforeach
+                    @endif
 				    <button class="btn btn-primary btn-lg btn-block @guest disabled @endguest" type="submit">Continue to checkout</button>
                 </form>
 			</div>

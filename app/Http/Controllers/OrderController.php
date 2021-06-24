@@ -23,6 +23,10 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
+        $user = Auth::user();
+        $order = Order::create(['user_id'=> $user->id,'subtotal'=> $request->subtotal,'discount'=> $request->discount,'vat'=> $request->vat,'delivery_fee'=> $request->delivery,'delivery_address'=> $user->addresses->where('status',true)->first()->id,'amount'=> $request->grandtotal]);
+        //create order
+        //initiate payment
         // dd(json_decode($request->item[0])->id);
     }
 

@@ -20,8 +20,7 @@ profile{
 move mobile footer to only home and menu page
 cart - place the data to the page.. 
 ==============NOTDONE====================
-cart - increase qty, remove item,shipping address, calculate total on remove or increase
-cart then pay.
+then pay.
 orders - pay now
 paystack, 
 
@@ -45,8 +44,12 @@ meal calendar[
 ]
 
 
+shipping is based on number of deliveries that will be made
+check if subtotal or grandtotal == 0 before checkout
+
+recurring order
+initiate charge backs
+
 after user filtering and food is not available,
 show no-meal, and show: would you like to be notified when this meal is available? button= yes.
-
-type the food and the menu online
 
