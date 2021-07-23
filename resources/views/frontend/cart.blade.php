@@ -25,7 +25,7 @@
                     <tbody>
                         @if($cart)
                             @foreach ($cart as $item)
-                                <tr class="item" data-price="{{$item['product']->price}}" data-amount="{{$item['product']->price * $item['quantity']}}" data-qty="{{$item['quantity']}}">
+                                <tr class="item" data-price="{{$item['product']->price}}" data-amount="{{$item['product']->price * $item['quantity']}}" data-qty="{{$item['quantity']}}" data-delivery="{{$item['delivery']}}">
                                     <td>
                                         <a href="#">
                                             <div class="meal d-flex flex-column">
@@ -42,15 +42,12 @@
                                             </div>
                                             <div class="d-flex justify-content-between mt-2 mt-sm-0">
                                                 <span class="small">
-                                                    @if($item['type'] == 'App\Meal')        
-                                                        @foreach($item['product']->items as $food)
-                                                            {{$food->name.' ('.$food->size.')'}}
-                                                            @if(!$loop->last)+ @endif
-                                                        @endforeach
-                                                    @else
-                                                        {{$item['product']->description}}<br>
-                                                        <small>Size:{{ucwords($item['product']->size)}}</small>
-                                                    @endif
+                                                    @foreach($item['product']->items as $food)
+                                                        {{$food->name.' ('.$food->size.')'}}
+                                                        @if(!$loop->last)+ @endif
+                                                    @endforeach
+                                                    <br>
+                                                    <span class="small">{{ucwords($item['product']->calendar->period)}} on {{$item['product']->calendar->datetime->format('l-jS')}}</span>
                                                 </span>
                                                 <span class="visible-xs">
                                                     <div class="qty-box">
@@ -80,6 +77,7 @@
                                         ₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span>
                                     </td>
                                 </tr>   
+                                  
                             @endforeach
                         @else
                                 <tr>
@@ -97,6 +95,16 @@
                             <td class="text-right">
                                 
                                 <h3>₦<span class="subtotal">{{number_format($order['subtotal'])}}</span></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deliveries :</td>
+                            <td class="text-right delivery_text">
+                                @forelse($deliveries as $delivery)
+                                    <span>You have 1 delivery on {{$delivery}}</span>  <br>
+                                @empty
+                                    <span>No deliveries</span>
+                                @endforelse
                             </td>
                         </tr>
                         <tr>
@@ -127,7 +135,7 @@
                     @auth
 					<li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
-                            <h6 class="my-0 font-weight-bold">Delivery</h6>
+                            <h6 class="my-0 font-weight-bold">Delivery x <span id="deliveries">{{count($deliveries)}}</span></h6>
                             @if(Auth::user()->addresses->isNotEmpty())
                             <small class="text-muted">
                                 {{Auth::user()->addresses->where('status',true)->first()->address}} ,
@@ -260,6 +268,19 @@
             $('#subtotal').val(subtotal);
             $('.cart_count').html(cart_count);
         }
+        function deliveries(){
+            var deliveries = [];
+            var delivery_text = '';
+            $('.item').each(function(index){
+                if(!deliveries.includes($(this).attr('data-delivery') ) )
+                deliveries.push($(this).attr('data-delivery'));
+            });
+            $('#deliveries').html(deliveries.length);
+            deliveries.forEach(function(value, index, array){
+                delivery_text += 'You have 1 delivery on '+ value+'<br>';
+            });
+            $('.delivery_text').html(delivery_text);
+        }
         
         $(document).on('input','.quantity',function(){
             var qty = $(this).val(); //get the quantity
@@ -280,8 +301,6 @@
     </script>
 {{-- 
 
-//5.set address & delivery fee
-//7.payment 
 --}}
 
 	<script>
@@ -307,7 +326,7 @@
                 $('input[id="'+slug+'"]').remove();
                 subtotal();
                 grandtotal();
-                   
+                deliveries();
                 },
                 error: function (data, textStatus, errorThrown) {
                 console.log(data);

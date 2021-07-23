@@ -1,48 +1,16 @@
-ADMIN
-dashboard
-meals
-menu
-orders
-order view
-purchase
-
-FRONTEND
-meal routine - show meal days
-login and 
-registration
-dashboard
-transactions
-profile{
-    personal[name, email, phone, birthday, wedding anniversary, photo]
-    change passwords
-    addresses
-}
-move mobile footer to only home and menu page
-cart - place the data to the page.. 
-==============NOTDONE====================
+cart page
 then pay.
 orders - pay now
 paystack, 
 
- FRONTEND
+
+FRONTEND
 homecooking
 foodstuff purchase - 
+
 cakes and pastries
 event catering
 training
-
-
-meal calendar[
-                BREAKFAST   LUNCH   DINNER     DESSERTS
-    MONDAY      
-    TUESDAY
-    WEDNESDAY
-    THURSDAY
-    FRIDAY
-    SATURDAY
-    SUNDAY
-]
-
 
 shipping is based on number of deliveries that will be made
 check if subtotal or grandtotal == 0 before checkout
@@ -52,4 +20,11 @@ initiate charge backs
 
 after user filtering and food is not available,
 show no-meal, and show: would you like to be notified when this meal is available? button= yes.
+
+make meal page look like these:
+https://main.mylistingtheme.com/listing/ministry-of-sound/
+https://property.mylistingtheme.com/listing/era-square/
+https://car.mylistingtheme.com/listing/audi-a8/
+
+
 

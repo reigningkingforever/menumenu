@@ -218,7 +218,7 @@
                                                         </span>  
                                                     </a>
                                                     <br>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#delete-item{{$menu->id}}" class="btn btn-danger btn-outline btn-sm rounded" rel="tooltip" title="delete item" data-placement="left">
+                                                    <a href="javascript:void(0)" type="button" data-toggle="modal" data-target="#delete-item{{$menu->id}}" class="btn btn-danger btn-outline btn-sm rounded" rel="tooltip" title="delete item" data-placement="left">
                                                         <span class="btn-label">
                                                             <i class="fa fa-trash"></i>
                                                         </span>

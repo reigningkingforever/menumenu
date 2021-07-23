@@ -82,11 +82,29 @@
                                 </div>
                                 <div class="d-flex">
                                     <a href="{{route('admin.meal.edit',$meal)}}" class="btn btn-sm">edit</a>
-                                    <a href="#" class="btn btn-sm bg-red">delete</a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#delete-item{{$meal->id}}" class="btn btn-sm bg-red">delete</a>
                                 </div>
                             </section>
                         </div>
                     </div>
+                    <div class="modal fade modal-mini modal-primary" id="delete-item{{$meal->id}}" tabindex="-1" role="dialog" aria-labelledby="delete-item{{$meal->id}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-center">
+                                    <p>Delete Meal</p>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>Are you sure you want to delete this Meal</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form class="d-inline" action="{{route('admin.meal.delete',$meal)}}" method="POST">@csrf
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                    </form>
+                                    <button type="button" class="btn btn-link btn-simple" style="cursor:pointer" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                 @empty
                     <p class="text-center">No Meal</p>
                 @endforelse

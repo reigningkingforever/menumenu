@@ -18,9 +18,9 @@
           <li>
             <a @if(url()->current() == url('/'))  href="#about" @else href="{{url('/')}}#about" @endif class="page-scroll">About</a></li>
           <li>
-            <a @if(url()->current() == url('/'))  href="#restaurant-menu" @else href="{{url('/')}}#restaurant-menu" @endif>Menu</a></li>
+            <a @if(url()->current() == url('/'))  href="#restaurant-menu" @else href="{{url('/')}}#restaurant-menu" @endif class="page-scroll">Menu</a></li>
           
-          <li><a href="{{route('meals')}}" class="page-scroll">Meals</a></li>
+          {{-- <li><a href="{{route('meals')}}" class="page-scroll">Meals</a></li> --}}
           <li><a href="{{route('blog')}}" class="page-scroll">Blog</a></li>
           
         </ul>

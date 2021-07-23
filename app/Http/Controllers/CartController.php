@@ -44,12 +44,14 @@ class CartController extends Controller
     
     public function index()
     {
-        $cart = request()->session()->get('cart');
+        // request()->session()->flush('cart');
+        $cart = $this->validateCart();
         $order = $this->getOrder();
+        $deliveries = $this->getDeliveries();
         $states = State::where('status',true)->get();
         $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
         $towns = Town::whereIn('city_id',$cities->pluck('id')->toArray())->with(['city'])->get();
-        return view('frontend.cart',compact('cart','order','states','towns'));
+        return view('frontend.cart',compact('cart','order','deliveries','states','towns'));
     }
     
     public function applycoupon(Request $request){

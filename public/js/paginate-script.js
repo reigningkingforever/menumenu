@@ -3,7 +3,7 @@
 $(".list-wrapper").each(function( index ) {
 	var items = $(this).find('.list-item');
 	var numitems = items.length;
-	var perPage = 9;
+	var perPage = 12;
 	
 	
 	items.slice(perPage).hide();

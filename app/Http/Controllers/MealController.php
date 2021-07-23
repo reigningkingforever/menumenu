@@ -12,35 +12,39 @@ class MealController extends Controller
 {
     use MediaManagementTrait;
 
-    public function index(){
-        // dd(\Auth::user()->carts);
-        if($q = request()->query('search')){
-            $meals = Meal::where('name','LIKE',"%$q%")
-            ->orWhere('subname','LIKE',"%$q%")
+    public function index(Request $request){
+        //dd($request->all());
+        if($q = $request->search){
+            $meals = Meal::available()->where('name','LIKE',"%$q%")->orWhere('subname','LIKE',"%$q%")
             //->orWhere('tags','LIKE',"%$q%")
-            ->orWhereHas('meals', function ($query) use($q) {
+            ->orWhereHas('items', function ($query) use($q) {
                 $query->where('name', 'like', "%$q%")->orWhere('description', 'like', "%$q%");
             })
             ->get();
-        }
-        elseif(request()->query('filter')){
-            $meals = Meal::whereBetween('price',explode(',',request()->query('price')))->whereIn('diet',request()->query('diet'))->whereIn('period',request()->query('period'))->whereHas('items', function ($query) {
-                $query->whereIn('origin',request()->query('origin'));
-            })->get();
-            $filter = ['period'=> request()->query('period'), 
-                        'origin' => request()->query('origin'),
-                        'diet' => request()->query('diet'),
-                        'cost' => request()->query('price')];
-        }
-        else{
-        $meals = Meal::all();
-        $filter = ['period'=>  ['breakfast','lunch','dinner','dessert'],
+                $filter = [
+                    'itemtype'=>  ['food','drinks','fruits','pastries'],
+                    'period'=>  ['breakfast','lunch','dinner','dessert'],
                     'origin' => ['local','intercontinental','chinese','italian'],
                     'diet' => ['vegan','veg','nonveg'],
-                      'cost' => 0,500];
+                    'cost' => 0,20000
+                ];
         }
-        //dd($meals->where('day','sunday'));
-        return view('frontend.menu.meals',compact('meals','filter'));
+        else{
+            $cost = (!$request->cost)  ? array(0,20000) : explode(',',$request->cost);
+            $meals = Meal::available()->whereBetween('price',$cost)->whereIn('period',$request->period)
+                    ->whereHas('items', function ($query) use ($request){
+                    $query->whereIn('origin',$request->origin)->whereIn('type',$request->itemtype)->whereIn('diet',$request->diet);
+                })->get();
+            $filter = [
+                        'itemtype'=>  $request->itemtype,
+                        'period'=> $request->period, 
+                        'origin' => $request->origin,
+                        'diet' => $request->diet,
+                        'cost' => $request->price
+                    ];
+        }
+        
+        return view('frontend.meal.list',compact('meals','filter'));
     }
 
     /**
@@ -61,12 +65,22 @@ class MealController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $meal = new Meal;
         $meal->name = $request->name;
         $meal->subname = $request->subname;
-        $meal->period = $request->period;
-        $meal->day = $request->day;
-        $meal->diet = $this->getMealDiet($request->menu);
+        $meal->monday = ($request->monday) ? $request->monday :0;
+        $meal->tuesday = ($request->tuesday) ? $request->tuesday :0;
+        $meal->wednesday = ($request->wednesday) ? $request->wednesday : 0;
+        $meal->thursday = ($request->thursday) ? $request->thursday : 0;
+        $meal->friday = ($request->friday) ? $request->friday : 0;
+        $meal->saturday = ($request->saturday) ? $request->saturday : 0;
+        $meal->sunday = ($request->sunday) ? $request->sunday : 0;
+        $meal->breakfast = ($request->breakfast) ? $request->breakfast : 0;
+        $meal->lunch = ($request->lunch) ? $request->lunch : 0;
+        $meal->dinner = ($request->dinner) ? $request->dinner : 0;
+        $meal->dessert = ($request->dessert) ? $request->dessert : 0;
+        // $meal->diet = $this->getMealDiet($request->menu);
         $meal->price = $request->price;
         $meal->save();
         $meal->items()->attach($request->menu);
@@ -103,9 +117,17 @@ class MealController extends Controller
     {
         $meal->name = $request->name;
         $meal->subname = $request->subname;
-        $meal->period = $request->period;
-        $meal->day = $request->day;
-        $meal->diet = $this->getMealDiet($request->menu);
+        $meal->monday = ($request->monday) ? $request->monday :0;
+        $meal->tuesday = ($request->tuesday) ? $request->tuesday :0;
+        $meal->wednesday = ($request->wednesday) ? $request->wednesday : 0;
+        $meal->thursday = ($request->thursday) ? $request->thursday : 0;
+        $meal->friday = ($request->friday) ? $request->friday : 0;
+        $meal->saturday = ($request->saturday) ? $request->saturday : 0;
+        $meal->sunday = ($request->sunday) ? $request->sunday : 0;
+        $meal->breakfast = ($request->breakfast) ? $request->breakfast : 0;
+        $meal->lunch = ($request->lunch) ? $request->lunch : 0;
+        $meal->dinner = ($request->dinner) ? $request->dinner : 0;
+        $meal->dessert = ($request->dessert) ? $request->dessert : 0;
         $meal->price = $request->price;
         $meal->save();
         $meal->items()->sync($request->menu);

@@ -7,10 +7,12 @@ use App\Media;
 use App\Comment;
 use App\Bookmark;
 use App\OrderDetail;
+use App\MealCalendar;
 use Illuminate\Database\Eloquent\Model;
 
 class Meal extends Model
 {
+    protected $casts = ['period'=> 'array'];
     public function items(){
         return $this->belongsToMany(Menu::class,'meal_items');
     }
@@ -19,6 +21,10 @@ class Meal extends Model
         return $this->morphOne(Media::class, 'mediable')->withDefault([
             'name' => 'no-image.jpg',
         ]);
+    }
+
+    public function calendar(){
+        return $this->hasOne(MealCalendar::class);
     }
 
     public function comments(){
@@ -31,5 +37,10 @@ class Meal extends Model
 
     public function bookmarks(){
         return $this->morphMany(Bookmark::class, 'eatable');
+    }
+    public function scopeAvailable($query){
+        return $query->whereHas('calendar', function ($q) {
+            $q->whereBetween('datetime', [now(), today()->addDays(7)->addHours(21)]);
+          })->with('calendar');
     }
 }

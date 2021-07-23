@@ -121,7 +121,7 @@
 
 			methods.destroy.call(this);
 
-			var $panel = this.prop("tagName") === "UL" ? this : $('<ul class="pagination pull-right"></ul>').appendTo(this);
+			var $panel = this.prop("tagName") === "UL" ? this : $('<ul class="pagination d-flex justify-content-center"></ul>').appendTo(this);
 
 			// Generate Prev link
 			if (o.prevText) {

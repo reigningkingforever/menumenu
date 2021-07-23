@@ -4,15 +4,32 @@ namespace App\Http\Traits;
 use App\City;
 use App\Town;
 use App\State;
-use App\Payment;
 use App\Coupon;
+use App\Payment;
 use App\Setting;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use App\Http\Traits\OrderTrait;
 use Illuminate\Support\Facades\Auth;
 
 trait OrderTrait
 {
-    protected function getOrder(){
+
+    protected function validateCart(){
         $cart = request()->session()->get('cart');
+        $newcart = [];
+        if($cart){
+            foreach($cart as $item){
+                if($item['product']->calendar->datetime > Carbon::now()->startOfWeek())
+                $newcart[] = $item;
+            }
+            request()->session()->put('cart', $newcart);
+        }
+        return $newcart;
+    }
+
+    protected function getOrder(){
+        $cart = $this->validateCart();
         if(!$cart)
         $order = ['subtotal'=> 0,'delivery'=> $this->getDeliveryCharge(),'vat'=> 0,'vat_percent'=>$this->getVat()];
         else
@@ -20,6 +37,40 @@ trait OrderTrait
         $grandtotal = $order['subtotal'] + $order['delivery'] + $order['vat'];
         $order['grandtotal'] = $grandtotal;
         return $order;
+    }
+
+    protected function getDeliveries(){
+        $deliveries = [];
+
+        $days = [   
+                    'monday'=>  ['thisweek'=> 0,'nextweek'=> 0],
+                    'tuesday'=>  ['thisweek'=> 0,'nextweek'=> 0],
+                    'wednesday'=>  ['thisweek'=> 0,'nextweek'=> 0],
+                    'thursday'=>  ['thisweek'=> 0,'nextweek'=> 0],
+                    'friday'=>  ['thisweek'=> 0,'nextweek'=> 0],
+                    'saturday'=> ['thisweek'=> 0,'nextweek'=> 0],
+                    'sunday'=>  ['thisweek'=> 0,'nextweek'=> 0],
+                ];
+        $cart = $this->validateCart();
+        if($cart){
+            foreach ($days as $day => $week){
+                //check each day
+                foreach ($cart as $item){
+                    if($item['product']->calendar->datetime->format('l') == ucwords($day)){
+                        if($this->getWeek($item['product']->calendar->datetime) == 'thisweek')
+                        $days[$day]['thisweek'] = 1;
+                        else
+                        $days[$day]['nextweek'] = 1;
+                    }
+                }  
+                if($days[$day]['thisweek'])
+                    $deliveries[] = $day.' this week';
+                if($days[$day]['nextweek'])
+                $deliveries[] = $day.' next week';
+            }
+        }
+        //dd($deliveries);
+        return $deliveries;
     }
 
     protected function getDeliveryCharge(){
@@ -44,13 +95,14 @@ trait OrderTrait
             elseif(in_array($address->state_id,$state->where('deliver_to',true)->pluck('id')->toArray()))
             $delivery = Setting::where('name','same_country_delivery_charge')->first()->value;
         }
-        return $delivery;
+        return $delivery * count($this->getDeliveries());
     }
 
     protected function getVat(){
         $vat = Setting::where('name','vat')->first()->value;
         return $vat;
     }
+
     protected function getSubtotal(Array $cart){
         $subtotal = 0;
         foreach($cart as $item){
@@ -58,8 +110,9 @@ trait OrderTrait
         }
         return $subtotal;
     }
+    
     protected function getCoupon($code){
-        $cart = request()->session()->get('cart');
+        $cart = $this->validateCart();
         if(!$cart)
         return $this->getWorth('No items in your cart');
         $worth = [];
@@ -158,6 +211,12 @@ trait OrderTrait
     protected function getWorth($description,$value = 0){
         $worth = ['value'=> $value,'description'=> $description];
         return $worth;
+    }
+
+    protected function getWeek($value){
+        if($value < Carbon::now()->endOfWeek())
+        return 'thisweek';
+        else return 'nextweek';
     }
     
 }

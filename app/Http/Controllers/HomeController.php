@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\City;
-use App\Menu;
+use App\Tag;
+use App\Meal;
 use App\State;
 use App\Town;
 use Illuminate\Http\Request;
@@ -25,13 +26,17 @@ class HomeController extends Controller
     }
 
     public function front(){
-        $menus = Menu::where('size','medium')->get();
+        $meals = Meal::available()->get();
+        $tag = Tag::where('status',true)->get();
         $filter = ['itemtype'=>  ['food','drinks','fruits','pastries'],
+                    'period'=>  ['breakfast','lunch','dinner','dessert'],
                     'origin' => ['local','intercontinental','chinese','italian'],
                     'diet' => ['vegan','veg','nonveg'],
-                    'size' => 'medium'
+                    'size' => 'medium',
+                    'cost' => '0,20000',
                     ];
-        return view('frontend.home',compact('menus','filter'));
+        return view('frontend.home',compact('meals','filter'));
+        
     }
 
     public function user()

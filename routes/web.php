@@ -19,12 +19,12 @@ Route::view('foodstuff-purchase','frontend.foodstuff')->name('foodstuff-purchase
 Route::view('event-catering','frontend.catering')->name('catering');
 Route::view('training','frontend.training')->name('training');
 
-Route::get('meals','MealController@index')->name('meals');
+Route::get('menus','MenuController@index')->name('menus');
+Route::get('menu/{menu}', 'MenuController@view')->name('menu.view');
+
+Route::post('meals','MealController@index')->name('meals');
 Route::get('meal/{meal}', 'MealController@view')->name('meal.view');
 
-
-Route::post('menus','MenuController@index')->name('menus');
-Route::get('menu/{menu}', 'MenuController@view')->name('menu.view');
 
 Route::get('blog','PostController@index')->name('blog');
 Route::get('post/{post}', 'PostController@view')->name('post');

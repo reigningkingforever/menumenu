@@ -16,23 +16,29 @@ class MenuController extends Controller
             $menus = Menu::where('name','LIKE',"%$q%")->orWhere('description','LIKE',"%$q%")->get();
             $filter = ['itemtype'=>  ['food','drinks','fruits','pastries'],
                     'origin' => ['local','intercontinental','chinese','italian'],
+                    'period'=>  ['breakfast','lunch','dinner','dessert'],
                     'diet' => ['vegan','veg','nonveg'],
-                    'size' => 'medium'
+                    'size' => 'medium',
+                    'cost' => 0,500
                     ];
         }
         else{
-            $menus = Menu::whereIn('type',$request->itemtype)->where('size',$request->size)->whereIn('origin',$request->origin)->whereIn('diet',$request->diet)->get();
+            $cost = (!$request->cost)  ? array(0,20000) : explode(',',$request->cost);
+            $menus = Menu::whereBetween('price',$cost)->whereIn('type',$request->itemtype)->whereIn('origin',$request->origin)->whereIn('diet',$request->diet)->get();
             $filter = ['itemtype'=> $request->itemtype,
                         'origin' => $request->origin, 
+                        'period'=>  $request->period, 
                         'diet' => $request->diet,
-                        'size' => $request->size
+                        'size' => $request->size,
+                        'cost' => $request->cost
                     ];
         }
-        // dd($filter);
+        //dd($request->all());
         return view('frontend.menu.list',compact('menus','filter'));
     }
+    
     public function view(Menu $menu){
-        return view('frontend.menu.list');
+        return view('frontend.meals.menu');
     }
 
     //BACKEND

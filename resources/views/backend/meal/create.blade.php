@@ -24,7 +24,7 @@
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 {{-- <label class="">Title</label> --}}
-                                                <input type="text" name="name" class="form-control" placeholder="Title" required>
+                                                <input type="text" name="name" class="form-control" placeholder="Title" maxlength="20" required>
                                                 <small class="form-text text-muted">Title of the meal</small>
                                             </div>
                                             <div class="form-group">
@@ -47,40 +47,98 @@
                                             {{-- <button type="button" class="d-block mb-2 addmore">Add Other Meal</button> --}}
                                             
                                             <label>Add meal to routine (optional)</label>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-sm-2 control-label">Days</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check checkbox-inline">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="monday" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Monday
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="tuesday" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Tuesday
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="wednesday" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Wednesday
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="thursday" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Thursday
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="friday" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Friday
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="saturday" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Saturday
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="sunday" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Sunday
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label>Meal Periods (optional)</label>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-sm-2 control-label">Period</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check checkbox-inline">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="breakfast" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Breakfast
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="lunch" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Lunch
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="dinner" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Dinner
+                                                            </label>
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" name="dessert" value="1">
+                                                                <span class="form-check-sign"></span>
+                                                                Dessert
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="form-group row">
-                                                
-                                                <div class="col-md-4">
-                                                    <label class="">Day</label>
-                                                    <select name="day" id="day" class="form-control" required>
-                                                        <option value="monday">Monday</option>
-                                                        <option value="tuesday">Tuesday</option>
-                                                        <option value="wednesday">Wednesday</option>
-                                                        <option value="thursday">Thursday</option>
-                                                        <option value="friday">Friday</option>
-                                                        <option value="saturday">Saturday</option>
-                                                        <option value="sunday">Sunday</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="">Meal Time</label>
-                                                    <select name="period" id="period" class="form-control" required>
-                                                        <option value="breakfast">Breakfast</option>
-                                                        <option value="lunch">Lunch</option>
-                                                        <option value="dinner">Dinner</option>
-                                                        <option value="dessert">Dessert</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 form-group">
+                                                <div class="col-md-6">
                                                     <label class="">Price</label>
-                                                    <input type="number" name="price" class="form-control" placeholder="0.0" required>   
-                                                </div>                                     
-                                            </div>                                
+                                                    <input type="number" name="price" class="form-control" placeholder="0.0" required>  
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="">Image</label>
+                                                    <input type="file" name="file" id="cover"> 
+                                                </div>
+                                            </div>                                   
                                         </div>
                                         <div class="col-md-5">
                                             {{-- <p>Featured Image</p> --}}
                                             <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:400px;" class="w-100" data-format="image" id="featured">
-                                            <input type="file" name="file" id="cover">
+                                            
                                             
                                             
                                             {{-- <input name="featured_image" id="featured_image" type="hidden">       --}}

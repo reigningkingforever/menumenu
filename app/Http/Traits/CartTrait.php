@@ -3,12 +3,14 @@ namespace App\Http\Traits;
 use App\Cart;
 use App\Meal;
 use App\Menu;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use App\Http\Traits\OrderTrait;
 use Illuminate\Support\Facades\Auth;
 
 trait CartTrait
 {
-    
+    use OrderTrait;
     protected function addToCartSession($item,$item_id){
         $product = $this->getItem($item,$item_id);
         if(!$product)
@@ -22,6 +24,7 @@ trait CartTrait
                         "type" => $item,
                         "product" => $product,
                         "quantity" => request()->quantity ? request()->quantity :1,
+                        "delivery" => strtolower($product->calendar->datetime->format('l').' '.$this->getWeek($product->calendar->datetime)),
                         
                     ]
             ];
@@ -38,6 +41,7 @@ trait CartTrait
                     "type" => $item,
                     "product" => $product,
                     "quantity" => request()->quantity ? request()->quantity : 1,
+                    "delivery" => strtolower($product->calendar->datetime->format('l').' '.$this->getWeek($product->calendar->datetime)),
                     
                     
                 ];
