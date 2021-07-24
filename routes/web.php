@@ -34,9 +34,12 @@ Route::post('add-to-cart','CartController@addtocart')->name('cart.add');
 Route::post('remove-from-cart','CartController@removefromcart')->name('cart.remove');
 Route::post('applycoupon','CartController@applycoupon')->name('applycoupon');
 
-Route::post('checkout','OrderController@store')->name('checkout');
+Route::get('checkoutOrder/{order}','OrderController@checkout')->name('checkoutOrder');
 
-Route::post('pay', 'PaymentController@redirectToGateway')->name('pay');
+Route::post('checkout','PaymentController@checkout')->name('checkout');
+
+
+Route::get('paymentverification','PaymentController@verification')->name('paymentverify');
 
 Auth::routes();
 Route::get('home', 'HomeController@dashboard')->name('home');

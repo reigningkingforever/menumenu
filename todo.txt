@@ -27,4 +27,15 @@ https://property.mylistingtheme.com/listing/era-square/
 https://car.mylistingtheme.com/listing/audi-a8/
 
 
+if item is in the cart for more than a day, will the user still be able to buy it?
+meaning the date has passed
+
+if item is in the orders and it has not been paid for, will the user still be able to buy it?
+
+if order is unsuccessful, delete the order
+delete unsuccessful order everyday
+
+enter required_at on orders
+
+
 

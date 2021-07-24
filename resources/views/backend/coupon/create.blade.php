@@ -105,18 +105,7 @@
                                         <div class="tab-pane fade" id="restriction" role="tabpanel" aria-labelledby="restriction-tabs">
                                             {{-- <form class="needs-validation" novalidate=""> --}}
                                                 
-                                                 <div class="form-group row">
-                                                    <label for="menus" class="col-xl-3 col-md-4">Menu</label>
-                                                    <div class="col-md-7 px-0">
-                                                        <select class="form-control  select2" id="menus" name="menus[]" multiple style="width:100%;">
-                                                            @foreach ($menus as $menu)
-                                                                <option value="{{$menu->id}}">{{$menu->name}}</option>
-                                                            @endforeach 
-                                                            
-                                                        </select>
-                                                    </div>
-                                                    
-                                                </div> 
+                                                  
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-md-4" for="meals">Meal</label>
                                                     <div class="col-md-7 px-0">

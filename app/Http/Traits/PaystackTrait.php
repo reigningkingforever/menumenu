@@ -1,22 +1,20 @@
 <?php
 namespace App\Http\Traits;
+use App\Order;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\Auth;
 
 trait PaystackTrait
 {
 
-    protected function initialize(){
-        $user - Auth::user();
+    protected function initializePayment(Order $order){
+        $user = Auth::user();
         $response = Curl::to('https://api.paystack.co/transaction/initialize')
-        ->withHeader('Authorization: Bearer sk_live_1bb98205998c469512e315cbe61691e3472866db')
-        ->withData( array( 'email' => "customer@email.com",'amount'=> "20000",'metadata' => ['product'=>'premium'] ) )
+        ->withHeader('Authorization: Bearer sk_test_d9e9680f24a58a7f9908d11486b94581c15d50d6')
+        ->withData( array('email' => $user->email,'amount'=> $order->amount *100,'metadata' => ['order_id'=> $order->id ] ) )
         ->asJson()
         ->post();
-        $response = json_decode($result);
-        //dd($response);
-        if(!$response || !$response->status) 
-        return false;
+        return $response;
     }
     // {
     //     "status": true,
@@ -28,26 +26,12 @@ trait PaystackTrait
     //     }
     //   }
 
-    protected function verify(){
-        $transactionRef = request()->query('trxref');
+    protected function verifyPayment($value){
+        $transactionRef = $value;
         $paymentDetails = Curl::to('https://api.paystack.co/transaction/verify/'.$transactionRef)
-         ->withHeader('Authorization: Bearer sk_test_30c5651e1fa89e38d79ab5768016cda82caecdea')
+         ->withHeader('Authorization: Bearer sk_test_d9e9680f24a58a7f9908d11486b94581c15d50d6')
          ->get();
-        //dd($paymentDetails);
-        $product = $paymentDetails['data']['metadata']['product'];
-        $payout = $paymentDetails['data']['metadata']['payout'];
-        $payment_status = $paymentDetails['data']['status'];
-        $payment_amount = $paymentDetails['data']['amount'];
-        $customer_email = $paymentDetails['data']['customer']['email'];
-        $user = User::find(1);
-        $customer = User::whereEmail($customer_email)->first();
-        if ($payment_status == 'success') {
-
-        }else {
-            flash('Payment was not successful')->error();
-        }
-
-        return redirect('home');
+        return $paymentDetails;
     }
     // {
     //     "status": true,

@@ -15,5 +15,4 @@ Route::group(['prefix'=>'user','as'=>'user.','middleware'=> 'auth'],function(){
     Route::get('order','OrderController@index')->name('orders');
     Route::get('order/view/{order}','OrderController@show')->name('order.show');
     Route::post('order/delete/{order}','OrderController@delete')->name('order.delete');
-    Route::post('checkout','PaymentController@checkout')->name('checkout');
 });

@@ -41,35 +41,13 @@ trait OrderTrait
 
     protected function getDeliveries(){
         $deliveries = [];
-
-        $days = [   
-                    'monday'=>  ['thisweek'=> 0,'nextweek'=> 0],
-                    'tuesday'=>  ['thisweek'=> 0,'nextweek'=> 0],
-                    'wednesday'=>  ['thisweek'=> 0,'nextweek'=> 0],
-                    'thursday'=>  ['thisweek'=> 0,'nextweek'=> 0],
-                    'friday'=>  ['thisweek'=> 0,'nextweek'=> 0],
-                    'saturday'=> ['thisweek'=> 0,'nextweek'=> 0],
-                    'sunday'=>  ['thisweek'=> 0,'nextweek'=> 0],
-                ];
         $cart = $this->validateCart();
         if($cart){
-            foreach ($days as $day => $week){
-                //check each day
-                foreach ($cart as $item){
-                    if($item['product']->calendar->datetime->format('l') == ucwords($day)){
-                        if($this->getWeek($item['product']->calendar->datetime) == 'thisweek')
-                        $days[$day]['thisweek'] = 1;
-                        else
-                        $days[$day]['nextweek'] = 1;
-                    }
-                }  
-                if($days[$day]['thisweek'])
-                    $deliveries[] = $day.' this week';
-                if($days[$day]['nextweek'])
-                $deliveries[] = $day.' next week';
+            foreach ($cart as $item){
+                if(!in_array($item['product']->calendar->datetime->format('l').' '.$this->getWeek($item['product']->calendar->datetime),$deliveries))
+                $deliveries[] = $item['product']->calendar->datetime->format('l').' '.$this->getWeek($item['product']->calendar->datetime);
             }
         }
-        //dd($deliveries);
         return $deliveries;
     }
 
@@ -127,17 +105,6 @@ trait OrderTrait
             return $this->getWorth('Coupon is not available');
         if($coupon->end_at && $coupon->end_at < now())
             return $this->getWorth('Coupon is expired');
-        if($coupon->menu_limit){
-            $menu = false;
-            foreach($cart as $item){
-                foreach($coupon->menu_limit as $value){
-                    if($item['type'] == 'App\Menu' && $value == $item['id'])
-                    $menu = true;
-                }
-            }
-            if(!$menu)
-            return $this->getWorth('Coupon is not available for the items in your cart');
-        }
         if($coupon->meal_limit){
             $meal = false;
             foreach($cart as $item){
@@ -215,8 +182,8 @@ trait OrderTrait
 
     protected function getWeek($value){
         if($value < Carbon::now()->endOfWeek())
-        return 'thisweek';
-        else return 'nextweek';
+        return 'this week';
+        else return 'next week';
     }
     
 }

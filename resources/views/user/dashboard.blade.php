@@ -145,9 +145,9 @@
 										<table class="table-responsive-md table mb-0 text-left">
 											<thead>
 												<tr>
-													<th scope="col">Order</th>
+													<th scope="col">Date</th>
 													<th scope="col">Items </th>
-													<th scope="col">Count</th>
+													<th scope="col">Deliveries</th>
 													<th scope="col">Amount</th>
 													<th scope="col">Delivery</th>
 													<th scope="col">Status</th>
@@ -157,11 +157,11 @@
 											<tbody>
 												@forelse ($user->orders as $order)
 												<tr>
-													<td>{{$order->id}}</td>
-													<td>{{$order->details->first()->itemable->name}}</td>
+													<td>{{$order->created_at->format('M-jS')}}</td>
 													<td>{{$order->details->count()}} items</td>
+													<td>{{$order->deliveries->count()}}</td>
 													<td>₦{{$order->amount}}</td>
-													<td>{{$order->delivered_at->format('d.m.y h:i:A')}}</td>
+													<td>{{($order->delivered_at) ? $order->delivered_at->format('d.m.y h:i:A'):''}}</td>
 													<td>{{$order->status}}</td>
 													<td>
 														<a href="{{route('user.order.show',$order)}}" class="text-primary">
@@ -208,11 +208,11 @@
 											<h3>Transactions</h3>
 											{{-- <a href="#" class="btn btn-sm btn-solid">add product</a> --}}
 										</div>
-										<table class="table table-responsive-sm mb-0">
+										<table class="table table-responsive-sm mb-0 text-left">
 											<thead>
 												<tr>
-													<th scope="col">order id</th>
-													<th scope="col">payment id</th>
+													<th scope="col">Date</th>
+													<th scope="col">Order</th>
 													<th scope="col">payment method</th>
 													<th scope="col">status</th>
 													<th scope="col">amount</th>
@@ -221,9 +221,9 @@
 											<tbody>
 												@forelse ($user->payments as $payment)
 												<tr>
-													<td>{{$payment->order_id}}</td>
-													<td>{{$payment->id}}</td>
-													<td>{{$payment->details->first()->itemable->name}}</td>
+													<td>{{$payment->created_at->format('M-jS')}}</td>
+													<td><a href="{{route('user.order.show',$payment->order)}}">View Order</a></td>
+													<td>{{$payment->method}}</td>
 													<td>{{$payment->status}}</td>
 													<td>₦{{$payment->amount}}</td>
 													

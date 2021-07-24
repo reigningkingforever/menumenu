@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Meal;
-use App\Menu;
 use App\Town;
 use App\State;
 use App\Coupon;
@@ -19,12 +18,11 @@ class CouponController extends Controller
         return view('backend.coupon.list',compact('coupons'));
     }
     public function create(){
-        $menus = Menu::all();
         $meals = Meal::all();
         $states = State::all();
         $cities = City::all();
         $towns = Town::all();
-        return view('backend.coupon.create',compact('menus','meals','states','cities','towns'));
+        return view('backend.coupon.create',compact('meals','states','cities','towns'));
     }
     public function store(Request $request){
         // dd($request->all());
@@ -38,7 +36,6 @@ class CouponController extends Controller
         $coupon->value = $request->value;
         $coupon->free_shipping = $request->shipping ? true:false;
         $coupon->status = $request->status ? true:false;
-        $coupon->menu_limit = $request->menus ? $request->menus : null;
         $coupon->meal_limit = $request->meals ? $request->meals : null;
         $coupon->state_limit = $request->states ? $request->states : null;
         $coupon->city_limit = $request->cities ? $request->cities : null;
@@ -50,12 +47,11 @@ class CouponController extends Controller
         return redirect()->route('admin.coupon.list');
     }
     public function edit(Coupon $coupon){
-        $menus = Menu::all();
         $meals = Meal::all();
         $states = State::all();
         $cities = City::all();
         $towns = Town::all();
-        return view('backend.coupon.edit',compact('coupon','menus','meals','states','cities','towns'));
+        return view('backend.coupon.edit',compact('coupon','meals','states','cities','towns'));
     }
 
     public function update(Coupon $coupon,Request $request){
@@ -68,7 +64,6 @@ class CouponController extends Controller
         $coupon->value = $request->value;
         $coupon->free_shipping = $request->shipping ? true:false;
         $coupon->status = $request->status ? true:false;
-        $coupon->menu_limit = $request->menus ? $request->menus : null;
         $coupon->meal_limit = $request->meals ? $request->meals : null;
         $coupon->state_limit = $request->states ? $request->states : null;
         $coupon->city_limit = $request->cities ? $request->cities : null;

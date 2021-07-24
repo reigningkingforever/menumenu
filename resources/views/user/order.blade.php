@@ -88,12 +88,12 @@
                                     @foreach ($order->details as $item)
                                     <tr>
                                         <td>
-                                            <a href="{{route('meal.view',$item->itemable)}}">
+                                            <a href="{{route('meal.view',$item->meal)}}">
                                                 <div class="meal d-flex flex-column">
-                                                    @if(!$item->itemable->media)
+                                                    @if(!$item->meal->media)
                                                         <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded m-0">
                                                     @else
-                                                        <img src="{{asset('storage/meals/'.$item->itemable->media->name)}}" class="avatar rounded m-0">
+                                                        <img src="{{asset('storage/meals/'.$item->meal->media->name)}}" class="avatar rounded m-0">
                                                     @endif
                                                     <a href="#" class="text-danger visible-xs" href="#"><u>Review</u></a>
                                                 </div>
@@ -102,21 +102,15 @@
                                         <td class="text-left">
                                             <div class="d-flex flex-column">
                                                 <div class="d-flex justify-content-between">
-                                                    <span>{{$item->itemable->name.' '.$item->itemable->subname}} <span class="visible-xs"> x {{$item->quantity}}</span></span>
+                                                    <span>{{$item->meal->name.' '.$item->meal->subname}} <span class="visible-xs"> x {{$item->quantity}}</span></span>
                                                     <span class="visible-xs">₦{{$item->amount}}</span>
                                                 </div>
                                                 <div class="d-flex justify-content-between mt-2 mt-sm-0">
-                                                    <span>
-                                                        @if($item->itemable_type == 'App\Meal') 
-                                                            
-                                                            @foreach($item->itemable->items as $food)
-                                                                {{$food->name.' ('.$food->size.')'}}
-                                                                @if(!$loop->last)+ @endif
-                                                            @endforeach
-                                                        @else
-                                                            {{$item->itemable->description}}<br>
-                                                            Size:{{ucwords($item->itemable->size)}}
-                                                        @endif
+                                                    <span>    
+                                                        @foreach($item->meal->items as $food)
+                                                            {{$food->name.' ('.$food->size.')'}}
+                                                            @if(!$loop->last)+ @endif
+                                                        @endforeach 
                                                     </span>
                                                     
                                                 </div>

@@ -189,6 +189,7 @@
                     <input type="hidden" name="vat" id="vat" value="{{$order['vat']}}">
                     <input type="hidden" name="delivery" id="delivery" value="{{$order['delivery']}}">
                     <input type="hidden" name="discount" id="discount" value="0">
+                    <input type="hidden" name="coupon_used" id="coupon_used">
                     
                     @if($cart)
                         @foreach($cart as $item)
@@ -299,9 +300,6 @@
         })
  
     </script>
-{{-- 
-
---}}
 
 	<script>
 		$(document).on('click','.remove-from-cart',function(){
@@ -349,6 +347,7 @@
                     },
                     success:function(data) {
                         $('#discount').val(data.value);
+                        $('#coupon_used').val(coupon);
                         $('.discount').html(data.value);
                         $('#coupon_description').html(data.description);
                         if(data.value != 0)
