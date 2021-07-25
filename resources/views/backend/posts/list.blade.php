@@ -41,13 +41,13 @@
                                                 @if(!$post->media->first())
                                                     <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
                                                 @elseif($post->media->first()->format == "image")
-                                                    <img @if($post->media->first()->external) src="{{$post->media->first()->name}}" @else src="{{asset('storage/images/'.$post->media->first()->name)}}" @endif class="avatar rounded">
+                                                    <img @if($post->media->firstWhere('featured',true)->external) src="{{$post->media->first()->name}}" @else src="{{asset('storage/posts/'.$post->media->firstWhere('featured',true)->name)}}" @endif class="avatar rounded">
                                                 @else
                                                     <img src="{{asset('storage/videos/events-1.jpg')}}" class="avatar rounded">
                                                 @endif
                                             </td>
                                             <td>
-                                                <h4 class="mt-0"><a href="{{route('article',$post)}}">{{$post->title}}</a> 
+                                                <h4 class="mt-0"><a href="{{route('post',$post)}}">{{$post->title}}</a> 
                                                     <span class="small text-muted">
                                                         @if($post->status) <i class="fa fa-check"> @else <i class="fa fa-warning"> @endif </i></span>
                                                 </h4>

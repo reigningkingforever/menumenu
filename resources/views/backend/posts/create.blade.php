@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
+@push('styles')
+<link href="{{asset('vendor/summernote/summernote.css')}}" rel="stylesheet">
+{{-- <link href="{{asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css')}}" rel="stylesheet"> --}}
 
+@endpush
 @section('main')
     <div class="content">
         <div class="container-fluid">
@@ -7,7 +11,7 @@
                 <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">Create Sermon</h4>
+                            <h4 class="card-title">Create Post</h4>
                         </div>
                         <div class="card-body ">
                             <form method="post" action="{{route('admin.post.save')}}" enctype="multipart/form-data"> @csrf
@@ -16,12 +20,13 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label class="">Title</label>
-                                                <input type="text" name="title" class="form-control">
+                                                <input type="text" name="title" class="form-control" value="{{url('/laravel-filemanager')}}">
                                                 <small class="form-text text-muted">Title of the article</small>
                                             </div>
                                             <div class="form-group">
                                                 <label class="">Description</label>
-                                                <textarea name="description" class="form-control" rows="10" style="height: unset"></textarea>
+                                                <textarea id="summernote-editor" name="content">{!! old('content', 'test editor content') !!}</textarea>
+                                                {{-- <textarea name="description" class="form-control" rows="10" style="height: unset"></textarea> --}}
                                             </div>
                                             <div class="form-group">
                                                 <label class="">Tags</label>
@@ -90,6 +95,56 @@
             }
         }
         
+    </script>
+    <script src="{{asset('vendor/summernote/summernote.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+      
+          // Define function to open filemanager window
+          var lfm = function(options, cb) {
+            var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+            window.open(route_prefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
+            window.SetUrl = cb;
+          };
+      
+          // Define LFM summernote button
+          var LFMButton = function(context) {
+            var ui = $.summernote.ui;
+            var button = ui.button({
+              contents: '<i class="note-icon-picture"></i> ',
+              tooltip: 'Insert image with filemanager',
+              click: function() {
+      
+                lfm({type: 'image', prefix: 'http://localhost/menumenu/public/laravel-filemanager'}, function(lfmItems, path) {
+                  lfmItems.forEach(function (lfmItem) {
+                    context.invoke('insertImage', lfmItem.url);
+                  });
+                });
+      
+              }
+            });
+            return button.render();
+          };
+      
+          // Initialize summernote with LFM button in the popover button group
+          // Please note that you can add this button to any other button group you'd like
+          $('#summernote-editor').summernote({
+            focus: true,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['popovers', ['lfm']],
+                ['insert', ['link','video']],
+                ['view', ['fullscreen', 'codeview']]
+            ],
+            buttons: {
+              lfm: LFMButton
+            }
+          })
+        });
     </script>
 @endpush
           

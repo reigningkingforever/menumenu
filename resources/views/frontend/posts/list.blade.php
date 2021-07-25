@@ -10,8 +10,16 @@
 			@forelse ($posts as $post)
 				<div class="col-xs-12 col-sm-4">
 					<div class="features-item">
-						
-						<img src="{{asset('storage/posts/'.$post->media->name)}}" class="img-responsive" alt="">
+						@if(!$post->media->first())
+                            <img src="{{asset('img/no-image.jpg')}}" class="img-responsive">
+						@elseif($post->media->first()->format == "image")
+							<img @if($post->media->firstWhere('featured',true)->external) src="{{$post->media->first()->name}}" 
+							@else src="{{asset('storage/posts/'.$post->media->firstWhere('featured',true)->name)}}" 
+							@endif class="img-responsive">
+						@else
+							<img src="{{asset('storage/videos/events-1.jpg')}}" class="img-responsive">
+						@endif
+
 						<h3><a href="{{route('post',$post)}}">{{$post->title}}</a></h3>
 						<p class="text-left">{{Illuminate\Support\Str::words($post->body,10, '...')}}</p>
 					</div>

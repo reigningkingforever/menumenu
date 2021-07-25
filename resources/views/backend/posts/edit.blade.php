@@ -7,10 +7,10 @@
                 <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">Edit Sermon</h4>
+                            <h4 class="card-title">Edit Post</h4>
                         </div>
                         <div class="card-body ">
-                            <form method="post" action="{{route('admin.post.update')}}" enctype="multipart/form-data"> @csrf
+                            <form method="post" action="{{route('admin.post.update',$post)}}" enctype="multipart/form-data"> @csrf
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-md-8">
@@ -54,7 +54,7 @@
                                             @if(!$post->media->first())
                                             <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:400px;" class="w-100" data-format="image" id="featured">
                                             @elseif($post->media->first()->format == "image")
-                                                <img @if($post->media->first()->external) src="{{$post->media->first()->name}}" @else src="{{asset('storage/images/'.$post->media->first()->name)}}" @endif style="height:400px;" class="w-100" data-format="image" id="featured">
+                                                <img @if($post->media->firstWhere('featured',true)->external) src="{{$post->media->first()->name}}" @else src="{{asset('storage/posts/'.$post->media->firstWhere('featured',true)->name)}}" @endif style="height:400px;" class="w-100" data-format="image" id="featured">
                                             @else
                                                 <img src="{{asset('storage/videos/events-1.jpg')}}" style="height:400px;" class="w-100" data-format="image" id="featured">
                                             @endif

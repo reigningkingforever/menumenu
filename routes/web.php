@@ -41,6 +41,10 @@ Route::post('checkout','PaymentController@checkout')->name('checkout');
 
 Route::get('paymentverification','PaymentController@verification')->name('paymentverify');
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 Auth::routes();
 Route::get('home', 'HomeController@dashboard')->name('home');
 include('user.php');

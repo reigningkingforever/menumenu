@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    use BookmarkTrait,CartTrait,OrderTrait;
+    use BookmarkTrait,CartTrait;
     
     public function addtocart(Request $request){
         $cart = $this->addToCartSession($request->item, $request->item_id);

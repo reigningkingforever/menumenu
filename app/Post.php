@@ -26,9 +26,7 @@ class Post extends Model
     }
     
     public function media(){
-        return $this->morphOne(Media::class, 'mediable')->withDefault([
-            'name' => 'no-image.jpg',
-        ]);
+        return $this->morphMany(Media::class, 'mediable');
     }
 
     public function comments(){

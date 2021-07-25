@@ -74,9 +74,9 @@ class PostController extends Controller
 
     
     
-    public function edit($id)
+    public function edit(Post $post)
     {
-        return view('backend.posts.edit');
+        return view('backend.posts.edit',compact('post'));
     }
 
     public function update(Request $request, $id)
