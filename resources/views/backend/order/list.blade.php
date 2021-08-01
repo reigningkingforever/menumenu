@@ -29,7 +29,7 @@
                     <div class="card data-tables strpied-tabled-with-hover">
                         <div class="card-header ">
                             <h4 class="card-title">Order</h4>
-                            <p class="card-category">Here is a subname for this table</p>
+                            <p class="card-category">Here is a sub name for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive dataTable dtr-inline">
                             <div class="toolbar">
@@ -69,20 +69,14 @@
                                             </td>
                                             <td><span class="text-muted">{{$order->created_at->format('M d')}}</span></td>
                                             <td>
-                                                @if(!$order->media)
                                                 <div class="meal">
                                                     <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
                                                 </div>
-                                                @else
-                                                <div class="meal">
-                                                    <img src="{{asset('storage/meals/'.$order->media->name)}}" class="avatar rounded">
-                                                </div>
-                                                @endif
                                             </td>
                                             <td>
                                                 <h5 class="my-0">
-                                                    <a href="{{route('admin.order.view',$order)}}">{{$order->details->first()->itemable->name}} </a>
-                                                    <small class="card-category text-muted"> @if($order->details->count() > 1) + {{$order->details->count() - 1}} more @endif</small>
+                                                    <a href="{{route('admin.order.view',$order)}}">{{$order->items->first()->calendar->meal->name}} </a>
+                                                    <small class="card-category text-muted"> @if($order->items->count() > 1) + {{$order->items->count() - 1}} more @endif</small>
                                                 </h5>
                                                 <small class="d-block"><i class="fa fa-user"></i>{{$order->user->name}}</small>    
                                                 <small><i class="fa fa-map-marker"></i>{{$order->delivery_address}}</small>    

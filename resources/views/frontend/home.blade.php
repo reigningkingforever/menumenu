@@ -271,7 +271,7 @@
       
                 <!-- Price -->
                 
-                <h3 class="headline">
+                {{-- <h3 class="headline">
                   <span>Price</span>
                 </h3>
                 <div class="radio">
@@ -302,7 +302,7 @@
                   <input type="radio" class="cost" name="cost" id="shop-filter-price_6" value="5001,20000" @if($filter['cost'] == '5001,20000') checked @endif>
                   <label for="shop-filter-price_6">Above 5000</label>
                 </div></br>
-                
+                 --}}
       
                 
                 
@@ -425,7 +425,6 @@
     </script>
     <script>
         $(document).on('click','.add-to-cart',function(){
-            var item = $(this).attr('data-item');
             var item_id = parseInt($(this).attr('data-item_id'));
             $.ajax({
                 type:'POST',
@@ -433,8 +432,7 @@
                 url: "{{route('cart.add')}}",
                 data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),
-                    'item_id': item_id,
-                    'item': item
+                    'item_id': item_id
                 },
                 success:function(data) {
                     $('.cart-count').html(data.cart_count);
@@ -447,7 +445,6 @@
             });
         });   
         $(document).on('click','.add-to-wish',function(){
-          var item = $(this).attr('data-item');
           var item_id = parseInt($(this).attr('data-item_id'));
             $.ajax({
                 type:'POST',
@@ -455,13 +452,10 @@
                 url: "{{route('user.bookmark.add')}}",
                 data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),
-                    'item_id': item_id,
-                    'item': item
+                    'item_id': item_id
                 },
                 success:function(data) {
-                  alert('success');
-                    // $('#wish_counter').html(data.wish_count);
-                    // $('#wish_counter').show();
+                  alert('Item Saved');
                 },
                 error: function (data, textStatus, errorThrown) {
                 console.log(data);

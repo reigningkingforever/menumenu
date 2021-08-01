@@ -7,6 +7,7 @@ use App\Media;
 use App\Payment;
 use App\Delivery;
 use App\OrderDetail;
+use App\MealCalendar;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,8 +17,12 @@ class Order extends Model
     protected $fillable = ['user_id','subtotal','discount','coupon_code','vat','delivery_fee','delivery_address','amount'];
     protected $dates = ['required_at','delivered_at'];
     
-    public function details(){
+    public function items(){
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function calendar(){
+        return $this->hasMany(MealCalendar::class);
     }
 
     public function deliveries(){
@@ -35,13 +40,5 @@ class Order extends Model
         return $this->morphOne(Media::class, 'mediable')->withDefault([
             'name' => 'no-image.jpg',
         ]);
-    }
-    public function getDeliveries(){
-        $deliveries = [];
-        foreach($this->details as $detail){
-            if(!in_array($detail->meal->calendar->datetime->format('y-m-d'),$deliveries))
-                $deliveries[] = $detail->meal->calendar->datetime->format('y-m-d');
-        }
-        return $deliveries;
     }
 }

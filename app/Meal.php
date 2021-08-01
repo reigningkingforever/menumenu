@@ -6,13 +6,23 @@ use App\Meal;
 use App\Media;
 use App\Comment;
 use App\Bookmark;
-use App\OrderDetail;
 use App\MealCalendar;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Meal extends Model
 {
+    use Sluggable;
     protected $casts = ['period'=> 'array'];
+
+    public function sluggable(){
+        return [
+            'slug' => [
+                'source' => ['name'],
+                'separator' => '_'
+            ]
+        ];
+    }
     public function items(){
         return $this->belongsToMany(Menu::class,'meal_items');
     }
@@ -31,16 +41,12 @@ class Meal extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function orders(){
-        return $this->morphMany(OrderDetail::class, 'itemable');
-    }
-
     public function bookmarks(){
         return $this->morphMany(Bookmark::class, 'eatable');
     }
     public function scopeAvailable($query){
         return $query->whereHas('calendar', function ($q) {
-            $q->whereBetween('datetime', [now(), today()->addDays(7)->addHours(21)]);
+            $q->whereBetween('datentime', [now(), today()->addDays(7)->addHours(21)]);
           })->with('calendar');
     }
 }

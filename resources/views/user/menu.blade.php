@@ -2,7 +2,7 @@
     <div class="profile-top">
         <div class="profile-image">
             @if($user->media)
-            <img src="{{asset('storage/users/'.$user->media->name)}}" alt="" class="img-fluid">
+            <img src="{{asset('storage/users/'.$user->image}}" alt="" class="img-fluid">
             @else
             <img src="https://ui-avatars.com/api/?name={{$user->name}}" alt="" class="img-fluid">
             @endif

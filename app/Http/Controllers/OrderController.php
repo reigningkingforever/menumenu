@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Coupon;
-use App\Payment;
-use App\OrderDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Traits\PaystackTrait;
 use Illuminate\Support\Facades\Auth;
@@ -26,28 +24,21 @@ class OrderController extends Controller
 
     public function checkout(Order $order){
         //check whether this order is still valid
-        $user = Auth::user();
-        $response = $this->initializePayment($order);
-        if(!$response || !$response->status){
-            foreach($order->details as $detail){
-                $detail->delete();
-            }
-            $order->delete();
-            return redirect()->route('cart');
+
+        foreach($order->item as $item){
+            $cart = $this->addToCartSession($item->calendar_id);
+            $this->addToCartDb($item->calendar_id);
         }
-        else{
-            $payment = new Payment;
-            $payment->user_id = $user->id;
-            $payment->order_id = $order->id;
-            if($order->coupon_code) $payment->coupon_id = Coupon::where('code',$request->coupon_used)->first()->id;
-            $payment->amount= $order->amount;
-            $payment->save();
-            return redirect()->to($response->data->authorization_url);
-        }
+        $order->delete();
+        return redirect()->route('cart');
     }
     
     public function show(Order $order)
     {
+        foreach($order->items as $item){
+            if($item->required_at < Carbon::now())
+            $item->delete();
+        }
         return view('user.order',compact('order'));
     }
 
@@ -64,7 +55,7 @@ class OrderController extends Controller
     public function delete(Order $order)
     {
         if($order->status == 'completed'){
-            foreach($order->details as $detail){
+            foreach($order->items as $detail){
                 $detail->delete();
             }
             $order->delete();

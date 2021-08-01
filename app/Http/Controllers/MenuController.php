@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Menu;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Traits\MediaManagementTrait;
 
 class MenuController extends Controller
 {
-    use MediaManagementTrait;
     //type, size, diet, origin
     public function index(Request $request){
         if($q = $request->search){
@@ -50,22 +47,17 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->size);
-        for($i = 0; $i < count($request->size); $i++){
-            $menu = new Menu;
-            $menu->name = $request->name;
-            $menu->code = $request->name;
-            $menu->description = $request->description;
-            $menu->type = $request->type;
-            $menu->origin = $request->origin;
-            $menu->diet = $request->diet;
-            $menu->size = $request->size[$i];
-            $menu->price = $request->price[$i];
-            $menu->save();
-            if($request->hasFile('file.'.$i)){
-                $this->multipleUpload($request->file[$i],$menu->id,get_class($menu));
-            }
-        }
+
+        $menu = new Menu;
+        $menu->name = $request->name;
+        $menu->image = $request->file;
+        $menu->description = $request->description;
+        $menu->type = $request->type;
+        $menu->origin = $request->origin;
+        $menu->diet = $request->diet;
+        $menu->size = 'medium';
+        $menu->price = $request->price;
+        $menu->save();
         return redirect()->back();
     }
 
@@ -79,31 +71,20 @@ class MenuController extends Controller
     public function update(Request $request, Menu $menu)
     {
         $menu->name = $request->name;
-        $menu->code = $request->name;
+        if($request->file) $menu->image = $request->file;
         $menu->description = $request->description;
         $menu->type = $request->type;
-        $menu->size = $request->size;
+        $menu->size = 'medium';
         $menu->origin = $request->origin;
         $menu->diet = $request->diet;
         $menu->price = $request->price;
         $menu->save();
-        if($request->hasFile('file')){
-            if($menu->media){
-                Storage::delete('public/meals/'.$menu->media->name);
-                $menu->media->delete();
-            }
-            $this->uploadMedia($request,$menu->id,get_class($menu));
-        }
         return redirect()->back();
     }
 
     public function destroy(Menu $menu)
     {
         if($menu->orders->isEmpty() && $menu->bookmarks->isEmpty()){
-            if($menu->media){
-                Storage::delete('public/meals/'.$menu->media->name);
-                $menu->media->delete();
-            }
             $menu->delete();
         }
         return redirect()->back();

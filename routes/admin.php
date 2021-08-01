@@ -16,6 +16,11 @@ Route::group(['prefix'=> 'admin','as'=>'admin.','middleware'=> ['auth','admin']]
     Route::post('meal/duplicate/{meal}','MealController@duplicate')->name('meal.duplicate');
     Route::post('meal/delete/{meal}','MealController@destroy')->name('meal.delete');
 
+    Route::get('meal/routine','RoutineController@index')->name('routine');
+    Route::post('meal/routine-add','RoutineController@add')->name('routine.add');
+    Route::post('meal/routine-update','RoutineController@update')->name('routine.update');
+    Route::post('meal/routine-delete','RoutineController@delete')->name('routine.delete');
+
     Route::get('orders','OrderController@list')->name('order.list');
     Route::get('order/view/{order}','OrderController@view')->name('order.view');
     Route::post('order/status','OrderController@status')->name('order.status');

@@ -29,7 +29,7 @@
                     <div class="card data-tables strpied-tabled-with-hover">
                         <div class="card-header ">
                             <h4 class="card-title">Purchase</h4>
-                            <p class="card-category">Here is a subname for this table</p>
+                            <p class="card-category">Here is a sub name for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive dataTable dtr-inline">
                             <div class="toolbar">
@@ -47,7 +47,7 @@
                                         </a>
                                     </th>
                                     <th>Date</th>
-                                    <th>Thumbnail</th>
+                                    
                                     <th style="width:300px;">Details</th> 
                                     <th>Required at</th>
                                     <th>Amount</th>
@@ -68,17 +68,7 @@
                                                 </div>
                                             </td>
                                             <td><span class="text-muted">{{$purchase->created_at->format('M d')}}</span></td>
-                                            <td>
-                                                @if(!$purchase->media)
-                                                <div class="meal">
-                                                    <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
-                                                </div>
-                                                @else
-                                                <div class="meal">
-                                                    <img src="{{asset('storage/meals/'.$purchase->media->name)}}" class="avatar rounded">
-                                                </div>
-                                                @endif
-                                            </td>
+                                            
                                             <td>
                                                 <h5 class="my-0">
                                                     <a href="#">{{$purchase->details->first()->meal->name}} </a>

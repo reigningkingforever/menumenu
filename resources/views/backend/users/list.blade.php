@@ -29,7 +29,7 @@
                     <div class="card data-tables strpied-tabled-with-hover">
                         <div class="card-header ">
                             <h4 class="card-title">user</h4>
-                            <p class="card-category">Here is a subname for this table</p>
+                            <p class="card-category">Here is a sub name for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive dataTable dtr-inline">
                             <div class="toolbar">
@@ -62,13 +62,13 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                @if(!$user->media)
+                                                @if(!$user->image)
                                                     <div class="meal">
                                                         <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
                                                     </div>
                                                 @else
                                                     <div class="meal">
-                                                            <img src="{{asset('storage/users/'.$user->media->name)}}" class="avatar rounded">
+                                                            <img src="{{asset('storage/users/'.$user->image}}" class="avatar rounded">
                                                     </div>
                                                 @endif
                                             </td>

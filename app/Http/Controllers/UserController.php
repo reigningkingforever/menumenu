@@ -7,25 +7,21 @@ use App\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Traits\MediaManagementTrait;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    use MediaManagementTrait;
     /*** FRONTEND.*/
     public function profile(Request $request)
     {
         // dd($request->all());
         $user = Auth::user();
         if($request->filled("name")) $user->name = $request->name;
+        if($request->filled("file")) $user->image = $request->file;
         if($request->filled("phone")) $user->phone = $request->phone;
         if($request->filled("birthday")) $user->birthday = $request->birthday;
         if($request->filled("anniversary")) $user->wedding_anniversary = $request->anniversary;
         $user->save();
-        if($request->hasFile('file') || $request->link){
-            $this->uploadMedia($request,$user->id,get_class($user));
-        }
         return redirect()->back();
     }
 

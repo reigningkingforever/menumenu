@@ -29,7 +29,7 @@
                     <div class="card data-tables strpied-tabled-with-hover">
                         <div class="card-header ">
                             <h4 class="card-title">comment</h4>
-                            <p class="card-category">Here is a subname for this table</p>
+                            <p class="card-category">Here is a sub name for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive dataTable dtr-inline">
                             <div class="toolbar">
@@ -67,16 +67,16 @@
                                             </td>
                                             <td><span class="text-muted">{{$comment->created_at->format('M d')}}</span></td>
                                             <td>
-                                                @if($comment->commentable->media)
+                                                @if($comment->commentable->image)
                                                     <div class="meal">
                                                         <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
                                                     </div>
                                                 @else
                                                     <div class="meal">
                                                         @if($comment->commentable_type == "post")
-                                                        <img src="{{asset('storage/posts/'.$comment->commentable->media->name)}}" class="avatar rounded">
+                                                        <img src="{{$comment->commentable->image}}" class="avatar rounded">
                                                         @else
-                                                        <img src="{{asset('storage/meals/'.$comment->commentable->media->name)}}" class="avatar rounded">
+                                                        <img src="{{$comment->commentable->image}}" class="avatar rounded">
                                                         @endif
                                                     </div>
                                                 @endif

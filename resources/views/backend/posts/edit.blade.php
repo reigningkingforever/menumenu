@@ -48,16 +48,19 @@
                                             
                                         </div>
                                         <div class="col-md-4">
-                                            <h4>Upload Post Photo/Banner</h4>
-                                            <input type="file" name="file" id="cover" required>
-                                            <h4> Image</h4>
-                                            @if(!$post->media->first())
-                                            <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:400px;" class="w-100" data-format="image" id="featured">
-                                            @elseif($post->media->first()->format == "image")
-                                                <img @if($post->media->firstWhere('featured',true)->external) src="{{$post->media->first()->name}}" @else src="{{asset('storage/posts/'.$post->media->firstWhere('featured',true)->name)}}" @endif style="height:400px;" class="w-100" data-format="image" id="featured">
-                                            @else
-                                                <img src="{{asset('storage/videos/events-1.jpg')}}" style="height:400px;" class="w-100" data-format="image" id="featured">
-                                            @endif
+                                           <h5>Featured Image</h5>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                    <i class="fa fa-picture-o"></i> Choose
+                                                  </a>
+                                                </span>
+                                                <input id="thumbnail" class="form-control" type="text" name="file">
+                                            </div>
+                                            <div id="holder" style="margin-top:15px;max-height:300px;"></div>
+                                            <h6>Existing Image</h6>
+                                            <img src="{{$post->image}}" style="height:400px;" class="w-100" data-format="image" id="featured">
+                                            
                                         </div>
                                     </div>
                                     {{-- <div class="row"> --}}
@@ -78,23 +81,10 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
     <script>
-        
-        $("#cover").change(function() {
-            readURL(this,'featured');
-            // $('#remove_image').show();
-        });
-        function readURL(input,output) {
-            console.log(input.id);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                $('#'+output).attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        
+        var route_prefix = "/laravel-filemanager";
+        $('#lfm').filemanager('image', {prefix: route_prefix});
     </script>
 @endpush
           

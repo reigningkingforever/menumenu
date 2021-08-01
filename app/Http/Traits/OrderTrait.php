@@ -20,7 +20,7 @@ trait OrderTrait
         $newcart = [];
         if($cart){
             foreach($cart as $item){
-                if($item['product']->calendar->datetime > Carbon::now()->startOfWeek())
+                if($item['calendar']->datentime > Carbon::now())
                 $newcart[] = $item;
             }
             request()->session()->put('cart', $newcart);
@@ -44,8 +44,8 @@ trait OrderTrait
         $cart = $this->validateCart();
         if($cart){
             foreach ($cart as $item){
-                if(!in_array($item['product']->calendar->datetime->format('l').' '.$this->getWeek($item['product']->calendar->datetime),$deliveries))
-                $deliveries[] = $item['product']->calendar->datetime->format('l').' '.$this->getWeek($item['product']->calendar->datetime);
+                if(!in_array($item['calendar']->datentime->format('l').' '.$this->getWeek($item['calendar']->datentime),$deliveries))
+                $deliveries[] = $item['calendar']->datentime->format('l').' '.$this->getWeek($item['calendar']->datentime);
             }
         }
         return $deliveries;
@@ -84,7 +84,7 @@ trait OrderTrait
     protected function getSubtotal(Array $cart){
         $subtotal = 0;
         foreach($cart as $item){
-            $subtotal += $item['quantity'] * $item['product']->price;
+            $subtotal += $item['quantity'] * $item['calendar']->meal->price;
         }
         return $subtotal;
     }

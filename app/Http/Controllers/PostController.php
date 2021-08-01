@@ -6,12 +6,9 @@ use App\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Traits\MediaManagementTrait;
 
 class PostController extends Controller
 {
-    use MediaManagementTrait;
     /**
      * FRONTEND
      */
@@ -61,27 +58,31 @@ class PostController extends Controller
         $post = new Post;
         // $post->user_id = 1;
         $post->user_id = Auth::id();
-        $post->name = $request->name;
+        $post->title = $request->title;
+        $post->image = $request->file;
         $post->tags = $request->tags;
         $post->status = $request->status;
         $post->body = $request->description;
         $post->save();
-        if($request->hasFile('file') || $request->link){
-            $this->uploadMedia($request,$post->id,get_class($post));
-        }
         return redirect()->route('admin.post.list',compact('post'));
     }
-
-    
     
     public function edit(Post $post)
     {
         return view('backend.posts.edit',compact('post'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        // dd($request->all());
+        $post->title = $request->title;
+        if($request->file) $post->image = $request->file;
+        $post->tags = $request->tags;
+        $post->status = $request->status;
+        $post->body = $request->description;
+        $post->save();
+        return redirect()->route('admin.post.list',compact('post'));
+    
     }
 
     public function duplicate(Post $post){
@@ -92,10 +93,6 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        foreach($post->media as $media){
-            Storage::delete('public/posts/'.$media->name);
-            $media->delete();
-        }
         $post->delete();
         return redirect()->route('admin.post.list');
     }

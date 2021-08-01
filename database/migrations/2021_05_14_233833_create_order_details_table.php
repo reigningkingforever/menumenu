@@ -20,7 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantity')->default(1);
             $table->string('size');
             $table->unsignedBigInteger('vendor_id')->nullable();
-            $table->string('status')->default('unassigned');
+            $table->string('status')->default('pending');
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');

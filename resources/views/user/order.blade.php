@@ -14,7 +14,7 @@
 					<div class="profile-top">
                         <div class="profile-image">
                             @if($order->user->media)
-                            <img src="{{asset('storage/users/'.$order->user->media->name)}}" alt="" class="img-fluid">
+                            <img src="{{asset('storage/users/'.$order->user->image}}" alt="" class="img-fluid">
                             @else
                             <img src="https://ui-avatars.com/api/?name={{$order->user->name}}" alt="" class="img-fluid">
                             @endif
@@ -85,7 +85,7 @@
                                     {{-- details = title, required at, delivery address --}}
                                 </thead>
                                 <tbody>
-                                    @foreach ($order->details as $item)
+                                    @foreach ($order->items as $item)
                                     <tr>
                                         <td>
                                             <a href="{{route('meal.view',$item->meal)}}">
@@ -93,7 +93,7 @@
                                                     @if(!$item->meal->media)
                                                         <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded m-0">
                                                     @else
-                                                        <img src="{{asset('storage/meals/'.$item->meal->media->name)}}" class="avatar rounded m-0">
+                                                        <img src="{{$item->meal->image}}" class="avatar rounded m-0">
                                                     @endif
                                                     <a href="#" class="text-danger visible-xs" href="#"><u>Review</u></a>
                                                 </div>
@@ -102,7 +102,7 @@
                                         <td class="text-left">
                                             <div class="d-flex flex-column">
                                                 <div class="d-flex justify-content-between">
-                                                    <span>{{$item->meal->name.' '.$item->meal->subname}} <span class="visible-xs"> x {{$item->quantity}}</span></span>
+                                                    <span>{{$item->meal->name.' '.$item->meal->description}} <span class="visible-xs"> x {{$item->quantity}}</span></span>
                                                     <span class="visible-xs">₦{{$item->amount}}</span>
                                                 </div>
                                                 <div class="d-flex justify-content-between mt-2 mt-sm-0">
@@ -144,7 +144,7 @@
                                             <td colspan="5">
                                                 <div class="d-flex justify-content-between">
                                                     <span class="">SubTotal</span>
-                                                    <span>₦{{$order->details->sum('amount')}}</span>
+                                                    <span>₦{{$order->items->sum('amount')}}</span>
                                                 </div>     
                                             </td>
                                             

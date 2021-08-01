@@ -59,14 +59,14 @@
                     <div class="col-sm-4 col-md-3 grid" data-foodtype="breakfast" data-origin="intercontinental" data-cost="500">
                         <div class="product">
                             <figure>
-                                <img src="{{asset('storage/meals/'.$meal->media->name)}}" alt="Spring Rolls">
+                                <img src="{{$meal->image}}" alt="Spring Rolls">
                             </figure>
                             <section class="details">
                                 <div class="d-flex justify-content-between">
                                     <h5>{{$meal->name}} </h5>
                                     <h5 class="price">₦{{$meal->price}}</h5>
                                 </div>
-                                <small class="text-muted">{{$meal->subname}}</small>
+                                <small class="text-muted">{{$meal->description}}</small>
                                     
                                 
                                 <div class="options mb-1">

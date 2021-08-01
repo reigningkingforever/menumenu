@@ -15,26 +15,22 @@
 		@foreach ($days as $day)
 			<div id="{{strtolower($day)}}" class="tab-pane fade in @if(today()->format('l') == $day)active @endif">
 				<div class="row list-wrapper">
-					@forelse ($meals->where('calendar.day',strtolower($day)) as $meal)
+					@forelse ($calendars->where('day',strtolower($day)) as $calendar)
 						<div class="col-sm-6 col-md-4 list-item grid">
 							<div class="product">
 								<figure>
-									@if(!$meal->media)
-									<img src="{{asset('img/no-image.jpg')}}" alt="{{$meal->name}}">
-									@else
-									<img src="{{asset('storage/meals/'.$meal->media->name)}}" alt="{{$meal->name}}">
-									@endif
+									<img src="{{$calendar->meal->image}}" alt="{{$calendar->meal->name}}">
 								</figure>
 								<section class="details">
 									<div class="min-details">
-										<h5>{{$meal->name}}<span>{{$meal->subname}}</span></h5>
-										<h5 class="price">₦{{$meal->price}}</h5>
+										<h5>{{$calendar->meal->name}}<span>{{$calendar->meal->description}}</span></h5>
+										<h5 class="price">₦{{$calendar->meal->price}}</h5>
 									</div>
 									<div class="options">
 										<div class="options-size">
 											<span style="font-weight:bold;">Items:</span>
 											<span>
-												@foreach ($meal->items as $item)
+												@foreach ($calendar->meal->items as $item)
 													<span>{{$item->name}}</span> 
 													@if(!$loop->last)+ @endif
 												@endforeach
@@ -42,15 +38,15 @@
 										</div>
 										<div class="options-colors">
 											<span style="font-weight:bold;">Delivery:</span>
-											<span>{{ucwords($meal->calendar->period)}} in {{$meal->calendar->datetime->diffForHumans()}} </span>
+											<span>{{ucwords($calendar->period)}} in {{$calendar->datentime->diffForHumans()}} </span>
 										</div>
 										
 									</div>
 									<div class="d-flex">
-										<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart" data-item="App\Meal" data-item_id="{{$meal->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
-										{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$meal->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
+										<a href="javascript:void(0)" class="btn btn-primary mr-2 add-to-cart"  data-item_id="{{$calendar->id}}"><i class="fa fa-shopping-cart pr-1"></i>Add to Cart</a>
+										{{-- <a target="_blank" href="https://wa.me/2349058271973?text=I%20want%20to%20buy%20item%20-%20meal%20{{$calendar->meal->id}}" class="btn btn-primary mr-2">Order Now</a> --}}
 										@auth
-										<a href="javascript:void(0)" class="btn btn-dark add-to-wish" data-item="App\Meal" data-item_id="{{$meal->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
+										<a href="javascript:void(0)" class="btn btn-dark add-to-wish"  data-item_id="{{$calendar->id}}"><i class="fa fa-heart pr-1"></i>Save</a>
 										@endauth
 									</div>
 									

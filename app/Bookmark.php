@@ -3,16 +3,17 @@
 namespace App;
 
 use App\User;
+use App\MealCalendar;
 use Illuminate\Database\Eloquent\Model;
 
 class Bookmark extends Model
 {
-    protected $fillable = ['user_id','eatable_id','eatable_type','day','period'];
+    protected $fillable = ['user_id','calendar_id'];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function eatable(){
-        return $this->morphTo();
+    public function calendar(){
+        return $this->belongsTo(MealCalendar::class);
     }
 }

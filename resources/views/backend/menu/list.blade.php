@@ -74,15 +74,6 @@
                                             </div>
                                             <div class="form-group row">
                                                 
-                                                {{-- <div class="col-md-4">
-                                                    <label class="">Item Type</label>
-                                                    <select name="" id="" class="form-control">
-                                                       
-                                                        <option>Food</option>
-                                                        <option>Drinks</option>
-                                                        <option>Pastries</option>
-                                                    </select>
-                                                </div> --}}
                                                 <div class="col-md-6">
                                                     <label class="">Item Origin</label>
                                                     <select name="origin" id="" class="form-control">
@@ -106,25 +97,23 @@
                                                 
                                             </div>
                                             <div class="companydocument">
-                                                <label class="">Size</label>
-                                                <div class="input-group mb-3">
-                                                    <select name="size[]" class="input-group-prepend border rounded">
-                                                        <option>Small</option>
-                                                        <option>Medium</option>
-                                                        <option>Large</option>    
-                                                    </select>    
-                                                    <input name="file[]" type="file" class="form-control" placeholder="image">
-                                                </div>
                                                 <div class="form-group">
-                                                    <input name="price[]" type="number" class="form-control" placeholder="Amount in naira" required>
+                                                    <input name="price" type="number" class="form-control" placeholder="Amount in naira" required>
                                                 </div>
+                                                <h5> Image</h5>
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                        <i class="fa fa-picture-o"></i> Choose
+                                                    </a>
+                                                    </span>
+                                                    <input id="thumbnail" class="form-control" type="text" name="file">
+                                                </div>
+                                                <div id="holder" style="margin-top:15px;max-height:300px;"></div>
+                                            
+                                                
                                             </div>
-                                            <button type="button" class="d-block my-2 addmore">Add New Sizes</button>
-                                            {{-- <div class="form-group">
-                                                <label>Featured Image</label>
-                                                <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:250px;" class="w-100" data-format="image" id="featured">
-                                                <input type="file" name="file" id="cover">
-                                            </div> --}}
+                                            
                                             <div class="form-group">
                                                 <button class="btn btn-primary btn-block " type="submit" style="cursor:pointer">
                                                     Save Item
@@ -144,7 +133,7 @@
                     <div class="card data-tables strpied-tabled-with-hover">
                         <div class="card-header ">
                             <h4 class="card-title">Menu Item</h4>
-                            <p class="card-category">Here is a subname for this table</p>
+                            <p class="card-category">Here is a sub name for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive dataTable dtr-inline">
                             <div class="toolbar">
@@ -178,15 +167,9 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                @if(!$menu->media)
                                                 <div class="meal">
-                                                    <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
+                                                    <img src="{{$menu->image}}" class="avatar rounded">
                                                 </div>
-                                                @else
-                                                <div class="meal">
-                                                    <img src="{{asset('storage/meals/'.$menu->media->name)}}" class="avatar rounded">
-                                                </div>
-                                                @endif
                                             </td>
                                             <td>
                                                 <h4 class="mt-0">
@@ -280,57 +263,17 @@
 
 </script>
 <script>
-        
-    $("#cover").change(function() {
-        readURL(this,'featured');
-        // $('#remove_image').show();
-    });
-    function readURL(input,output) {
-        console.log(input.id);
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-            $('#'+output).attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
     $('.food-type').click(function(){
         if($('#food').is(':checked'))
             $('.venue').hide();
         else $('.venue').show();
     })
 </script>
-<script>
-    $(document).on('click','.addmore',function(){
-        var product =         `<div class="companydocument">
-                                    <label class="">Size</label>
-                                    <div class="input-group mb-3">
-                                        <select name="size[]" class="input-group-prepend border rounded">
-                                            
-                                            <option>Small</option>
-                                            <option>Medium</option>
-                                            <option>Large</option>
-                                            
-                                        </select>    
-                                        <input name="file[]" type="file" class="form-control" placeholder="image">
-                                    </div>
-                                    <div class="input-group">
-                                        <input name="price[]" type="number" class="form-control" placeholder="Amount in naira">
-                                        <button type="button" class="btn btn-danger input-group-text input-group-append input-group-addon removemore border">
-                                            <i class="fa fa-times mr-1 "></i>Delete Size & Price
-                                        </button>
-                                    </div>
-                                </div>`;
-        $('.companydocument').last().after(product);
-    });
-    
-    $(document).on('click','.removemore',function(){
-        if($('.companydocument').length > 1){
-            $(this).closest('.companydocument').remove();
-        }
-    });
-</script>
+<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+    <script>
+        var route_prefix = "/laravel-filemanager";
+        $('#lfm').filemanager('image', {prefix: route_prefix});
+    </script>
 @endpush
 
           

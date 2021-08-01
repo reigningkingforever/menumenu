@@ -1,8 +1,6 @@
 @extends('backend.layouts.app')
 @push('styles')
 <link href="{{asset('vendor/summernote/summernote.css')}}" rel="stylesheet">
-{{-- <link href="{{asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css')}}" rel="stylesheet"> --}}
-
 @endpush
 @section('main')
     <div class="content">
@@ -53,11 +51,17 @@
                                             
                                         </div>
                                         <div class="col-md-4">
-                                            <h4>Upload Post Photo/Banner</h4>
-                                            <input type="file" name="file" id="cover" required>
-                                            <h4> Image</h4>
-                                            <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:400px;" class="w-100" data-format="image" id="featured">
-                                            {{-- <input name="featured_image" id="featured_image" type="hidden">       --}}
+                                            <h5>Featured Image</h5>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                    <i class="fa fa-picture-o"></i> Choose
+                                                  </a>
+                                                </span>
+                                                <input id="thumbnail" class="form-control" type="text" name="file">
+                                            </div>
+                                            <div id="holder" style="margin-top:15px;max-height:300px;"></div>
+
                                         </div>
                                     </div>
                                     {{-- <div class="row"> --}}
@@ -78,28 +82,9 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        
-        $("#cover").change(function() {
-            readURL(this,'featured');
-            // $('#remove_image').show();
-        });
-        function readURL(input,output) {
-            console.log(input.id);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                $('#'+output).attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        
-    </script>
     <script src="{{asset('vendor/summernote/summernote.js')}}"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function(){
-      
           // Define function to open filemanager window
           var lfm = function(options, cb) {
             var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
@@ -115,7 +100,7 @@
               tooltip: 'Insert image with filemanager',
               click: function() {
       
-                lfm({type: 'image', prefix: 'http://localhost/menumenu/public/laravel-filemanager'}, function(lfmItems, path) {
+                lfm({type: 'image', prefix: '/laravel-filemanager'}, function(lfmItems, path) {
                   lfmItems.forEach(function (lfmItem) {
                     context.invoke('insertImage', lfmItem.url);
                   });
@@ -145,6 +130,11 @@
             }
           })
         });
+    </script> --}}
+    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+    <script>
+        var route_prefix = "/laravel-filemanager";
+        $('#lfm').filemanager('image', {prefix: route_prefix});
     </script>
 @endpush
           

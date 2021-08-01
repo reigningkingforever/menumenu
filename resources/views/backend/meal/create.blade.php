@@ -28,102 +28,72 @@
                                                 <small class="form-text text-muted">Title of the meal</small>
                                             </div>
                                             <div class="form-group">
-                                                {{-- <label class="">Sub Title</label> --}}
-                                                <input type="text" name="subname" class="form-control" placeholder="with" required>
-                                                <small class="form-text text-muted">subname of the meal</small>
+                                                <textarea name="description" class="form-control" placeholder="All meal items" row='3' style="height:unset;" required></textarea>
+                                                <small class="form-text text-muted">Description of the meal</small>
                                             </div>
-
+                                            <div class="form-group d-flex">
+                                                <span class="text-muted">Type</span>
+                                                <div class="form-check form-check-radio mt-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="food" value="food" checked>
+                                                        <span class="form-check-sign"></span>
+                                                        Food
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-radio mt-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="drink" value="drink" >
+                                                        <span class="form-check-sign"></span>
+                                                        Drink
+                                                    </label>
+                                                </div> 
+                                                <div class="form-check form-check-radio mt-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="fruit" value="fruit">
+                                                        <span class="form-check-sign"></span>
+                                                        Fruit
+                                                    </label>
+                                                </div>   
+                                                <div class="form-check form-check-radio mt-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input food-type" type="radio" name="type" id="pastries" value="pastries">
+                                                        <span class="form-check-sign"></span>
+                                                        Pastries
+                                                    </label>
+                                                </div>    
+                                            </div>
+                                            <div class="form-group row">
+                                                
+                                                <div class="col-md-6">
+                                                    <label class="">Item Origin</label>
+                                                    <select name="origin" id="" class="form-control">
+                                                        <option>Intercontinental</option>
+                                                        <option>Local</option>
+                                                        <option>Chinese</option>
+                                                        <option>Italian</option>
+                                                        <option>Russian</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="">Diet</label>
+                                                    <select name="diet" id="" class="form-control">
+                                                        <option value="vegan">Vegan</option>
+                                                        <option value="veg">Vegetarian</option>
+                                                        <option value="nonveg">Non-Vegetarian</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                
+                                            </div>
                                             <div class="form-group companydocument">
                                                 <label class="">Select Meal Items</label>
                                                 <select name="menu[]" class="form-control select2" multiple required>
                                                     @foreach ($menus as $menu)
-                                                        <option label="{{$menu->media->name}}" value="{{$menu->id}}"> {{$menu->name.'('.$menu->size.') : ₦'.$menu->price}} </option>
+                                                        <option label="{{$menu->image}}" value="{{$menu->id}}"> {{$menu->name.'('.$menu->size.') : ₦'.$menu->price}} </option>
                                                     @endforeach
-                                                    
                                                 </select>
                                             </div>
-                                            
-                                            
-                                            {{-- <button type="button" class="d-block mb-2 addmore">Add Other Meal</button> --}}
-                                            
-                                            <label>Add meal to routine (optional)</label>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label class="col-sm-2 control-label">Days</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="form-check checkbox-inline">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="monday" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Monday
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="tuesday" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Tuesday
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="wednesday" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Wednesday
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="thursday" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Thursday
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="friday" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Friday
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="saturday" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Saturday
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="sunday" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Sunday
-                                                            </label>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <label>Meal Periods (optional)</label>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label class="col-sm-2 control-label">Period</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="form-check checkbox-inline">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="breakfast" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Breakfast
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="lunch" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Lunch
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="dinner" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Dinner
-                                                            </label>
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" name="dessert" value="1">
-                                                                <span class="form-check-sign"></span>
-                                                                Dessert
-                                                            </label>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <div class="form-group row">
                                                 <div class="col-md-6">
                                                     <label class="">Price</label>
@@ -131,17 +101,21 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="">Image</label>
-                                                    <input type="file" name="file" id="cover"> 
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn">
+                                                          <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                            <i class="fa fa-picture-o"></i> Choose
+                                                          </a>
+                                                        </span>
+                                                        <input id="thumbnail" class="form-control" type="text" name="file">
+                                                    </div>
                                                 </div>
                                             </div>                                   
                                         </div>
                                         <div class="col-md-5">
-                                            {{-- <p>Featured Image</p> --}}
-                                            <img src="{{asset('img/no-image.jpg')}}" alt="" style="height:400px;" class="w-100" data-format="image" id="featured">
+                                            <h5>Featured Image</h5>
                                             
-                                            
-                                            
-                                            {{-- <input name="featured_image" id="featured_image" type="hidden">       --}}
+                                            <div id="holder" style="margin-top:15px;max-height:300px;"></div>
                                         </div>
                                     </div>
                                     {{-- <div class="row"> --}}
@@ -162,55 +136,15 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        
-        $("#cover").change(function() {
-            readURL(this,'featured');
-            // $('#remove_image').show();
-        });
-        function readURL(input,output) {
-            console.log(input.id);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                $('#'+output).attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        
-    </script>
-    <script>
-        $(document).on('click','.addmore',function(){
-            var product = `<div class="input-group companydocument mb-2">
-                                                
-                                                <select class="form-control" name="types[]">
-                                                    <option selected disabled>Add Meal</option>
-
-                                                </select>
-                                                
-                                                <button type="button" class="input-group-text input-group-append input-group-addon removemore">
-                                                    <i class="fa fa-times mr-1 "></i>Del
-                                                </button>
-                                            </div>`;
-            $('.companydocument').last().after(product);
-        });
-        
-        $(document).on('click','.removemore',function(){
-            if($('.companydocument').length > 1){
-                $(this).closest('.companydocument').remove();
-            }
-        });
-    </script>
+    
     <script>
         function formatState (state) {
             if (!state.id) {
                 return state.text;
             }
             
-            var baseUrl = "{{asset('storage/meals/')}}";
             var $state = $(
-                '<span><img src="' + baseUrl + '/'+ state.element.label+'" class="thumbnail mr-2" /> ' + state.text + '</span>'
+                '<span><img src="' + state.element.label+'" class="thumbnail mr-2" /> ' + state.text + '</span>'
             );
             // var $state = $(
             //     '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-thumbnail" /> ' + state.text + '</span>'
@@ -221,9 +155,8 @@
             if (!state.id) {
                 return state.text;
             }
-            var baseUrl = "{{asset('storage/meals/')}}";
             var $state = $(
-                '<span><img src="' + baseUrl +'/'+ state.element.label+ '" class="thumbnail mr-2" /> </span>'
+                '<span><img src="' + state.element.label+ '" class="thumbnail mr-2" /> </span>'
             );
             // var $state = $(
             //     '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-thumbnail" /> ' + state.text + '</span>'
@@ -235,6 +168,11 @@
             templateSelection: formatSelection,
             placeholder:"Click here",
         });
+    </script>
+    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+    <script>
+        var route_prefix = "/laravel-filemanager";
+        $('#lfm').filemanager('image', {prefix: route_prefix});
     </script>
 @endpush
           

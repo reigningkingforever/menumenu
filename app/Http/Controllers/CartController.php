@@ -8,7 +8,6 @@ use App\Town;
 use App\City;
 use Illuminate\Http\Request;
 use App\Http\Traits\CartTrait;
-use App\Http\Traits\OrderTrait;
 use App\Http\Traits\BookmarkTrait;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,32 +17,31 @@ class CartController extends Controller
     use BookmarkTrait,CartTrait;
     
     public function addtocart(Request $request){
-        $cart = $this->addToCartSession($request->item, $request->item_id);
+        $cart = $this->addToCartSession($request->item_id);
         if(Auth::check())
-        $this->addToCartDb($request->item, $request->item_id);
+        $this->addToCartDb($request->item_id);
         // return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
         return response()->json(['cart_count'=> collect($cart)->sum('quantity'),'cart'=> $cart],200);
     }
 
     public function removefromcart(Request $request){
-        $cart = $this->removeFromCartSession($request->item, $request->item_id);
+        $cart = $this->removeFromCartSession($request->item_id);
         if(Auth::check())
-        $this->removeFromCartDb($request->item, $request->item_id);
+        $this->removeFromCartDb($request->item_id);
         // return response()->json(['cart_count'=> count((array)$cart),'cart'=> $cart],200);
         return response()->json(['cart_count'=> collect($cart)->sum('quantity'),'cart'=> $cart],200);
     }
 
     public function addToBookmark(Request $request){
-        $wish = $this->addBookmark($request->item,$request->item_id);
+        $wish = $this->addBookmark($request->item_id);
         return response()->json(['wish_count'=> count((array)$wish)],200);
     }
     public function removeFromBookmark(Request $request){
-        $wish = $this->removeBookmark($request->item,$request->item_id);
+        $wish = $this->removeBookmark($request->item_id);
         return response()->json(['wish_count'=> count((array)$wish)],200);
     }
     
-    public function index()
-    {
+    public function index(){
         // request()->session()->flush('cart');
         $cart = $this->validateCart();
         $order = $this->getOrder();

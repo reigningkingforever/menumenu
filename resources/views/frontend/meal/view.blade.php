@@ -117,11 +117,9 @@
 					<div class="col-sm-6 col-md-4 list-item grid">
 					  <div class="product">
 						<figure>
-						  @if(!$menu->media)
-						  <img src="{{asset('img/no-image.jpg')}}" alt="{{$menu->name}}">
-						  @else
-						  <img src="{{asset('storage/meals/'.$menu->media->name)}}" alt="{{$menu->name}}">
-						  @endif
+						 
+						  <img src="{{$menu->image}}" alt="{{$menu->name}}">
+						
 						</figure>
 						<section class="details">
 						  <div class="min-details">

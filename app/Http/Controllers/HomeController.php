@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\City;
 use App\Tag;
-use App\Meal;
-use App\State;
+use App\City;
 use App\Town;
+use App\State;
+use App\MealCalendar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,16 +26,17 @@ class HomeController extends Controller
     }
 
     public function front(){
-        $meals = Meal::available()->get();
+        $calendars = MealCalendar::available()->whereIn('period',['breakfast','lunch','dinner'])->whereHas('meal',function ($query) {
+            $query->whereIn('origin',['local','intercontinental','chinese','italian'])->whereIn('type',['food','drinks','fruits','pastries'])->whereIn('diet',['vegan','veg','nonveg']);
+        })->get();
         $tag = Tag::where('status',true)->get();
         $filter = ['itemtype'=>  ['food','drinks','fruits','pastries'],
                     'period'=>  ['breakfast','lunch','dinner','dessert'],
                     'origin' => ['local','intercontinental','chinese','italian'],
                     'diet' => ['vegan','veg','nonveg'],
-                    'size' => 'medium',
                     'cost' => '0,20000',
                     ];
-        return view('frontend.home',compact('meals','filter'));
+        return view('frontend.home',compact('calendars','filter'));
         
     }
 

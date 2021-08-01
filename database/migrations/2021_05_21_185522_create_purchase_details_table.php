@@ -19,7 +19,7 @@ class CreatePurchaseDetailsTable extends Migration
             $table->unsignedBigInteger('meal_id');
             $table->integer('quantity')->default(1);
             $table->string('size');
-            $table->timestamp('required_date')->nullable();
+            $table->timestamp('required_at')->nullable();
             $table->timestamps();
             $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade');
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');

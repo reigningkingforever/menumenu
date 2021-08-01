@@ -80,32 +80,27 @@
                                                     {{-- details = title, required at, delivery address --}}
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($order->details as $item)
+                                                    @foreach ($order->items as $item)
                                                         <tr> 
                                                             <td>
                                                                 
                                                                 <div class="meal">
-                                                                    <img src="{{asset('storage/meals/'.$item->itemable->media->name)}}" class="avatar rounded">
+                                                                    <img src="{{$item->calendar->meal->image}}" class="avatar rounded">
                                                                 </div>
                                                                 
                                                             </td>
                                                             <td>
                                                                 <h5 class="my-0">
-                                                                    <a href="#">{{$item->itemable->name}} </a>
+                                                                    <a href="#">{{$item->calendar->meal->name}} </a>
                                                                     {{-- <small>size: {{$item->meal->size}}</small>  --}}
                                                                 </h5>
                                                                 <small class="d-none d-md-block">
-                                                                    {{-- {{$item->meal->description}} --}}
-                                                                    @if($item->itemable_type == 'App\Meal') 
-                                                            
-                                                                        @foreach($item->itemable->items as $food)
-                                                                            {{$food->name.' ('.$food->size.')'}}
-                                                                            @if(!$loop->last)+ @endif
-                                                                        @endforeach
-                                                                    @else
-                                                                        {{$item->itemable->description}}<br>
-                                                                        Size:{{ucwords($item->itemable->size)}}
-                                                                    @endif
+                                                                    {{$item->calendar->meal->description}}<br>
+                                                                    @foreach($item->calendar->meal->items as $food)
+                                                                        {{$food->name.' ('.$food->size.')'}}
+                                                                        @if(!$loop->last)+ @endif
+                                                                    @endforeach
+                                                                    
                                                                 </small>    
                                                             </td>
                                                             <td> {{$item->quantity}} </td>

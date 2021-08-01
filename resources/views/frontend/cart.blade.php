@@ -25,35 +25,35 @@
                     <tbody>
                         @if($cart)
                             @foreach ($cart as $item)
-                                <tr class="item" data-price="{{$item['product']->price}}" data-amount="{{$item['product']->price * $item['quantity']}}" data-qty="{{$item['quantity']}}" data-delivery="{{$item['delivery']}}">
+                                <tr class="item" data-price="{{$item['calendar']->meal->price}}" data-amount="{{$item['calendar']->meal->price * $item['quantity']}}" data-qty="{{$item['quantity']}}" data-delivery="{{$item['delivery']}}">
                                     <td>
                                         <a href="#">
                                             <div class="meal d-flex flex-column">
-                                                <img src="{{asset('storage/meals/'.$item['product']->media->name)}}" class="avatar rounded m-0" alt="">     
-                                                <a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="text-danger visible-xs remove-from-cart" href="#"><u>Remove</u></a>
+                                                <img src="{{$item['calendar']->meal->image}}" class="avatar rounded m-0" alt="">     
+                                                <a href="javascript:void(0)"  data-item_id="{{$item->id}}" data-slug="{{$item['calendar']->meal->slug}}" class="text-danger visible-xs remove-from-cart" href="#"><u>Remove</u></a>
                                             </div>
                                         </a>
                                     </td>
                                     <td>
                                         <div class="d-flex flex-column">
                                             <div class="d-flex justify-content-between">
-                                                <span>{{$item['product']->name}}</span>
-                                                <span class="visible-xs">₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span></span>
+                                                <span>{{$item['calendar']->meal->name}}</span>
+                                                <span class="visible-xs">₦<span class="total" data-slug="{{$item['calendar']->meal->slug}}">{{$item['calendar']->meal->price * $item['quantity']}}</span></span>
                                             </div>
                                             <div class="d-flex justify-content-between mt-2 mt-sm-0">
                                                 <span class="small">
-                                                    @foreach($item['product']->items as $food)
+                                                    @foreach($item['calendar']->meal->items as $food)
                                                         {{$food->name.' ('.$food->size.')'}}
                                                         @if(!$loop->last)+ @endif
                                                     @endforeach
                                                     <br>
-                                                    <span class="small">{{ucwords($item['product']->calendar->period)}} on {{$item['product']->calendar->datetime->format('l-jS')}}</span>
+                                                    <span class="small">{{ucwords($item['calendar']->period)}} on {{$item['calendar']->datentime->format('l-jS')}}</span>
                                                 </span>
                                                 <span class="visible-xs">
                                                     <div class="qty-box">
                                                         <div class="form-group">
                                                             <input type="number" name="quantity" class="form-control quantity" style="width:50px;"
-                                                                value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
+                                                                value="{{$item['quantity']}}" slug="{{$item['calendar']->meal->slug}}">
                                                         </div>
                                                     </div>
                                                 </span>
@@ -62,19 +62,19 @@
                                         </div>
                                     </td>
                                     <td class="hidden-xs">
-                                        ₦{{$item['product']->price}}
+                                        ₦{{$item['calendar']->meal->price}}
                                     </td>
                                     <td class="hidden-xs">
                                         <div class="qty-box">
                                             <div class="">
                                                 <input type="number" name="quantity" class="form-control quantity" style="width:70px;"
-                                                    value="{{$item['quantity']}}" slug="{{$item['product']->slug}}">
+                                                    value="{{$item['quantity']}}" slug="{{$item['calendar']->meal->slug}}">
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="hidden-xs"><a href="javascript:void(0)" data-item="{{$item['type']}}" data-item_id="{{$item['product']->id}}" data-slug="{{$item['product']->slug}}" class="icon text-danger remove-from-cart"><i class="fa fa-times"></i></a></td>
+                                    <td class="hidden-xs"><a href="javascript:void(0)"  data-item_id="{{$item->id}}" data-slug="{{$item['calendar']->meal->slug}}" class="icon text-danger remove-from-cart"><i class="fa fa-times"></i></a></td>
                                     <td class="hidden-xs">
-                                        ₦<span class="total" data-slug="{{$item['product']->slug}}">{{$item['product']->price * $item['quantity']}}</span>
+                                        ₦<span class="total" data-slug="{{$item['calendar']->meal->slug}}">{{$item['calendar']->meal->price * $item['quantity']}}</span>
                                     </td>
                                 </tr>   
                                   
@@ -193,7 +193,7 @@
                     
                     @if($cart)
                         @foreach($cart as $item)
-                        <input type="hidden" name="item[]" id="{{$item['product']->slug}}" value="{{ json_encode( $array = ['id' => $item['product']->id,'type'=>$item['type'],'quantity'=> $item['quantity'] ]  ) }}" >
+                        <input type="hidden" name="item[]" id="cal{{$item->id}}" value="{{ json_encode( $array = ['id' => $item->id,'quantity'=> $item['quantity'] ]  ) }}" >
                         @endforeach
                     @endif
 				    <button class="btn btn-primary btn-lg btn-block @guest disabled @endguest" type="submit">Continue to checkout</button>
@@ -303,7 +303,6 @@
 
 	<script>
 		$(document).on('click','.remove-from-cart',function(){
-            var item = $(this).attr('data-item');
             var item_id = parseInt($(this).attr('data-item_id'));
             var clicked = $(this).closest('tr');
             var slug = $(this).attr('data-slug');
@@ -314,7 +313,6 @@
                 data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),
                     'item_id': item_id,
-                    'item': item
                 },
                 success:function(data) {
                 $('.cart_count').val(data.cart_count);

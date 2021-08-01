@@ -29,7 +29,12 @@
                     <p>Meals</p>
                 </a>
             </li>
-            
+            <li>
+                <a class="nav-link" href="{{route('admin.routine')}}">
+                    <i class="nc-icon nc-badge"></i>
+                    <p>Routine</p>
+                </a>
+            </li>
             <li>
                 <a class="nav-link" href="{{route('admin.order.list')}}">
                     <i class="nc-icon nc-badge"></i>

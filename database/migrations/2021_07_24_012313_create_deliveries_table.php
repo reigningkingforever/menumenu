@@ -18,7 +18,8 @@ class CreateDeliveriesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('address');
             $table->unsignedBigInteger('order_id');
-            $table->timestamp('datetime');
+            $table->date('delivery_date');
+            $table->time('delivery_time');
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

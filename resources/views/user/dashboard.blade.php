@@ -69,7 +69,7 @@
 															@if(!$menu->eatable->media)
 																<img src="{{asset('img/no-image.jpg')}}" alt="{{$menu->eatable->name}}" class="blur-up lazyloaded">
 																@else
-																<img src="{{asset('storage/meals/'.$menu->eatable->media->name)}}" alt="{{$menu->eatable->name}}" class="blur-up lazyloaded">
+																<img src="{{$menu->eatable->image}}" alt="{{$menu->eatable->name}}" class="blur-up lazyloaded">
 															@endif
 														</th>
 														<td>{{$menu->eatable->name}}</td>
@@ -111,7 +111,7 @@
 															@if(!$meal->eatable->media)
 																<img src="{{asset('img/no-image.jpg')}}" alt="{{$meal->eatable->name}}" class="blur-up lazyloaded">
 																@else
-																<img src="{{asset('storage/meals/'.$meal->eatable->media->name)}}" alt="{{$meal->eatable->name}}" class="blur-up lazyloaded">
+																<img src="{{$meal->eatable->image}}" alt="{{$meal->eatable->name}}" class="blur-up lazyloaded">
 															@endif
 														</th>
 														<td>{{$meal->eatable->name}}</td>
@@ -158,7 +158,7 @@
 												@forelse ($user->orders as $order)
 												<tr>
 													<td>{{$order->created_at->format('M-jS')}}</td>
-													<td>{{$order->details->count()}} items</td>
+													<td>{{$order->items->count()}} items</td>
 													<td>{{$order->deliveries->count()}}</td>
 													<td>₦{{$order->amount}}</td>
 													<td>{{($order->delivered_at) ? $order->delivered_at->format('d.m.y h:i:A'):''}}</td>
@@ -387,7 +387,7 @@
 													<div class="col-md-12 d-flex flex-column flex-md-row">
 														<div class="d-flex flex-column flex-md-row">
 															<div class="text-center">
-																<img @if($user->media) src="{{asset('storage/users/'.$user->media->name)}}" @else src="{{asset('img/no-image.jpg')}}" @endif class="avatar rounded my-0" width="200px" height="200px" id="featured">
+																<img @if($user->media) src="{{asset('storage/users/'.$user->image}}" @else src="{{asset('img/no-image.jpg')}}" @endif class="avatar rounded my-0" width="200px" height="200px" id="featured">
 																<a href="javascript:void(0)" class="text-muted d-block" id="set_cover">Upload Picture</a>
 																<input type="file" name="file" id="cover" style="display:none;">
 															</div>

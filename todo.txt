@@ -1,41 +1,58 @@
-cart page
-then pay.
-orders - pay now
-paystack, 
+
+file:///C:/Users/reign/Documents/WebDev/html/components/bootstrap-4user-calendar-schedulerdrag-drop/dist/routine.html?#
+Manager needs to fill calendar a month ahead
 
 
-FRONTEND
-homecooking
-foodstuff purchase - 
+add meal via ajax- on success, drop meal on the date hovered upon
 
-cakes and pastries
-event catering
-training
+on drag meal from a to b, use ajax to change meal calendar in database
 
-shipping is based on number of deliveries that will be made
-check if subtotal or grandtotal == 0 before checkout
+data-slug in cart.blade.php
 
-recurring order
-initiate charge backs
+recurring order from blogpost
 
-after user filtering and food is not available,
-show no-meal, and show: would you like to be notified when this meal is available? button= yes.
+after user filtering and food is not available, show no-meal, 
+after user filtering and food is not available, show: would you like to be notified when this meal is available? button= yes.
+
+
+use tags
+on add to save, after save, what next ?
+
+if item is in the cart for more than a day, will the user still be able to buy it?
+meaning the date has passed
+
+delete items in unsuccessful order whose date has passed everyday
+delete items in cart whose date has passed everyday
+put data on admin pages
+
 
 make meal page look like these:
 https://main.mylistingtheme.com/listing/ministry-of-sound/
 https://property.mylistingtheme.com/listing/era-square/
 https://car.mylistingtheme.com/listing/audi-a8/
 
+Routine for current and previous month cannot be changed, can only be viewed
 
-if item is in the cart for more than a day, will the user still be able to buy it?
-meaning the date has passed
+table cell has date & meal period(breakfast)|cal 16
 
-if item is in the orders and it has not been paid for, will the user still be able to buy it?
+task id = calendar_id
 
-if order is unsuccessful, delete the order
-delete unsuccessful order everyday
+cell 1 (1st,breakfast,cal-16) | cell 2 (2nd,breakfast,cal-21) | cell 3 (3rd,breakfast,cal-7)
+cell 4 (4th,lunch,) | cell 5 (5th,lunch,) | cell 6 (6th,lunch,cal-96)
+cell 7 (7th,dinner,cal-16) | cell 8 (8th,dinner,cal-16) | cell 9 (9th,dinner,cal-8)
 
-enter required_at on orders
+drag 1st to 4th
+cal-16 will now be (4th,lunch,cal-9
+//save to database: datentime, day, meal_id, period, ..return cal_id
+//update database: datentime, period,  where cal_id = 4
 
 
-
+i preached to wale in my dream saying:
+if man will try to make it himself, he will lie, steal,kill or destroy
+but God with Him, he will excel
+God comes to visit Him..
+Then God decides to be with Him
+Then God now chooses to live in Him
+it is that presence of God that he needs to take advantage of
+If man will recognize Gods presence and take his help from there, he will excel
+God himself knows that this is what man needs

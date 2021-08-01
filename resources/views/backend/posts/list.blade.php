@@ -23,7 +23,7 @@
                                 <a href="{{route('admin.post.create')}}" class="btn btn-primary mr-5">Add New</a>
                             </div>
                             
-                            <p class="card-category">Here is a subname for this table</p>
+                            <p class="card-category">Here is a sub name for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive">
                             <table class="table table-hover ">
@@ -38,13 +38,7 @@
                                     @forelse ($posts as $post)
                                         <tr>
                                             <td class="card-user">
-                                                @if(!$post->media->first())
-                                                    <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded">
-                                                @elseif($post->media->first()->format == "image")
-                                                    <img @if($post->media->firstWhere('featured',true)->external) src="{{$post->media->first()->name}}" @else src="{{asset('storage/posts/'.$post->media->firstWhere('featured',true)->name)}}" @endif class="avatar rounded">
-                                                @else
-                                                    <img src="{{asset('storage/videos/events-1.jpg')}}" class="avatar rounded">
-                                                @endif
+                                                <img src="{{$post->image}}" class="avatar rounded"> 
                                             </td>
                                             <td>
                                                 <h4 class="mt-0"><a href="{{route('post',$post)}}">{{$post->title}}</a> 

@@ -9,6 +9,7 @@ use App\Coupon;
 use App\Payment;
 use App\Delivery;
 use App\OrderDetail;
+use App\MealCalendar;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use App\Http\Traits\PaystackTrait;
@@ -28,24 +29,29 @@ class PaymentController extends Controller
         $user_address = $user->addresses->where('status',true)->first()->address.' '.$user->addresses->where('status',true)->first()->town->name.' '.$user->addresses->where('status',true)->first()->city->name.' '.$user->addresses->where('status',true)->first()->state->name;
         $coupon_id = '';
         if($request->coupon_used) $coupon_id = Coupon::where('code',$request->coupon_used)->first()->id;
-        // $order = Order::create(['user_id'=> $user->id,'subtotal'=> $request->subtotal,'discount'=> $request->discount,'coupon_code' => $request->coupon_used,'vat'=> $request->vat,'delivery_fee'=> $request->delivery,'delivery_address'=> $user_address,'amount'=> $request->grandtotal]);
-        // foreach($request->item as $item){
-        //     $detail = new OrderDetail;
-        //     $detail->order_id = $order->id;
-        //     $detail->meal_id = json_decode($item)->id;
-        //     $detail->quantity = json_decode($item)->quantity;
-        //     $detail->save();
-        // }
-        $order = Order::find(6);
-        foreach($order->getDeliveries() as $delivery){
-            $deliver = Delivery::create(['user_id'=> $user->id,'address'=> $user_address,'order_id'=> $order->id,'datetime'=> $delivery]);
+        $order = Order::create(['user_id'=> $user->id,'subtotal'=> $request->subtotal,
+        'discount'=> $request->discount,'coupon_code' => $request->coupon_used,'vat'=> $request->vat,
+        'delivery_fee'=> $request->delivery,'delivery_address'=> $user_address,'amount'=> $request->grandtotal]);
+        
+        foreach($request->item as $item){
+            $calendar_id = json_decode($item)->id;
+            $detail = new OrderDetail;
+            $detail->order_id = $order->id;
+            $detail->calendar_id = $calendar_id;
+            $detail->quantity = json_decode($item)->quantity;
+            $detail->required_at = MealCalendar::find($calendar_id)->datentime;
+            $detail->save();
+        }
+        foreach($order->items->sortBy('required_at') as $item){
+            $deliver = Delivery::firstOrCreate(['user_id'=> $user->id,'order_id'=> $order->id,'delivery_date'=> $item->required_at->format('y-m-d')],
+            ['delivery_time'=> $item->required_at->format('h:i'),'address'=> $user_address]);
         }
         // $order = Order::find(6);
         //initiate payment
         $response = $this->initializePayment($order);
         if(!$response || !$response->status){
-            foreach($order->details as $detail){
-                $detail->delete();
+            foreach($order->items as $item){
+                $item->delete();
             }
             $order->delete();
             return redirect()->route('cart');
@@ -88,7 +94,7 @@ class PaymentController extends Controller
             request()->session()->forget('cart');
             return redirect()->route('user.order.show',$order);
         }else {
-            foreach($order->details as $detail){
+            foreach($order->items as $detail){
                 $detail->delete();
             }
             $order->delete();

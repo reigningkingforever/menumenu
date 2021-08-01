@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Meal;
+use App\MealCalendar;
 use App\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,11 +13,12 @@ class OrderDetail extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
-    public function meal(){
-        return $this->belongsTo(Meal::class);
+    public function calendar(){
+        return $this->belongsTo(Calendar::class);
     }
     public function vendor(){
         return $this->belongsTo(Vendor::class);
     }
+    
     
 }

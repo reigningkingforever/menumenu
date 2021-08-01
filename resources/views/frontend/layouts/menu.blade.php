@@ -32,8 +32,8 @@
           <li class="nav-item dropdown hidden-xs">
               
             <a class="nav-link dropdown-toggle pb-0 bg-transparent nohover " href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-              @if(Auth::user()->media)
-                <img src="{{asset('storage/users/'.Auth::user()->media->name)}}" alt="" class="rounded-circle" height="34px">
+              @if(Auth::user()->image)
+                <img src="{{asset('storage/users/'.Auth::user()->image)}}" alt="" class="rounded-circle" height="34px">
                 @else
                 <img src="https://ui-avatars.com/api/?name={{Auth::user()->name}}" alt="" class="rounded-circle" height="34px">
               @endif
