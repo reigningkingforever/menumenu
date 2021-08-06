@@ -18,26 +18,26 @@ trait CartTrait
         // if cart is empty then this is the first product
         if(!$cart) {
             $cart = [
-                    $calendar->id => [
+                    'meal-'.$calendar->id => [
                         "id" => $item_id,
                         "calendar" => $calendar,
                         "quantity" => request()->quantity ? request()->quantity :1,
-                        "delivery" => strtolower($calendar->datentime->format('l').' '.$this->getWeek($calendar->datentime)),    
+                        "delivery" => strtolower($calendar->start_at->format('l').' '.$this->getWeek($calendar->start_at)),    
                     ]
             ];
             request()->session()->put('cart', $cart);
         }else{
             // if cart not empty then check if this product exist then increment quantity
-            if(isset($cart[$calendar->id])) {
-                $cart[$calendar->id]['quantity']++;
+            if(isset($cart['meal-'.$calendar->id])) {
+                $cart['meal-'.$calendar->id]['quantity']++;
                 request()->session()->put('cart', $cart);
             }else{
                 // if item not exist in cart then add to cart with quantity = 1
-                $cart[$calendar->id] = [
+                $cart['meal-'.$calendar->id] = [
                     "id" => $item_id,
                     "calendar" => $calendar,
                     "quantity" => request()->quantity ? request()->quantity : 1,
-                    "delivery" => strtolower($calendar->datentime->format('l').' '.$this->getWeek($calendar->datentime)),
+                    "delivery" => strtolower($calendar->start_at->format('l').' '.$this->getWeek($calendar->start_at)),
                 ];
                 request()->session()->put('cart', $cart);
             }

@@ -43,10 +43,7 @@ class HomeController extends Controller
     public function user()
     {   
         $user = Auth::user();
-        $states = State::where('status',true)->get();
-        $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
-        $towns = Town::whereIn('city_id',$cities->pluck('id')->toArray())->with(['city'])->get();
-        return view('user.dashboard',compact('user','states','cities','towns'));
+        return view('user.dashboard',compact('user'));
     }
     public function backend()
     {

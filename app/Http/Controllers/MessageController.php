@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\Message;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class MessageController extends Controller
 {
     /**
-     * BACKEND.
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function list()
+    public function index()
     {
-        $comments = Comment::all();
-        return view('backend.reviews',compact('comments'));
-    }
-
-    public function destroy(Comment $comment)
-    {
-        //
+        $messages = Message::orderBy('created_at','DESC')->get();
+        return view('backend.emails.list',compact('messages'));
     }
 
     /**
@@ -28,7 +25,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.emails.create');
     }
 
     /**
@@ -82,5 +79,8 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+    public function destroy($id)
+    {
+        //
+    }
 }

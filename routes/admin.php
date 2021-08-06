@@ -47,8 +47,12 @@ Route::group(['prefix'=> 'admin','as'=>'admin.','middleware'=> ['auth','admin']]
     Route::post('posts/delete/{post}','PostController@destroy')->name('post.delete');
 
 
-    Route::get('reviews/','ReviewController@list')->name('review.list');
-    Route::post('review/delete/{comment}','ReviewController@destroy')->name('review.delete');
+    Route::get('comments','CommentController@index')->name('comments');
+    Route::post('comment/delete/{comment}','CommentController@destroy')->name('comment.delete');
+
+    Route::get('messages','MessageController@index')->name('messages');
+    Route::get('messages/create','MessageController@create')->name('messages.create');
+    Route::post('messages/send','MessageController@store')->name('messages.store');
 
     Route::get('payment','PaymentController@list')->name('payment.list');
     Route::post('payment/delete/{payment}','PaymentController@destroy')->name('payment.delete');
@@ -66,4 +70,5 @@ Route::group(['prefix'=> 'admin','as'=>'admin.','middleware'=> ['auth','admin']]
     Route::post('settings/state','SettingsController@state')->name('setting.state');
     Route::post('settings/cities','SettingsController@cities')->name('setting.cities');
     Route::post('settings/towns','SettingsController@towns')->name('setting.towns');
+    Route::post('settings/notifications','SettingsController@notifications')->name('setting.notifications');
 });

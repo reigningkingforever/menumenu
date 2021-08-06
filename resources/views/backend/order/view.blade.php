@@ -19,10 +19,10 @@
                                         <div class="card-body text-muted">
                                             <h4 class="card-title text-muted">Customer Info</h4>
                                             <span class="border  d-block mr-5 mb-3"></span>
-                                            <span>Mrs Idera Margaret</span>
-                                            <span class="d-block">reigningkingforever@gmail.com</h4>
-                                            <span class="d-block">08053308425</span>
-                                            <small class="d-block">51, Kano street, Ebute-meta east, Lagos</small>
+                                            <span>{{$order->user->name}}</span>
+                                            <span class="d-block">{{$order->user->email}}</h4>
+                                            <span class="d-block">{{$order->user->phone}}</span>
+                                            <small class="d-block">{{$order->user->addresses->where('status',true)->first()->address}}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -33,19 +33,19 @@
                                             <span class="border d-block mr-5 mb-3"></span>
                                             <div class="d-flex justify-content-between">
                                                 <span class="text-muted">Order no:</span>
-                                                <span class=" small">04332323</span>
+                                                <span class=" small">{{$order->id}}</span>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <span class="text-muted">Order Date:</span>
-                                                <span class="small">Friday 12.12.12</span>
+                                                <span class="small">{{$order->created_at->format('l d-m-y')}}</span>
                                                 
                                             </div>
                                             <div class="d-flex justify-content-between">
                         
-                                                <span class="text-muted">Required Date:</span>
+                                                <span class="text-muted">Deliveries:</span>
                                                 <div>
-                                                    <small class="d-block">Saturday 12.12.12</small>
-                                                    <small>2 hours from now</small>
+                                                    <small class="d-block">{{$order->deliveries->count()}}</small>
+                                                    
                                                 </div>
                                                 
                                                 
@@ -182,6 +182,22 @@
                         <div class="card-image">
                             <img src="{{asset('img/gallery/01.jpg')}}" alt="...">
                         </div>
+                        <div class="card-body text-center">
+                            <h5>Deliveries</h5>
+                            
+                                @foreach ($order->deliveries as $delivery)
+                                <p class="description ">Date: {{$delivery->delivery_date->format('M d')}} ,
+                                    Time: {{$delivery->delivery_time}} </p>
+                                @endforeach
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="card card-user">
+                        <div class="card-image">
+                            <img src="{{asset('img/gallery/01.jpg')}}" alt="...">
+                        </div>
                         <div class="card-body">
                             <div class="author">
                                 <a href="#">
@@ -211,6 +227,7 @@
                             </button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@
                                 <ul class="nav nav-tabs tab-coupon" id="myTab" role="tablist">
                                     <li class="nav-item"><a class="nav-link active show" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true" data-original-title="" title="">General</a></li>
                                     <li class="nav-item"><a class="nav-link" id="places-tabs" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false" data-original-title="" title="">Places</a></li>
-                                    <li class="nav-item"><a class="nav-link" id="others-tabs" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false" data-original-title="" title="">Others</a></li>
+                                    <li class="nav-item"><a class="nav-link" id="others-tabs" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false" data-original-title="" title="">Notification</a></li>
                                 </ul>
                                 <div class="tab-content p-5" id="myTabContent">
                                     <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
@@ -276,7 +276,30 @@
                                         
                                     </div>
                                     <div class="tab-pane fade" id="others" role="tabpanel" aria-labelledby="others-tabs">
-                                        <h4>This is others tab</h4>
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <h4 class="title">Notification Settings</h4>
+                                                    <table>
+                                                        <tr>
+                                                            <td>Send SMS</td>
+                                                            <td>
+                                                            <input type="checkbox" checked="" data-toggle="switch" data-on-color="info" data-off-color="info">
+                                                            <span class="toggle"></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Send Email</td>
+                                                            <td>
+                                                            <input type="checkbox" checked="" data-toggle="switch" data-on-color="info" data-off-color="info">
+                                                            <span class="toggle"></span>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </table>
+        
+                                                
+                                            </div>
+                                        </fieldset>
                                     </div>
                                 </div>
                                 

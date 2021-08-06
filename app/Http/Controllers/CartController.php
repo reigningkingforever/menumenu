@@ -16,6 +16,17 @@ class CartController extends Controller
 {
     use BookmarkTrait,CartTrait;
     
+    public function index(){
+        // request()->session()->forget('cart');
+        $cart = $this->validateCart();
+        $order = $this->getOrder();
+        $deliveries = $this->getDeliveries();
+        $states = State::where('status',true)->get();
+        $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
+        $towns = Town::whereIn('city_id',$cities->pluck('id')->toArray())->with(['city'])->get();
+        return view('frontend.cart',compact('cart','order','deliveries','states','towns'));
+    }
+
     public function addtocart(Request $request){
         $cart = $this->addToCartSession($request->item_id);
         if(Auth::check())
@@ -41,16 +52,7 @@ class CartController extends Controller
         return response()->json(['wish_count'=> count((array)$wish)],200);
     }
     
-    public function index(){
-        // request()->session()->flush('cart');
-        $cart = $this->validateCart();
-        $order = $this->getOrder();
-        $deliveries = $this->getDeliveries();
-        $states = State::where('status',true)->get();
-        $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
-        $towns = Town::whereIn('city_id',$cities->pluck('id')->toArray())->with(['city'])->get();
-        return view('frontend.cart',compact('cart','order','deliveries','states','towns'));
-    }
+    
     
     public function applycoupon(Request $request){
         $coupon = $this->getCoupon($request->coupon);

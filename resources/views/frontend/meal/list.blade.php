@@ -38,7 +38,7 @@
 										</div>
 										<div class="options-colors">
 											<span style="font-weight:bold;">Delivery:</span>
-											<span>{{ucwords($calendar->period)}} in {{$calendar->datentime->diffForHumans()}} </span>
+											<span>{{ucwords($calendar->period)}} @if($calendar->start_at < now()) Available Now @else {{$calendar->start_at->diffForHumans()}} @endif</span>
 										</div>
 										
 									</div>

@@ -18,12 +18,12 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label class="">Title</label>
-                                                <input type="text" name="title" class="form-control" value="{{url('/laravel-filemanager')}}">
+                                                <input type="text" name="title" class="form-control">
                                                 <small class="form-text text-muted">Title of the article</small>
                                             </div>
                                             <div class="form-group">
                                                 <label class="">Description</label>
-                                                <textarea id="summernote-editor" name="content">{!! old('content', 'test editor content') !!}</textarea>
+                                                <textarea id="summernote-editor" name="description">{!! old('description') !!}</textarea>
                                                 {{-- <textarea name="description" class="form-control" rows="10" style="height: unset"></textarea> --}}
                                             </div>
                                             <div class="form-group">
@@ -83,7 +83,7 @@
 @endsection
 @push('scripts')
     <script src="{{asset('vendor/summernote/summernote.js')}}"></script>
-    {{-- <script>
+    <script>
         $(document).ready(function(){
           // Define function to open filemanager window
           var lfm = function(options, cb) {
@@ -130,7 +130,7 @@
             }
           })
         });
-    </script> --}}
+    </script>
     <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
     <script>
         var route_prefix = "/laravel-filemanager";

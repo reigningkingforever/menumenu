@@ -46,8 +46,8 @@
               <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li> --}}
               <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">Log out</a>
-                  <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+                  document.getElementById('logout-form1').submit();">Log out</a>
+                  <form id="logout-form1" action="{{route('logout')}}" method="POST" style="display: none;">
                       @csrf                                        </form>
               </li>
             </ul>
@@ -59,8 +59,8 @@
             <li class="nav-item"><a class="nav-link" href="#">Order</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Transactions</a></li> --}}
             <li class="nav-item"><a class="nav-link" style="cursor:pointer;" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">Log out</a>
-                <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+                document.getElementById('logout-form2').submit();">Log out</a>
+                <form id="logout-form2" action="{{route('logout')}}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </li>

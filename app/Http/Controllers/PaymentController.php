@@ -23,6 +23,19 @@ class PaymentController extends Controller
         $this->middleware('auth');
     }
 
+    // public function checkthis(){
+    //     $user = Auth::user();
+    //     $user_address = $user->addresses->where('status',true)->first()->address.' '.$user->addresses->where('status',true)->first()->town->name.' '.$user->addresses->where('status',true)->first()->city->name.' '.$user->addresses->where('status',true)->first()->state->name;
+        
+    //     $order = Order::find(5);
+    //     foreach($order->items->sortBy('required_at') as $item){
+
+    //         $deliver = Delivery::firstOrCreate(['user_id'=> $user->id,'order_id'=> $order->id,'delivery_date'=> $item->required_at->format('Y-m-d')],
+    //         ['delivery_time'=> $item->required_at->format('H:i:s'),'address'=> $user_address]);
+    //     }
+    //     return true;
+    // }
+
     public function checkout(Request $request)
     {
         $user = Auth::user();
@@ -39,14 +52,13 @@ class PaymentController extends Controller
             $detail->order_id = $order->id;
             $detail->calendar_id = $calendar_id;
             $detail->quantity = json_decode($item)->quantity;
-            $detail->required_at = MealCalendar::find($calendar_id)->datentime;
+            $detail->required_at = MealCalendar::find($calendar_id)->start_at;
             $detail->save();
         }
         foreach($order->items->sortBy('required_at') as $item){
-            $deliver = Delivery::firstOrCreate(['user_id'=> $user->id,'order_id'=> $order->id,'delivery_date'=> $item->required_at->format('y-m-d')],
-            ['delivery_time'=> $item->required_at->format('h:i'),'address'=> $user_address]);
+            $deliver = Delivery::firstOrCreate(['user_id'=> $user->id,'order_id'=> $order->id,'delivery_date'=> $item->required_at->format('Y-m-d')],
+            ['delivery_time'=> $item->required_at->format('H:i:s'),'address'=> $user_address]);
         }
-        // $order = Order::find(6);
         //initiate payment
         $response = $this->initializePayment($order);
         if(!$response || !$response->status){
@@ -102,6 +114,11 @@ class PaymentController extends Controller
         }
 
         
+    }
+
+    public function userTransactions(){
+        $user = Auth::user();
+        return view('user.transactions',compact('user'));
     }
 
      /**

@@ -20,7 +20,7 @@ trait OrderTrait
         $newcart = [];
         if($cart){
             foreach($cart as $item){
-                if($item['calendar']->datentime > Carbon::now())
+                if($item['calendar']->end_at > Carbon::now())
                 $newcart[] = $item;
             }
             request()->session()->put('cart', $newcart);
@@ -44,8 +44,8 @@ trait OrderTrait
         $cart = $this->validateCart();
         if($cart){
             foreach ($cart as $item){
-                if(!in_array($item['calendar']->datentime->format('l').' '.$this->getWeek($item['calendar']->datentime),$deliveries))
-                $deliveries[] = $item['calendar']->datentime->format('l').' '.$this->getWeek($item['calendar']->datentime);
+                if(!in_array($item['calendar']->start_at->format('l').' '.$this->getWeek($item['calendar']->start_at),$deliveries))
+                $deliveries[] = $item['calendar']->start_at->format('l').' '.$this->getWeek($item['calendar']->start_at);
             }
         }
         return $deliveries;

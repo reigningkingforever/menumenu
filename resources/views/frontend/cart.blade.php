@@ -30,7 +30,7 @@
                                         <a href="#">
                                             <div class="meal d-flex flex-column">
                                                 <img src="{{$item['calendar']->meal->image}}" class="avatar rounded m-0" alt="">     
-                                                <a href="javascript:void(0)"  data-item_id="{{$item->id}}" data-slug="{{$item['calendar']->meal->slug}}" class="text-danger visible-xs remove-from-cart" href="#"><u>Remove</u></a>
+                                                <a href="javascript:void(0)"  data-item_id="{{$item['id']}}" data-slug="cal{{$item['id']}}" class="text-danger visible-xs remove-from-cart" href="#"><u>Remove</u></a>
                                             </div>
                                         </a>
                                     </td>
@@ -38,7 +38,7 @@
                                         <div class="d-flex flex-column">
                                             <div class="d-flex justify-content-between">
                                                 <span>{{$item['calendar']->meal->name}}</span>
-                                                <span class="visible-xs">₦<span class="total" data-slug="{{$item['calendar']->meal->slug}}">{{$item['calendar']->meal->price * $item['quantity']}}</span></span>
+                                                <span class="visible-xs">₦<span class="total" data-slug="cal{{$item['id']}}">{{$item['calendar']->meal->price * $item['quantity']}}</span></span>
                                             </div>
                                             <div class="d-flex justify-content-between mt-2 mt-sm-0">
                                                 <span class="small">
@@ -47,13 +47,13 @@
                                                         @if(!$loop->last)+ @endif
                                                     @endforeach
                                                     <br>
-                                                    <span class="small">{{ucwords($item['calendar']->period)}} on {{$item['calendar']->datentime->format('l-jS')}}</span>
+                                                    <span class="small">{{ucwords($item['calendar']->period)}} on {{$item['calendar']->start_at->format('l-jS')}}</span>
                                                 </span>
                                                 <span class="visible-xs">
                                                     <div class="qty-box">
                                                         <div class="form-group">
-                                                            <input type="number" name="quantity" class="form-control quantity" style="width:50px;"
-                                                                value="{{$item['quantity']}}" slug="{{$item['calendar']->meal->slug}}">
+                                                            <input type="number" name="quantity" min="1" class="form-control quantity" style="width:50px;"
+                                                                value="{{$item['quantity']}}" slug="cal{{$item['id']}}">
                                                         </div>
                                                     </div>
                                                 </span>
@@ -67,14 +67,18 @@
                                     <td class="hidden-xs">
                                         <div class="qty-box">
                                             <div class="">
-                                                <input type="number" name="quantity" class="form-control quantity" style="width:70px;"
-                                                    value="{{$item['quantity']}}" slug="{{$item['calendar']->meal->slug}}">
+                                                <input type="number" name="quantity" min="1" class="form-control quantity" style="width:70px;"
+                                                    value="{{$item['quantity']}}" slug="cal{{$item['id']}}">
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="hidden-xs"><a href="javascript:void(0)"  data-item_id="{{$item->id}}" data-slug="{{$item['calendar']->meal->slug}}" class="icon text-danger remove-from-cart"><i class="fa fa-times"></i></a></td>
                                     <td class="hidden-xs">
-                                        ₦<span class="total" data-slug="{{$item['calendar']->meal->slug}}">{{$item['calendar']->meal->price * $item['quantity']}}</span>
+                                        <a href="javascript:void(0)"  data-item_id="{{$item['id']}}" data-slug="cal{{$item['id']}}" class="icon text-danger remove-from-cart">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
+                                    <td class="hidden-xs">
+                                        ₦<span class="total" data-slug="cal{{$item['id']}}">{{$item['calendar']->meal->price * $item['quantity']}}</span>
                                     </td>
                                 </tr>   
                                   
@@ -193,7 +197,7 @@
                     
                     @if($cart)
                         @foreach($cart as $item)
-                        <input type="hidden" name="item[]" id="cal{{$item->id}}" value="{{ json_encode( $array = ['id' => $item->id,'quantity'=> $item['quantity'] ]  ) }}" >
+                        <input type="hidden" name="item[]" id="cal{{$item['id']}}" value="{{ json_encode( $array = ['id' => $item['id'],'quantity'=> $item['quantity'] ]  ) }}" >
                         @endforeach
                     @endif
 				    <button class="btn btn-primary btn-lg btn-block @guest disabled @endguest" type="submit">Continue to checkout</button>

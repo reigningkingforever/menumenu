@@ -125,11 +125,7 @@
  <script src="{{asset('backend/js/plugins/moment.min.js')}}"></script>
 <!--  DatetimePicker   -->
 <script src="{{asset('backend/js/plugins/bootstrap-datetimepicker.js')}}"></script>
-<!--  Full Calendar   -->
-<script src="{{asset('backend/js/plugins/fullcalendar.min.js')}}"></script>
- <!--  Chartist Plugin  -->
- <script src="{{asset('backend/js/plugins/chartist.min.js')}}"></script>
- <!--  Notifications Plugin    -->
+
  <script src="{{asset('backend/js/plugins/bootstrap-notify.js')}}"></script>
  <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
  <script src="{{asset('backend/js/light-bootstrap-dashboard.js?v=2.0.0')}}" type="text/javascript"></script>

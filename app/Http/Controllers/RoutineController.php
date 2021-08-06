@@ -25,35 +25,53 @@ class RoutineController extends Controller
             $days[] = Carbon::parse($year.'-'.$month.'-'.$i);
         }
         $meals = Meal::all();
-        $calendars = MealCalendar::whereDate('datentime','>=',$today->startOfMonth())->whereDate('datentime','<=',$today->endOfMonth())->get();
+        $calendars = MealCalendar::whereDate('start_at','>=',$today->startOfMonth())->whereDate('end_at','<=',$today->endOfMonth())->get();
         return view('backend.meal.routine',compact('meals','calendars','days'));
     }
 
     
     public function add(Request $request)
     {
-        $datentime = $this->getDateTime($request->datentime,$request->period);
-        $day = strtolower($datentime->format('l'));
-        $calendar = MealCalendar::create(['datentime'=> $datentime,'day'=> $day,'meal_id'=> $request->meal_id,'period'=> $request->period]);
+        $start_at = $this->getStartDateTime($request->startend,$request->period);
+        $end_at = $this->getEndDateTime($request->startend,$request->period);
+        $day = strtolower($start_at->format('l'));
+        if($start_at->format('m') > now()->format('m'))
+        $calendar = MealCalendar::create(['start_at'=> $start_at,'end_at'=> $end_at,'day'=> $day,'meal_id'=> $request->meal_id,'period'=> $request->period]);
         return response()->json(['calendar_id'=> $calendar->id,'meal_name'=> $calendar->meal->name],200);
     }
 
     
     public function delete(Request $request)
     {
-        $calendar = MealCalendar::where('id',$request->item_id)->delete();
+        $calendar = MealCalendar::where('id',$request->item_id)->where('start_at','>',now())->delete();
         return response()->json(200);
     }
 
     
     public function update(Request $request)
     {
-        $datentime = $this->getDateTime($request->datentime,$request->period);
-        $day = strtolower($datentime->format('l'));
-        $calendar = MealCalendar::where('id',$request->item_id)->update(['datentime'=> $datentime,'day'=> $day,'period'=> $request->period]);
+        $start_at = $this->getStartDateTime($request->startend,$request->period);
+        $end_at = $this->getEndDateTime($request->startend,$request->period);
+        $day = strtolower($start_at->format('l'));
+        if($start_at->format('m') > now()->format('m'))
+        $calendar = MealCalendar::where('id',$request->item_id)->update(['start_at'=> $start_at,'end_at'=> $end_at,'day'=> $day,'period'=> $request->period]);
         return response()->json(200);
     }
-    public function getDateTime($date,$period){
+    public function getStartDateTime($date,$period){
+        switch($period){
+            case 'breakfast':$time = 6;
+            break;
+            case 'lunch': $time = 11;
+            break;
+            case 'dinner': $time = 4;
+            break;
+            default: $time = 6;
+            break;
+        }
+        $format = $date.' '.$time;
+        return Carbon::createFromFormat('Y-m-d H',$format);
+    }
+    public function getEndDateTime($date,$period){
         switch($period){
             case 'breakfast':$time = 11;
             break;
@@ -61,7 +79,7 @@ class RoutineController extends Controller
             break;
             case 'dinner': $time = 21;
             break;
-            default: $time = 12;
+            default: $time = 21;
             break;
         }
         $format = $date.' '.$time;

@@ -15,7 +15,7 @@ class CreateMealCalendarsTable extends Migration
     {
         Schema::create('meal_calendars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('datentime');
+            $table->timestamp('start_at');
             $table->unsignedBigInteger('meal_id');
             $table->string('period'); //breakfast, lunch, dinner, dessert
             $table->timestamps();

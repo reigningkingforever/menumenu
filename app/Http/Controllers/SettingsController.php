@@ -28,4 +28,8 @@ class SettingsController extends Controller
         $towns = Town::whereIn('id',$request->towns)->update(['status'=> $request->status]);
         return redirect()->back();
     }
+    public function notifications(Request $request){
+        return redirect()->back();
+    }
+
 }

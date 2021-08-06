@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Traits\CartTrait;
 use App\Http\Traits\PaystackTrait;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {   
-    use PaystackTrait;
+    use CartTrait,PaystackTrait;
     /** FRONTEND*/
     public function __construct(){
         $this->middleware('auth');
@@ -18,8 +19,8 @@ class OrderController extends Controller
 
     public function index()
     {
-        // $orders = Auth::user();
-        // return view('')
+        $user = Auth::user();
+        return view('user.orders',compact('user'));
     }
 
     public function checkout(Order $order){
@@ -39,7 +40,7 @@ class OrderController extends Controller
             if($item->required_at < Carbon::now())
             $item->delete();
         }
-        return view('user.order',compact('order'));
+        return view('user.orderView',compact('order'));
     }
 
     public function edit(Order $order)

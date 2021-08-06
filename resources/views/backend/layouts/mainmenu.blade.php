@@ -68,9 +68,15 @@
             </li>
             
             <li>
-                <a class="nav-link" href="{{route('admin.review.list')}}">
+                <a class="nav-link" href="{{route('admin.comments')}}">
                     <i class="nc-icon nc-atom"></i>
                     <p>Reviews</p>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{route('admin.messages')}}">
+                    <i class="nc-icon nc-badge"></i>
+                    <p>Mail</p>
                 </a>
             </li>
             <li>

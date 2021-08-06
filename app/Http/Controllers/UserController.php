@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\Town;
 use App\User;
+use App\State;
 use App\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +15,28 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /*** FRONTEND.*/
+
+    public function index(){
+        $user = Auth::user();
+        $states = State::where('status',true)->get();
+        $cities = City::whereIn('state_id',$states->pluck('id')->toArray())->get();
+        $towns = Town::whereIn('city_id',$cities->pluck('id')->toArray())->with(['city'])->get();
+        return view('user.profile',compact('user','states','cities','towns'));
+    }
+    public function settings(){
+        $user = Auth::user();
+        return view('user.settings',compact('user'));
+    }
+    public function preferences(Request $request){
+        $user = Auth::user();
+        $user->allergies = $request->allergies;
+        $user->diet = $request->diet;
+        $user->saved_reminder = $request->saved_reminder;
+        $user->email_notify = $request->email_notify;
+        $user->sms_notify = $request->sms_notify;
+        $user->save();
+        return redirect()->back();
+    }
     public function profile(Request $request)
     {
         // dd($request->all());

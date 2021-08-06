@@ -17,6 +17,11 @@ class Order extends Model
     protected $fillable = ['user_id','subtotal','discount','coupon_code','vat','delivery_fee','delivery_address','amount'];
     protected $dates = ['required_at','delivered_at'];
     
+    public static function boot()
+    {
+        parent::boot();
+        parent::observe(new \App\Observers\OrderObserver);
+    }
     public function items(){
         return $this->hasMany(OrderDetail::class);
     }

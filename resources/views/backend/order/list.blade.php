@@ -82,8 +82,10 @@
                                                 <small><i class="fa fa-map-marker"></i>{{$order->delivery_address}}</small>    
                                             </td>
                                             
-                                            <td><h5 class="mb-0">{{$order->required_at->format('M d')}}</h5>
-                                                <small>{{$order->required_at->format('h:i A')}}</small>
+                                            <td><small class="mb-0">
+                                                @foreach ($order->deliveries as $delivery)
+                                                    <small>{{$delivery->delivery_date->format('M d')}}{{$delivery->delivery_time}}</small>
+                                                @endforeach</small>
                                             </td>
                                             <td><h5>₦{{$order->amount}}</h5></td>
                                             <td>

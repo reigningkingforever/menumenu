@@ -14,7 +14,7 @@
 					<div class="profile-top">
                         <div class="profile-image">
                             @if($order->user->media)
-                            <img src="{{asset('storage/users/'.$order->user->image}}" alt="" class="img-fluid">
+                            <img src="{{asset('storage/users/'.$order->user->image)}}" alt="" class="img-fluid">
                             @else
                             <img src="https://ui-avatars.com/api/?name={{$order->user->name}}" alt="" class="img-fluid">
                             @endif

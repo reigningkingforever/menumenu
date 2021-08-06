@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MealCalendar extends Model
 {
-    protected $fillable = ['datentime','meal_id','period','day'];
-    protected $dates = ['datentime'];
+    protected $fillable = ['start_at','end_at','meal_id','period','day'];
+    protected $dates = ['start_at','end_at'];
 
     public function meal(){
         return $this->belongsTo(Meal::class);
@@ -17,12 +17,13 @@ class MealCalendar extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+    
     public function getWeek(){
-        if($this->datentime < Carbon::now()->endOfWeek())
+        if($this->start_at < Carbon::now()->endOfWeek())
         return 'this week';
         else return 'next week';
     }
     public function scopeAvailable($query){
-        return $query->whereBetween('datentime', [now(), today()->addDays(7)->addHours(21)]);
+        return $query->whereBetween('end_at', [now(), today()->addDays(6)->addHours(21)]);
     }
 }

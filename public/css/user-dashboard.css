@@ -73,3 +73,37 @@
     text-transform: capitalize !important;
     /* text-align: left !important; */
 }
+
+.feeds {
+    margin: 0px;
+    padding: 0px; 
+}
+.feeds li {
+    list-style: none;
+    padding: 10px;
+    display: flex; 
+    align-items: center;
+    border-bottom:1px solid #eee;
+}
+.feeds li:hover {
+    background: rgba(0, 0, 0, 0.02); 
+}
+.feeds li > div {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 100%; 
+}
+.feeds li > div i {
+    line-height: 40px; 
+}
+.feeds li span {
+float: right;
+width: auto;
+font-size: 12px; 
+margin-left:auto;
+}
+  

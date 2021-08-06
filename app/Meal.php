@@ -46,7 +46,7 @@ class Meal extends Model
     }
     public function scopeAvailable($query){
         return $query->whereHas('calendar', function ($q) {
-            $q->whereBetween('datentime', [now(), today()->addDays(7)->addHours(21)]);
+            $q->whereBetween('start_at', [now(), today()->addDays(7)->addHours(21)]);
           })->with('calendar');
     }
 }

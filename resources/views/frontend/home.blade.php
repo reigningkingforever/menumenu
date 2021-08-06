@@ -57,8 +57,8 @@
             <a href="#" class="unit-1 text-center">
               <img src="{{asset('img/gallery/01.jpg')}}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
-                <h3 class="unit-1-heading">Door to Door Delivery</h3>
-                <p class="px-5">We keep the convenience of our clients to be of paramount important, therefore we will deliver parcels to you at your specified convenience.</p>
+                <h3 class="unit-1-heading">Food</h3>
+                <p class="px-5">Food consist of 70% of our meal routine. We serve meals of different origin such as local dishes, intercontinental dishes etc...</p>
               </div>
             </a>
           </div>
@@ -67,8 +67,8 @@
             <a href="#" class="unit-1 text-center">
               <img src="{{asset('img/gallery/02.jpg')}}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
-                <h3 class="unit-1-heading">Cold Courier Service</h3>
-                <p class="px-5">We have special delivery boxes for carrying items that need to be transported at low temperatures.</p>
+                <h3 class="unit-1-heading">Drinks</h3>
+                <p class="px-5">We make and serve special nutritional drinks to accompany your meals. This includes juice, milk shakes, smoodies, tea, etc...</p>
               </div>
             </a>
           </div>
@@ -77,8 +77,8 @@
             <a href="#" class="unit-1 text-center">
               <img src="{{asset('img/gallery/03.jpg')}}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
-                <h3 class="unit-1-heading">Food Delivery</h3>
-                <p class="px-5">We courier food to any location, keeping the temperature of the food nearly the same while in transit .</p>
+                <h3 class="unit-1-heading">Fruits</h3>
+                <p class="px-5">Our meal routines are rich in fruits that give you different required vitamins daily, making sure your body get a balanced diet all year round</p>
               </div>
             </a>
           </div>
@@ -87,8 +87,8 @@
             <a href="#" class="unit-1 text-center">
               <img src="{{asset('img/gallery/04.jpg')}}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
-                <h3 class="unit-1-heading">Medical Delivery</h3>
-                <p class="px-5">Deliverying medical items between doctors and patients, blood banks, hospitals and pharmacies is one of our major specialties.</p>
+                <h3 class="unit-1-heading">Pastries</h3>
+                <p class="px-5">You can also have your sweets, chocolates, cakes, pies etc in between meals as desserts as snacks to enjoy at your leisure time</p>
               </div>
             </a>
           </div>
@@ -97,8 +97,8 @@
             <a href="#" class="unit-1 text-center">
               <img src="{{asset('img/gallery/05.jpg')}}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
-                <h3 class="unit-1-heading">Packaging and Branding</h3>
-                <p class="px-5">Our e-commerce partners often leave their packaging materials with us to hasten the delivery process of products to their customers.</p>
+                <h3 class="unit-1-heading">Vegetarian Diet</h3>
+                <p class="px-5">We have made sure that you can find meals without meat or fish or any kind of animal in our routine. You can go ahead to order meals of you diet type satisfaction from our menu .</p>
               </div>
             </a>
           </div>
@@ -107,8 +107,8 @@
             <a href="#" class="unit-1 text-center">
               <img src="{{asset('img/gallery/06.jpg')}}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
-                <h3 class="unit-1-heading">Cash on Delivery</h3>
-                <p class="px-5">We collect cash on behalf of our clients who offer this service to their customers. We have no record of settlement hassles</p>
+                <h3 class="unit-1-heading">Vegan Diet</h3>
+                <p class="px-5">Great care has been taken to make your diet preference our concern. We therefore have meals that neither contain animals nor products of animals. Feel free to explore our menu</p>
               </div>
             </a>
           </div>
@@ -117,8 +117,8 @@
             <a href="#" class="unit-1 text-center">
               <img src="{{asset('img/gallery/07.jpg')}}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
-                <h3 class="unit-1-heading">Goods Transportation</h3>
-                <p class="px-5">We deliver goods all over the country from farm to markets, markets to distributors and retailers, and individual bulk purchases.</p>
+                <h3 class="unit-1-heading">Non-Vegetarian</h3>
+                <p class="px-5">You can pretty much find anything you desire to eat from our menus. We serve a vast array of beef, chicken, fish, egg etc.. in our meals </p>
               </div>
             </a>
           </div>
@@ -154,8 +154,9 @@
             <div class="section-title">
               <h2>Our Story</h2>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare.</p>
+            <p> Let's face it, you eat the same meals every day & week, and you're tired of that rice routine ain't you?</p>
+            <p>DailyMenu is pledged to serve you diversities of meals every week, to make your nutritional experience a healthy, fun and amazing exploration.</p>
+            <p>We are pleased to have the privilege of caring about what goes into your mouth. Please follow our weekly menu to order food, drinks, fruits, pastries, etc </p>
           </div>
         </div>
       </div>

@@ -68,7 +68,7 @@
                                                     </div>
                                                 @else
                                                     <div class="meal">
-                                                            <img src="{{asset('storage/users/'.$user->image}}" class="avatar rounded">
+                                                            <img src="{{asset('storage/users/'.$user->image)}}" class="avatar rounded">
                                                     </div>
                                                 @endif
                                             </td>
@@ -130,7 +130,7 @@
                                                                     <p>Are you sure you want to delete this user</p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form class="d-inline" action="{{route('admin.review.delete',$user)}}" method="POST">@csrf
+                                                                    <form class="d-inline" action="{{route('admin.comment.delete',$user)}}" method="POST">@csrf
                                                                         <button type="submit" class="btn btn-danger">Yes</button>
                                                                     </form>
                                                                     <button type="button" class="btn btn-link btn-simple" style="cursor:pointer" data-dismiss="modal">Close</button>

@@ -69,7 +69,7 @@
                                             <td>{{$payment->amount}}</td>
                                             <td> @if($payment->status) Success @else Failed @endif </td>
                                             
-                                            <td><a href="#">View Order</a></td>
+                                            <td><a href="{{route('admin.order.view',$payment->order)}}">View Order</a></td>
                                             <td>
                                                 <div class="d-flex">
                                                     @if(!$payment->status)

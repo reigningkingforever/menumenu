@@ -6,56 +6,60 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\NexmoMessage;
 
-class OrderNotification extends Notification
+class OrderNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $order;
+    
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    
     public function via($notifiable)
     {
+        if($notifiable->email_notify)
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
+    
     public function toMail($notifiable)
     {
+        $word = $this->message($this->order->status);
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->subject('Order '.$this->order->status)
+                    ->line($word)
+                    ->action('View order', route('order.view',$this->order))
                     ->line('Thank you for using our application!');
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => $this->message($this->order->status),
+            'url'=> route('order.view',$this->order)
         ];
     }
+    public function toNexmo($notifiable)
+    {
+        return (new NexmoMessage)->content($this->message($this->order->status));
+    }
+
+    public function message($status){
+        $word = '';
+        switch($status){
+            case 'pending': $word = 'order with order number '.$this->order->id.' was edited';
+            break;
+            case 'paid': $word = 'You paid for order with order number '.$this->order->id;
+            break;
+            case 'delivered': $word = 'order with order number '.$this->order->id.' has expired';
+            break;
+        }
+        return $word;
+    }
 }
+

@@ -24,16 +24,7 @@
                         <div class="card-body">
                           <div class="row justify-content-center align-items-center pb-2">
                             <div style="text-align:center;">
-                              {{-- 
-                                    <div>
-                                      <h2>Drag And Drop Calendar/Scheduler</h2>
-                                    </div>
-                                    <div>
-                                      <span>Drag and drop tasks wherever you want on the calendar/scheduler</span><br>
-                                      <span>Hover on a task to edit or delete the specific task.</span>
-                                    </div>
-                                    <span><a href="https://crezzur.com">www.crezzur.com</a> - info@crezzur.com</span> 
-                                --}}
+                              
                               <form>
                                 <div class="d-flex justify-content-center">
                                   <div>
@@ -138,7 +129,7 @@
                                       @foreach ($days as $day)
                                         <td class="@if($day->format('l')=='Saturday' || $day->format('l')=='Sunday') weekend @endif ui-droppable" data-date="{{$day->format('Y-m-d')}}" data-period="breakfast">
                                           @forelse($calendars->where('period','breakfast') as $calendar)
-                                              @if($calendar->datentime->format('Y-m-d') == $day->format('Y-m-d'))
+                                              @if($calendar->start_at->format('Y-m-d') == $day->format('Y-m-d'))
                                                 <div class="drag details ui-draggable ui-draggable-handle" data-calendar_id="{{$calendar->id}}" data-period="{{$calendar->period}}" style="border-left: 5px solid rgb(81, 255, 0); position: relative;">
                                                   <h3 class="details-task" style=" background: #51FF00; color: #000000">{{$calendar->meal->name}}</h3>
                                                   <div class="details-uren">
@@ -168,7 +159,7 @@
                                       @foreach ($days as $day)
                                       <td class="@if($day->format('l')=='Saturday' || $day->format('l')=='Sunday') weekend @endif ui-droppable" data-date="{{$day->format('Y-m-d')}}" data-period="lunch">
                                           @forelse($calendars->where('period','lunch') as $calendar)
-                                              @if($calendar->datentime->format('Y-m-d') == $day->format('Y-m-d'))
+                                              @if($calendar->start_at->format('Y-m-d') == $day->format('Y-m-d'))
                                                 <div class="drag details ui-draggable ui-draggable-handle" data-calendar_id="{{$calendar->id}}" data-period="{{$calendar->period}}" style="border-left: 5px solid #2473AB; position: relative;">
                                                   <h3 class="details-task" style=" background: #2473AB; color: #FFFFFF">{{$calendar->meal->name}}</h3>
                                                   <div class="details-uren">
@@ -199,7 +190,7 @@
                                       @foreach ($days as $day)
                                       <td class="@if($day->format('l')=='Saturday' || $day->format('l')=='Sunday') weekend @endif ui-droppable" data-date="{{$day->format('Y-m-d')}}" data-period="dinner">
                                           @forelse($calendars->where('period','dinner') as $calendar)
-                                              @if($calendar->datentime->format('Y-m-d') == $day->format('Y-m-d'))
+                                              @if($calendar->start_at->format('Y-m-d') == $day->format('Y-m-d'))
                                                 <div class="drag details ui-draggable ui-draggable-handle" data-calendar_id="{{$calendar->id}}" data-period="{{$calendar->period}}" style="border-left: 5px solid #2473AB; position: relative;">
                                                   <h3 class="details-task" style=" background: #2473AB; color: #FFFFFF">{{$calendar->meal->name}}</h3>
                                                   <div class="details-uren">
@@ -229,7 +220,7 @@
                                       @foreach ($days as $day)
                                       <td class="@if($day->format('l')=='Saturday' || $day->format('l')=='Sunday') weekend @endif ui-droppable" data-date="{{$day->format('Y-m-d')}}" data-period="dessert">
                                         @forelse($calendars->where('period','dessert') as $calendar)
-                                              @if($calendar->datentime->format('Y-m-d') == $day->format('Y-m-d'))
+                                              @if($calendar->start_at->format('Y-m-d') == $day->format('Y-m-d'))
                                                 <div class="drag details ui-draggable ui-draggable-handle" data-calendar_id="{{$calendar->id}}" data-period="{{$calendar->period}}" style="border-left: 5px solid #BD0000; position: relative;">
                                                   <h3 class="details-task" style=" background: #BD0000; color: #FFFFFF">{{$calendar->meal->name}}</h3>
                                                   <div class="details-uren">

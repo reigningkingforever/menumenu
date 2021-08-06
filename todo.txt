@@ -3,27 +3,44 @@ file:///C:/Users/reign/Documents/WebDev/html/components/bootstrap-4user-calendar
 Manager needs to fill calendar a month ahead
 
 
-add meal via ajax- on success, drop meal on the date hovered upon
 
-on drag meal from a to b, use ajax to change meal calendar in database
 
-data-slug in cart.blade.php
+1.GET PICTURES FOR THESE
+food|drinks|fruits|pastries|veg|vegan|non-veg|
 
-recurring order from blogpost
+2. correct meals on display
+add meal pictures
+
+3. TASK
+{
+social logins
+create emails sending
+create notifications - 
+payments, 
+signup, 
+order change, 
+
+}
+
+
+TEST
+try to make an order
+enter LIVE PAYSTACK DETAILS
+create a post, & let people book recurring order from post
+view post frontend
+
+OTHERS
+buy domain
+transfer project to new domain
+advertize
+
+
+
+
 
 after user filtering and food is not available, show no-meal, 
 after user filtering and food is not available, show: would you like to be notified when this meal is available? button= yes.
 
-
-use tags
-on add to save, after save, what next ?
-
-if item is in the cart for more than a day, will the user still be able to buy it?
-meaning the date has passed
-
-delete items in unsuccessful order whose date has passed everyday
-delete items in cart whose date has passed everyday
-put data on admin pages
 
 
 make meal page look like these:
@@ -31,20 +48,10 @@ https://main.mylistingtheme.com/listing/ministry-of-sound/
 https://property.mylistingtheme.com/listing/era-square/
 https://car.mylistingtheme.com/listing/audi-a8/
 
-Routine for current and previous month cannot be changed, can only be viewed
 
-table cell has date & meal period(breakfast)|cal 16
 
-task id = calendar_id
 
-cell 1 (1st,breakfast,cal-16) | cell 2 (2nd,breakfast,cal-21) | cell 3 (3rd,breakfast,cal-7)
-cell 4 (4th,lunch,) | cell 5 (5th,lunch,) | cell 6 (6th,lunch,cal-96)
-cell 7 (7th,dinner,cal-16) | cell 8 (8th,dinner,cal-16) | cell 9 (9th,dinner,cal-8)
 
-drag 1st to 4th
-cal-16 will now be (4th,lunch,cal-9
-//save to database: datentime, day, meal_id, period, ..return cal_id
-//update database: datentime, period,  where cal_id = 4
 
 
 i preached to wale in my dream saying:

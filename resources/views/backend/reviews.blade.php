@@ -46,17 +46,14 @@
                                         
                                         </a>
                                     </th>
-                                    <th>Date</th>
+                                    <th style="width:70px">Date</th>
                                     <th>Thumbnail</th>
                                     <th >Details</th> 
-                                    <th>Status</th>
                                     <th >Action</th>
-                                    {{-- details = title, required at, delivery address --}}
                                 </thead>
                                 <tbody>
                                     @foreach ($comments as $comment)
                                         <tr>
-                                            
                                             <td>
                                                 <div class="form-check checkbox-inline">
                                                     <label class="form-check-label">
@@ -65,7 +62,9 @@
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td><span class="text-muted">{{$comment->created_at->format('M d')}}</span></td>
+                                            <td>
+                                                <span class="text-muted">{{$comment->created_at->format('M d')}}</span>
+                                            </td>
                                             <td>
                                                 @if($comment->commentable->image)
                                                     <div class="meal">
@@ -83,24 +82,18 @@
                                             </td>
                                             <td>
                                                 <h5 class="my-0">
-                                                    @if($comment->commentable_type == "post")
-                                                        <a href="{{route('post.view',$comment->commentable)}}">{{$comment->commentable->name}} </a>
-                                                    @elseif($comment->commentable_type == "menu")
-                                                        <a href="{{route('menu.view',$comment->commentable)}}">{{$comment->commentable->name}} </a>
+                                                    @if($comment->commentable_type == "App\Post")
+                                                        <a href="{{route('post',$comment->commentable)}}">{{$comment->commentable->title}} </a>
                                                     @else
                                                         <a href="{{route('meal.view',$comment->commentable)}}">{{$comment->commentable->name}} </a>
                                                     @endif
-                                                    <button class="btn btn-simple btn-link btn-icon">post</button>
-                                                
                                                     
                                                     <small class="card-category d-block text-muted"> {{$comment->body}}</small>
                                                 </h5>
                                                   
                                             </td>
                                             
-                                            <td>
-                                                <h5>{{$comment->status}}</h5>
-                                            </td>
+                                            
                                             <td class="d-block">
                                                 <div class="">
                                                     <a href="#" type="button" data-toggle="modal" data-target="#change-status{{$comment->id}}" rel="tooltip" title="change status" data-placement="left" class="btn btn-warning btn-outline btn-sm mb-2 rounded">
@@ -147,7 +140,7 @@
                                                                     <p>Are you sure you want to delete this comment</p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form class="d-inline" action="{{route('admin.review.delete',$comment)}}" method="POST">@csrf
+                                                                    <form class="d-inline" action="{{route('admin.comment.delete',$comment)}}" method="POST">@csrf
                                                                         <button type="submit" class="btn btn-danger">Yes</button>
                                                                     </form>
                                                                     <button type="button" class="btn btn-link btn-simple" style="cursor:pointer" data-dismiss="modal">Close</button>
@@ -158,17 +151,12 @@
                                                 </div>    
                                             </td>
                                         </tr>
-                                    @endforeach
-                                        
-                                    
-                                    
+                                    @endforeach    
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-                
-                
+                </div> 
             </div>
         </div>
     </div>
@@ -189,12 +177,8 @@
             search: "_INPUT_",
             searchPlaceholder: "Search records",
         }
-
     });
-
 </script>
-
-
 @endpush
 
           

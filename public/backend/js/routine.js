@@ -27,7 +27,7 @@ $("td[data-date]").droppable({
           data:{
               '_token' : $('meta[name="csrf-token"]').attr('content'),
               'item_id': calendar_id,
-              'datentime':newDate,
+              'startend':newDate,
               'period':dropPeriod
           },
           success:function(data) {
@@ -131,7 +131,7 @@ $(".ui-droppable").hover(
 );
 
 $(document).on('click', '#addMeal', function() {
-  // var datentime = $(this).parent().data('date');
+  // var startend = $(this).parent().data('date');
   // var period = $(this).parent().data('period');
   $('#dates').val($(this).parent().data('date'));
   $('#periods').val($(this).parent().data('period'));
@@ -152,7 +152,7 @@ $(document).on('click', '#addCalendar', function() {
       data:{
           '_token' : $('meta[name="csrf-token"]').attr('content'),
           'meal_id': meal_id,
-          'datentime': dates,
+          'startend': dates,
           'period': periods
       },
       success:function(data) {
