@@ -2,7 +2,8 @@
 
 namespace App;
 use App\Meal;
-use App\Order;
+use App\Bookmark;
+use App\OrderDetail;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,8 +15,11 @@ class MealCalendar extends Model
     public function meal(){
         return $this->belongsTo(Meal::class);
     }
-    public function orders(){
-        return $this->hasMany(Order::class);
+    public function bookmarks(){
+        return $this->hasMany(Bookmark::class,'calendar_id');
+    }
+    public function orderItems(){
+        return $this->hasMany(OrderDetail::class,'calendar_id');
     }
     
     public function getWeek(){

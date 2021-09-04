@@ -4,6 +4,7 @@ namespace App;
 
 
 use App\Tag;
+use App\Meal;
 use App\Media;
 use App\Comment;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,9 @@ class Menu extends Model
 
     public function comments(){
         return $this->morphMany(Comment::class, 'commentable');
+    }
+    public function meals(){
+        return $this->belongsToMany(Meal::class,'meal_items');
     }
 
 }

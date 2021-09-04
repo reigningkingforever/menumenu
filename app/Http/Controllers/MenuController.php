@@ -84,7 +84,7 @@ class MenuController extends Controller
 
     public function destroy(Menu $menu)
     {
-        if($menu->orders->isEmpty() && $menu->bookmarks->isEmpty()){
+        if($menu->meals->isEmpty()){
             $menu->delete();
         }
         return redirect()->back();

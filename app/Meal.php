@@ -4,11 +4,12 @@ namespace App;
 
 use App\Meal;
 use App\Media;
+use App\Order;
 use App\Comment;
 use App\Bookmark;
 use App\MealCalendar;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Meal extends Model
 {
@@ -41,12 +42,12 @@ class Meal extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function bookmarks(){
-        return $this->morphMany(Bookmark::class, 'eatable');
-    }
     public function scopeAvailable($query){
         return $query->whereHas('calendar', function ($q) {
             $q->whereBetween('start_at', [now(), today()->addDays(7)->addHours(21)]);
           })->with('calendar');
+    }
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 }

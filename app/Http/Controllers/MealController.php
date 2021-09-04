@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Meal;
 use App\Menu;
+use App\MealCalendar;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
 {
 
     public function index(Request $request){
-        //dd($request->all());
+        // dd($request->all());
         if($q = $request->search){
-            $calendars = MealCalender::available()->whereHas('meal',function ($query) use($q){
+            $calendars = MealCalendar::available()->whereHas('meal',function ($query) use($q){
                 $query->where('name','LIKE',"%$q%")->orWhere('description','LIKE',"%$q%");
             })->get();
             $filter = [
@@ -25,7 +26,7 @@ class MealController extends Controller
         }
         else{
             // $cost = (!$request->cost)  ? array(0,20000) : explode(',',$request->cost);
-            $calendars = MealCalender::available()->whereIn('period',$request->period)->whereHas('meal',function ($query) {
+            $calendars = MealCalendar::available()->whereIn('period',$request->period)->whereHas('meal',function ($query) use($request) {
                 $query->whereIn('origin',$request->origin)->whereIn('type',$request->itemtype)->whereIn('diet',$request->diet);
             })->get();
             $filter = [
@@ -44,7 +45,7 @@ class MealController extends Controller
      */
     public function list()
     {
-        $meals = Meal::all();
+        $meals = Meal::orderBy('name','ASC')->get();
         return view('backend.meal.list',compact('meals'));
     }
 
@@ -111,9 +112,10 @@ class MealController extends Controller
     
     public function destroy(Meal $meal)
     {
-        if($meal->orders->isEmpty() && $meal->bookmarks->isEmpty()){
+        if($meal->calendar->orderItems->isEmpty() && $meal->calendar->bookmarks->isEmpty()){
             $meal->delete();
         }
+        else dd('not empty');
         return redirect()->back();
     }
 

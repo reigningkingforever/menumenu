@@ -7,80 +7,53 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $messages = Message::orderBy('created_at','DESC')->get();
         return view('backend.emails.list',compact('messages'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('backend.emails.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $message = new Message;
+        $message->user_id = Auth::id();
+        $message->subject = $request->subject;
+        $message->body = $request->body;
+        $message->status = $request->status;
+        $message->save();
+        return redirect()->route('admin.messages');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Message $message)
     {
-        //
+        return view('backend.emails.edit',compact('message'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update(Request $request, Message $message)
     {
-        //
+        $message->subject = $request->subject;
+        $message->body = $request->body;
+        $message->status = $request->status;
+        $message->save();
+        return redirect()->route('admin.messages');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    
+    public function destroy(Message $message)
     {
-        //
+        $message->delete();
+        return redirect()->route('admin.messages');
     }
 }

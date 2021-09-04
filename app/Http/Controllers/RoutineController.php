@@ -35,7 +35,7 @@ class RoutineController extends Controller
         $start_at = $this->getStartDateTime($request->startend,$request->period);
         $end_at = $this->getEndDateTime($request->startend,$request->period);
         $day = strtolower($start_at->format('l'));
-        if($start_at->format('m') > now()->format('m'))
+        // if($start_at->format('m') > now()->format('m'))
         $calendar = MealCalendar::create(['start_at'=> $start_at,'end_at'=> $end_at,'day'=> $day,'meal_id'=> $request->meal_id,'period'=> $request->period]);
         return response()->json(['calendar_id'=> $calendar->id,'meal_name'=> $calendar->meal->name],200);
     }
@@ -63,7 +63,7 @@ class RoutineController extends Controller
             break;
             case 'lunch': $time = 11;
             break;
-            case 'dinner': $time = 4;
+            case 'dinner': $time = 16;
             break;
             default: $time = 6;
             break;

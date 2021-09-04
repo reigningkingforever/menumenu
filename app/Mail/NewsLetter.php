@@ -10,15 +10,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class NewsLetter extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $message;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Message $message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -28,6 +28,6 @@ class NewsLetter extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('backend.emails.templates.template-two');
     }
 }

@@ -151,12 +151,12 @@
         <div class="col-xs-12 col-md-6 about-img"> </div>
         <div class="col-xs-12 col-md-3 col-md-offset-1">
           <div class="about-text">
-            <div class="section-title">
+            <div class="section-titles">
               <h2>Our Story</h2>
             </div>
             <p> Let's face it, you eat the same meals every day & week, and you're tired of that rice routine ain't you?</p>
             <p>DailyMenu is pledged to serve you diversities of meals every week, to make your nutritional experience a healthy, fun and amazing exploration.</p>
-            <p>We are pleased to have the privilege of caring about what goes into your mouth. Please follow our weekly menu to order food, drinks, fruits, pastries, etc </p>
+            <p>And if you are on a health or fitness diet prescription, Dailymenu is your number one caterer to help you achieve your nutritional goals </p>
           </div>
         </div>
       </div>
