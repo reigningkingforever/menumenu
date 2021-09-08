@@ -195,121 +195,51 @@
                 <input name="filter" value="true" type="hidden">
                 <!-- Checkboxes -->
                 <h3 class="headline">
-                  <span>Type</span>
+                  <span>Category</span>
                 </h3>
+                @foreach ($tags->where('type','category')->sortBy('name') as $tag)
                 <div class="checkbox">
-                  <input type="checkbox" class="category" name="category[]" value="food" id="food" @if(in_array('food',$filter['category'])) checked @endif>
-                  <label for="food">Food</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="category" name="category[]" value="drinks" id="drinks" @if(in_array('drinks',$filter['category'])) checked @endif>
-                  <label for="drinks">Drinks</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="category" name="category[]" value="fruits" id="fruits" @if(in_array('fruits',$filter['category'])) checked @endif>
-                  <label for="fruits">Fruits</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="category" name="category[]" value="pastries" id="pastries" @if(in_array('pastries',$filter['category'])) checked @endif>
-                  <label for="pastries">Pastries</label>
+                  <input type="checkbox" class="category" name="category[]" value="{{$tag->name}}" id="{{$tag->name}}" @if(in_array($tag->name,$filter['category'])) checked @endif>
+                  <label for="{{$tag->name}}">{{ucwords($tag->name)}}</label>
                 </div>
-                <br>
+                </br>
+                @endforeach
+                
+                
                 <h3 class="headline">
                   <span>Period</span>
                 </h3>
+                @foreach ($tags->where('type','period')->sortBy('name') as $tag)
                 <div class="checkbox">
-                  <input type="checkbox" class="period" name="period[]" value="breakfast" id="breakfast" @if(in_array('breakfast',$filter['period'])) checked @endif>
-                  <label for="breakfast">Breakfast</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="period" name="period[]" value="lunch" id="lunch" @if(in_array('lunch',$filter['period'])) checked @endif>
-                  <label for="lunch">Lunch</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="period" name="period[]" value="dinner" id="dinner" @if(in_array('dinner',$filter['period'])) checked @endif>
-                  <label for="dinner">Dinner</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="period" name="period[]" value="dessert" id="dessert" @if(in_array('dessert',$filter['period'])) checked @endif>
-                  <label for="dessert">Dessert</label>
-                </div></br>
+                  <input type="checkbox" class="period" name="period[]" value="{{$tag->name}}" id="{{$tag->name}}" @if(in_array($tag->name,$filter['period'])) checked @endif>
+                  <label for="{{$tag->name}}">{{ucwords($tag->name)}}</label>
+                </div>
+                </br>
+                @endforeach
       
                 <h3 class="headline">
                   <span>Diet Type</span>
                 </h3>
+                @foreach ($tags->where('type','diet')->sortBy('name') as $tag)
                 <div class="checkbox">
-                  <input type="checkbox" class="diet" name="diet[]" value="vegan" id="vegan" @if(in_array('vegan',$filter['diet'])) checked @endif>
-                  <label for="vegan">Vegan</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="diet" name="diet[]" value="veg" id="veg" @if(in_array('veg',$filter['diet'])) checked @endif>
-                  <label for="veg">Vegetarian</label>
-                </div></br>
-                <div class="checkbox">
-                  <input type="checkbox" class="diet" name="diet[]" value="nonveg" id="nonveg" @if(in_array('nonveg',$filter['diet'])) checked @endif>
-                  <label for="nonveg">Non Vegetarian</label>
-                </div></br>
+                  <input type="checkbox" class="diet" name="diet[]" value="{{$tag->name}}" id="{{$tag->name}}" @if(in_array($tag->name,$filter['diet'])) checked @endif>
+                  <label for="{{$tag->name}}">{{ucwords($tag->name)}}</label>
+                </div>
+                </br>
+                @endforeach
+                
                 <!-- Radios -->
                 <h3 class="headline">
                   <span>Origin</span>
                 </h3>
+                @foreach ($tags->where('type','origin')->sortBy('name') as $tag)
                 <div class="checkbox">
-                    <input class="origin" type="checkbox" name="origin[]" id="local" value="local" @if(in_array('local',$filter['origin'])) checked @endif>
-                    <label for="local">Local Dish</label>
-                </div></br>
-                <div class="checkbox">
-                  <input class="origin" type="checkbox" name="origin[]" id="intercontinental" value="intercontinental" @if(in_array('intercontinental',$filter['origin'])) checked @endif>
-                  <label for="intercontinental">Intercontinental</label>
-                  </div></br>
-                <div class="checkbox">
-                  <input class="origin" type="checkbox" name="origin[]" id="chinese" value="chinese" @if(in_array('chinese',$filter['origin'])) checked @endif>
-                  <label for="chinese">Chinese</label>
-                  </div></br>
-                  <div class="checkbox">
-                  <input class="origin" type="checkbox" name="origin[]" id="italian" value="italian" @if(in_array('italian',$filter['origin'])) checked @endif>
-                  <label for="italian">Italian</label>
-                  </div></br>
-      
-                <!-- Price -->
-                
-                {{-- <h3 class="headline">
-                  <span>Price</span>
-                </h3>
-                <div class="radio">
-                  <input type="radio" class="cost" name="cost" value="0" id="shop-filter-price_0" value="0,20000" checked>
-                  <label for="shop-filter-price_1">All Prices</label>
-                </div></br>
-                <div class="radio">
-                  <input type="radio" class="cost" name="cost"  id="shop-filter-price_1" value="0,1000" @if($filter['cost'] == '0,1000') checked @endif>
-                  <label for="shop-filter-price_1">Under ₦1000</label>
-                </div></br>
-                <div class="radio">
-                  <input type="radio" class="cost" name="cost" id="shop-filter-price_2" value="1001,2000" @if($filter['cost'] == '1001,2000') checked @endif>
-                  <label for="shop-filter-price_2">₦1000 to ₦2000</label>
-                </div></br>
-                <div class="radio">
-                  <input type="radio" class="cost" name="cost" id="shop-filter-price_3" value="2001,3000" @if($filter['cost'] == '2001,3000') checked @endif>
-                  <label for="shop-filter-price_3">₦2000 to ₦3000</label>
-                </div></br>
-                <div class="radio">
-                  <input type="radio" class="cost" name="cost" id="shop-filter-price_4" value="3001,4000" @if($filter['cost'] == '3001,4000') checked @endif>
-                  <label for="shop-filter-price_4">₦3000 to 4000</label>
-                </div></br>
-                <div class="radio">
-                  <input type="radio" class="cost" name="cost" id="shop-filter-price_5" value="4001,5000" @if($filter['cost'] == '4001,5000') checked @endif>
-                  <label for="shop-filter-price_5">₦4000 to ₦5000</label>
-                </div></br>
-                <div class="radio">
-                  <input type="radio" class="cost" name="cost" id="shop-filter-price_6" value="5001,20000" @if($filter['cost'] == '5001,20000') checked @endif>
-                  <label for="shop-filter-price_6">Above 5000</label>
-                </div></br>
-                 --}}
-      
-                
-                
-                  <br>
+                  <input type="checkbox" class="origin" name="origin[]" value="{{$tag->name}}" id="{{$tag->name}}" @if(in_array($tag->name,$filter['origin'])) checked @endif>
+                  <label for="{{$tag->name}}">{{ucwords($tag->name)}}</label>
+                </div>
+                </br>
+                @endforeach
                 <button type="submit" class="btn btn-default btn-block">Filter</button>
-      
               </form>
             </div>
             <div id="menu_result">

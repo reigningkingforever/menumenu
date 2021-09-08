@@ -28,7 +28,7 @@ class MealController extends Controller
         else{
             // $cost = (!$request->cost)  ? array(0,20000) : explode(',',$request->cost);
             $calendars = MealCalendar::available()->whereIn('period',$request->period)->whereHas('meal',function ($query) use($request) {
-                $query->whereIn('origin',$request->origin)->whereIn('type',$request->category)->whereIn('diet',$request->diet);
+                $query->whereIn('origin',$request->origin)->whereIn('category',$request->category)->whereIn('diet',$request->diet);
             })->get();
             $filter = [
                         'category'=>  $request->category,

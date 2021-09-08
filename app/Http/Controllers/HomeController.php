@@ -26,19 +26,15 @@ class HomeController extends Controller
     }
 
     public function front(){
-        // $calendars = MealCalendar::available()->whereHas('meal',function ($query) {
-        //     $query->whereIn('origin',['local','intercontinental','chinese','italian'])
-        //     ->whereIn('type',['food','drinks','fruits','pastries'])->whereIn('diet',['vegan','veg','nonveg']);
-        // })->get();
         $calendars = MealCalendar::available()->whereHas('meal')->get();
-        $tag = Tag::where('status',true)->get();
+        $tags = Tag::where('status',true)->get();
         $filter = ['category'=>  ['food','drinks','fruits','pastries'],
                     'period'=>  ['breakfast','lunch','dinner','dessert'],
                     'origin' => ['local','intercontinental','chinese','italian'],
                     'diet' => ['vegan','veg','nonveg'],
                     'cost' => '0,20000',
                     ];
-        return view('frontend.home',compact('calendars','filter'));
+        return view('frontend.home',compact('calendars','filter','tags'));
         
     }
 
