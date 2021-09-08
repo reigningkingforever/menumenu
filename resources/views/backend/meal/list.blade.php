@@ -10,8 +10,8 @@
                     <form action="{{route('admin.meal.list')}}" method="GET">
                         <div class="d-flex justify-content-between">
                             <div class="form-group">
-                                <select name="" id="" class="form-control">
-                                    <option>Meal Time</option>
+                                <select name="period" id="" class="form-control">
+                                    <option selected disabled>Meal Time</option>
                                     <option>Breakfast</option>
                                     <option>Lunch</option>
                                     <option>Dinner</option>
@@ -19,16 +19,16 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select name="" id="" class="form-control">
-                                    <option>Meal Type</option>
+                                <select name="category" id="" class="form-control">
+                                    <option selected disabled>Meal Category</option>
                                     <option>Food</option>
                                     <option>Drinks</option>
                                     <option>Pastries</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select name="" id="" class="form-control">
-                                    <option>Origin</option>
+                                <select name="origin" id="" class="form-control">
+                                    <option selected disabled>Origin</option>
                                     <option>Local</option>
                                     <option>Chinese</option>
                                     <option>Italian</option>
@@ -37,8 +37,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select name="" id="" class="form-control">
-                                    <option>Diet</option>
+                                <select name="diet" id="" class="form-control">
+                                    <option selected disabled>Diet</option>
                                     <option>Vegetarian</option>
                                     <option>Vegan</option>
                                     <option>Non-Vegetarian</option>
@@ -67,19 +67,6 @@
                                     <h5 class="price">₦{{$meal->price}}</h5>
                                 </div>
                                 <small class="text-muted">{{$meal->description}}</small>
-                                    
-                                
-                                <div class="options mb-1">
-                                    <div class="options-size mb-1">
-                                        <span style="font-weight:bold;text-decoration:underline;display:block;text-align:center">Items</span>	
-                                    </div>
-                                    <div class="options-colors">
-                                        @foreach ($meal->items as $item)
-                                             <span>{{$item->name}}</span> 
-                                             @if(!$loop->last)+ @endif
-                                        @endforeach      
-                                    </div>
-                                </div>
                                 <div class="d-flex">
                                     <a href="{{route('admin.meal.edit',$meal)}}" class="btn btn-sm">edit</a>
                                     <a href="javascript:void(0)" data-toggle="modal" data-target="#delete-item{{$meal->id}}" class="btn btn-sm bg-red">delete</a>

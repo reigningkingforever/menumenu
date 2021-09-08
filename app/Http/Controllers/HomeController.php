@@ -32,7 +32,7 @@ class HomeController extends Controller
         // })->get();
         $calendars = MealCalendar::available()->whereHas('meal')->get();
         $tag = Tag::where('status',true)->get();
-        $filter = ['itemtype'=>  ['food','drinks','fruits','pastries'],
+        $filter = ['category'=>  ['food','drinks','fruits','pastries'],
                     'period'=>  ['breakfast','lunch','dinner','dessert'],
                     'origin' => ['local','intercontinental','chinese','italian'],
                     'diet' => ['vegan','veg','nonveg'],

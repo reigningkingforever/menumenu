@@ -107,10 +107,11 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between mt-2 mt-sm-0">
                                                     <span>    
-                                                        @foreach($item->meal->items as $food)
+                                                        {{$item->meal->description}}
+                                                        {{-- @foreach($item->meal->items as $food)
                                                             {{$food->name.' ('.$food->size.')'}}
                                                             @if(!$loop->last)+ @endif
-                                                        @endforeach 
+                                                        @endforeach  --}}
                                                     </span>
                                                     
                                                 </div>

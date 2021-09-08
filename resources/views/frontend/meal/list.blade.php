@@ -23,17 +23,14 @@
 								</figure>
 								<section class="details">
 									<div class="min-details">
-										<h5>{{$calendar->meal->name}}<span>{{$calendar->meal->description}}</span></h5>
+										<h5>{{$calendar->meal->name}}</h5>
 										<h5 class="price">₦{{$calendar->meal->price}}</h5>
 									</div>
 									<div class="options">
 										<div class="options-size">
-											<span style="font-weight:bold;">Items:</span>
+											<p style="text-decoration:underline;text-align:center">Description</p>
 											<span>
-												@foreach ($calendar->meal->items as $item)
-													<span>{{$item->name}}</span> 
-													@if(!$loop->last)+ @endif
-												@endforeach
+												<span>{{$calendar->meal->description}}</span>
 											</span>
 										</div>
 										<div class="options-colors">

@@ -2,9 +2,6 @@
 file:///C:/Users/reign/Documents/WebDev/html/components/bootstrap-4user-calendar-schedulerdrag-drop/dist/routine.html?#
 Manager needs to fill calendar a month ahead
 
-2. correct meals on display
-add meal pictures
-
 3. TASK
 {
 social logins

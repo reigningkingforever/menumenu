@@ -20,7 +20,7 @@
           <li>
             <a @if(url()->current() == url('/'))  href="#restaurant-menu" @else href="{{url('/')}}#restaurant-menu" @endif class="page-scroll">Menu</a></li>
           
-          {{-- <li><a href="{{route('meals')}}" class="page-scroll">Meals</a></li> --}}
+          <li><a href="#" class="page-scroll">Special Diet</a></li>
           <li><a href="{{route('blog')}}" class="page-scroll">Blog</a></li>
           
         </ul>

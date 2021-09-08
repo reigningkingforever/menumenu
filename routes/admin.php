@@ -2,11 +2,11 @@
 Route::group(['prefix'=> 'admin','as'=>'admin.','middleware'=> ['auth','admin']],function(){
     Route::get('dashboard', 'HomeController@backend')->name('home');
 
-    Route::get('menu','MenuController@list')->name('menu.list');
-    Route::post('menu/save','MenuController@store')->name('menu.save');
-    Route::get('menu/edit/{menu}','MenuController@edit')->name('menu.edit');
-    Route::post('menu/update','MenuController@update')->name('menu.update');
-    Route::post('menu/delete/{menu}','MenuController@destroy')->name('menu.delete');
+    Route::get('tag','TagController@list')->name('tag.list');
+    Route::post('tag/save','TagController@store')->name('tag.save');
+    Route::get('tag/edit/{tag}','TagController@edit')->name('tag.edit');
+    Route::post('tag/update/{tag}','TagController@update')->name('tag.update');
+    Route::post('tag/delete/{tag}','TagController@destroy')->name('tag.delete');
 
     Route::get('meals','MealController@list')->name('meal.list');
     Route::get('meal/create','MealController@create')->name('meal.create');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -11,74 +12,46 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list()
     {
-        //
+        $tags = Tag::all();
+        return view('backend.tags.list',compact('tags'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $tag = new Tag;
+        $tag->name = $request->name;
+        $tag->type = $request->type;
+        if($request->is_meal) $tag->is_meal = true;
+        if($request->is_post) $tag->is_post = true;
+        $tag->status = $request->status;
+        $tag->save();
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+    public function edit(Tag $tag)
     {
-        //
+        $tags = Tag::all();
+        return view('backend.tags.edit',compact('tag','tags'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->name = $request->name;
+        $tag->type = $request->type;
+        if($request->is_meal) $tag->is_meal = true;
+        if($request->is_post) $tag->is_post = true;
+        $tag->status = $request->status;
+        $tag->save();
+        return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(Tag $tag)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        
     }
 }

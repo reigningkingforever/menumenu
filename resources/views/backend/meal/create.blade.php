@@ -25,75 +25,55 @@
                                             <div class="form-group">
                                                 {{-- <label class="">Title</label> --}}
                                                 <input type="text" name="name" class="form-control" placeholder="Title" maxlength="20" required>
-                                                <small class="form-text text-muted">Title of the meal</small>
+                                                <small class="form-text text-muted">Display name of the meal</small>
                                             </div>
                                             <div class="form-group">
                                                 <textarea name="description" class="form-control" placeholder="All meal items" row='3' style="height:unset;" required></textarea>
                                                 <small class="form-text text-muted">Description of the meal</small>
                                             </div>
+                                            <label class="text-muted">Category</label>
                                             <div class="form-group d-flex">
-                                                <span class="text-muted">Type</span>
-                                                <div class="form-check form-check-radio mt-3">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="type" id="food" value="food" checked>
-                                                        <span class="form-check-sign"></span>
-                                                        Food
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-radio mt-3">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="type" id="drink" value="drink" >
-                                                        <span class="form-check-sign"></span>
-                                                        Drink
-                                                    </label>
-                                                </div> 
-                                                <div class="form-check form-check-radio mt-3">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="type" id="fruit" value="fruit">
-                                                        <span class="form-check-sign"></span>
-                                                        Fruit
-                                                    </label>
-                                                </div>   
-                                                <div class="form-check form-check-radio mt-3">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input food-type" type="radio" name="type" id="pastries" value="pastries">
-                                                        <span class="form-check-sign"></span>
-                                                        Pastries
-                                                    </label>
-                                                </div>    
+                                                @foreach ($tags->where('type','category')->sortBy('category') as $tag)
+                                                    <div class="form-check form-check-radio">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input food-type" type="radio" name="category" id="{{$tag->name}}" value="{{$tag->name}}" checked>
+                                                            <span class="form-check-sign"></span>
+                                                            {{ucwords($tag->name)}}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                                
+                                                   
                                             </div>
                                             <div class="form-group row">
                                                 
                                                 <div class="col-md-6">
                                                     <label class="">Item Origin</label>
                                                     <select name="origin" id="" class="form-control">
-                                                        <option>Intercontinental</option>
-                                                        <option>Local</option>
-                                                        <option>Chinese</option>
-                                                        <option>Italian</option>
-                                                        <option>Russian</option>
-                                                        
+                                                        @foreach ($tags->where('type','origin')->sortBy('origin') as $tag)
+                                                            <option value="{{$tag->name}}">{{ucwords($tag->name)}}</option>
+                                                        @endforeach                                               
                                                     </select>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="">Diet</label>
                                                     <select name="diet" id="" class="form-control">
-                                                        <option value="vegan">Vegan</option>
-                                                        <option value="veg">Vegetarian</option>
-                                                        <option value="nonveg">Non-Vegetarian</option>
+                                                        @foreach ($tags->where('type','diet')->sortBy('diet') as $tag)
+                                                        <option value="{{$tag->name}}">{{ucwords($tag->name)}}</option>
+                                                    @endforeach                                          
                                                     </select>
                                                 </div>
                                                 
                                                 
                                             </div>
-                                            <div class="form-group companydocument">
+                                            {{-- <div class="form-group companydocument">
                                                 <label class="">Select Meal Items</label>
                                                 <select name="menu[]" class="form-control select2" multiple required>
                                                     @foreach ($menus as $menu)
                                                         <option label="{{$menu->image}}" value="{{$menu->id}}"> {{$menu->name.'('.$menu->size.') : ₦'.$menu->price}} </option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group row">
                                                 <div class="col-md-6">
                                                     <label class="">Price</label>
@@ -115,16 +95,19 @@
                                         <div class="col-md-5">
                                             <h5>Featured Image</h5>
                                             
-                                            <div id="holder" style="margin-top:15px;max-height:300px;"></div>
+                                            <div id="holder" style="margin-top:15px;height:300px;border:#eee solid 1px;"></div>
                                         </div>
                                     </div>
-                                    {{-- <div class="row"> --}}
-                                        <div class="d-flex justify-content-center row">
-                                            <button class="btn btn-primary btn-block col-md-4" type="submit">
-                                                Save Meal
-                                            </button>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="d-flex justify-content-center row">
+                                                <button class="btn btn-primary btn-block col-md-4" type="submit">
+                                                    Save Meal
+                                                </button>
+                                            </div>
                                         </div>
-                                    {{-- </div> --}}
+                                        
+                                    </div>
                                 </fieldset> 
                             </form>
                         </div>
@@ -137,7 +120,7 @@
 @endsection
 @push('scripts')
     
-    <script>
+    {{-- <script>
         function formatState (state) {
             if (!state.id) {
                 return state.text;
@@ -168,7 +151,7 @@
             templateSelection: formatSelection,
             placeholder:"Click here",
         });
-    </script>
+    </script> --}}
     <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
     <script>
         var route_prefix = "/laravel-filemanager";

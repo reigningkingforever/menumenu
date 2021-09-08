@@ -24,9 +24,6 @@ class Meal extends Model
             ]
         ];
     }
-    public function items(){
-        return $this->belongsToMany(Menu::class,'meal_items');
-    }
 
     public function media(){
         return $this->morphOne(Media::class, 'mediable')->withDefault([

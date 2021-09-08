@@ -198,19 +198,19 @@
                   <span>Type</span>
                 </h3>
                 <div class="checkbox">
-                  <input type="checkbox" class="itemtype" name="itemtype[]" value="food" id="food" @if(in_array('food',$filter['itemtype'])) checked @endif>
+                  <input type="checkbox" class="category" name="category[]" value="food" id="food" @if(in_array('food',$filter['category'])) checked @endif>
                   <label for="food">Food</label>
                 </div></br>
                 <div class="checkbox">
-                  <input type="checkbox" class="itemtype" name="itemtype[]" value="drinks" id="drinks" @if(in_array('drinks',$filter['itemtype'])) checked @endif>
+                  <input type="checkbox" class="category" name="category[]" value="drinks" id="drinks" @if(in_array('drinks',$filter['category'])) checked @endif>
                   <label for="drinks">Drinks</label>
                 </div></br>
                 <div class="checkbox">
-                  <input type="checkbox" class="itemtype" name="itemtype[]" value="fruits" id="fruits" @if(in_array('fruits',$filter['itemtype'])) checked @endif>
+                  <input type="checkbox" class="category" name="category[]" value="fruits" id="fruits" @if(in_array('fruits',$filter['category'])) checked @endif>
                   <label for="fruits">Fruits</label>
                 </div></br>
                 <div class="checkbox">
-                  <input type="checkbox" class="itemtype" name="itemtype[]" value="pastries" id="pastries" @if(in_array('pastries',$filter['itemtype'])) checked @endif>
+                  <input type="checkbox" class="category" name="category[]" value="pastries" id="pastries" @if(in_array('pastries',$filter['category'])) checked @endif>
                   <label for="pastries">Pastries</label>
                 </div>
                 <br>
@@ -354,8 +354,8 @@
         $(this).prop('checked', true);
         filtermeals();
       });
-      $('.itemtype').click(function(){
-          if($('.itemtype:checked').length < 1)
+      $('.category').click(function(){
+          if($('.category:checked').length < 1)
           $(this).prop('checked', true);
         filtermeals();
       });
@@ -385,8 +385,8 @@
     </script>
     <script>
         function filtermeals(search = ''){
-            var itemtype = [];
-            $('.itemtype:checked').each(function(index){ itemtype.push($(this).val()); });
+            var category = [];
+            $('.category:checked').each(function(index){ category.push($(this).val()); });
             var period = [];
             $('.period:checked').each(function(index){ period.push($(this).val()); });
             var origin = [];
@@ -401,7 +401,7 @@
                 data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),
                     'search' : search,
-                    'itemtype' : itemtype,
+                    'category' : category,
                     'period' : period,
                     'origin' : origin,
                     'diet' : diet,

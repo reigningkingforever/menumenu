@@ -42,10 +42,7 @@
                                             </div>
                                             <div class="d-flex justify-content-between mt-2 mt-sm-0">
                                                 <span class="small">
-                                                    @foreach($item['calendar']->meal->items as $food)
-                                                        {{$food->name.' ('.$food->size.')'}}
-                                                        @if(!$loop->last)+ @endif
-                                                    @endforeach
+                                                    {{$item['calendar']->meal->description}}
                                                     <br>
                                                     <span class="small">{{ucwords($item['calendar']->period)}} on {{$item['calendar']->start_at->format('l-jS')}}</span>
                                                 </span>

@@ -92,15 +92,9 @@
                                                             <td>
                                                                 <h5 class="my-0">
                                                                     <a href="#">{{$item->calendar->meal->name}} </a>
-                                                                    {{-- <small>size: {{$item->meal->size}}</small>  --}}
                                                                 </h5>
                                                                 <small class="d-none d-md-block">
-                                                                    {{$item->calendar->meal->description}}<br>
-                                                                    @foreach($item->calendar->meal->items as $food)
-                                                                        {{$food->name.' ('.$food->size.')'}}
-                                                                        @if(!$loop->last)+ @endif
-                                                                    @endforeach
-                                                                    
+                                                                    {{$item->calendar->meal->description}}                                                                    
                                                                 </small>    
                                                             </td>
                                                             <td> {{$item->quantity}} </td>

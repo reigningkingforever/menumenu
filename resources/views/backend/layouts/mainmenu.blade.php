@@ -18,9 +18,9 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="{{route('admin.menu.list')}}">
+                <a class="nav-link" href="{{route('admin.tag.list')}}">
                     <i class="nc-icon nc-paper-2"></i>
-                    <p>Menu</p>
+                    <p>Tag</p>
                 </a>
             </li>
             <li>

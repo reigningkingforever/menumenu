@@ -396,6 +396,7 @@
     $('.select2').select2({
         templateResult: formatState,
         placeholder:"Click here",
+        dropdownParent: $('#addMealModal')
     });
 </script>
 @endpush
