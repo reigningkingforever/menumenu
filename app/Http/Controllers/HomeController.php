@@ -28,10 +28,10 @@ class HomeController extends Controller
     public function front(){
         $calendars = MealCalendar::available()->whereHas('meal')->get();
         $tags = Tag::where('status',true)->get();
-        $filter = ['category'=>  ['food','drinks','fruits','pastries'],
-                    'period'=>  ['breakfast','lunch','dinner','dessert'],
-                    'origin' => ['local','intercontinental','chinese','italian'],
-                    'diet' => ['vegan','veg','nonveg'],
+        $filter = ['category'=>  $tags->where('type','category')->pluck('name')->toArray(),
+                    'period'=>  $tags->where('type','period')->pluck('name')->toArray(),
+                    'origin' => $tags->where('type','origin')->pluck('name')->toArray(),
+                    'diet' => $tags->where('type','diet')->pluck('name')->toArray(),
                     'cost' => '0,20000',
                     ];
         return view('frontend.home',compact('calendars','filter','tags'));

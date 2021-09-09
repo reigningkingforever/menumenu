@@ -13,16 +13,17 @@ class MealController extends Controller
 
     public function index(Request $request){
         // dd($request->all());
+        $tags = Tag::where('status',true)->get();
         if($q = $request->search){
             $calendars = MealCalendar::available()->whereHas('meal',function ($query) use($q){
                 $query->where('name','LIKE',"%$q%")->orWhere('description','LIKE',"%$q%");
             })->get();
             $filter = [
-                'category'=>  ['food','drinks','fruits','pastries'],
-                'period'=>  ['breakfast','lunch','dinner','dessert'],
-                'origin' => ['local','intercontinental','chinese','italian'],
-                'diet' => ['vegan','veg','nonveg'],
-                'cost' => 0,20000
+                'category'=>  $tags->where('type','category')->pluck('name')->toArray(),
+                'period'=>  $tags->where('type','period')->pluck('name')->toArray(),
+                'origin' => $tags->where('type','origin')->pluck('name')->toArray(),
+                'diet' => $tags->where('type','diet')->pluck('name')->toArray(),
+                'cost' => '0,20000',
             ];
         }
         else{
