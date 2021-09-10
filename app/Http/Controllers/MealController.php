@@ -73,18 +73,6 @@ class MealController extends Controller
         return redirect()->route('admin.meal.list');
     }
 
-    // public function getMealDiet(Array $ids){
-    //     $diet = ''; 
-    //     $menus = Menu::whereIn('id',$ids)->get()->pluck('diet')->toArray();
-    //     if(in_array('nonveg',$menus))
-    //     $diet = 'nonveg';
-    //     elseif(in_array('veg',$menus))
-    //     $diet = 'veg';
-    //     else
-    //     $diet = 'vegan';
-    //     return $diet;
-    // }
-
     public function show(Meal $meal)
     {
         //
@@ -113,7 +101,7 @@ class MealController extends Controller
     
     public function destroy(Meal $meal)
     {
-        if($meal->calendar->orderItems->isEmpty() && $meal->calendar->bookmarks->isEmpty()){
+        if($meal->orderItems->isEmpty() && $meal->bookmarks->isEmpty()){
             $meal->delete();
         }
         return redirect()->back();

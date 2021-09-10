@@ -18,7 +18,7 @@ Route::view('cake-and-pastries','frontend.pastries')->name('cake-pastries');
 Route::view('foodstuff-purchase','frontend.foodstuff')->name('foodstuff-purchase');
 Route::view('event-catering','frontend.catering')->name('catering');
 Route::view('training','frontend.training')->name('training');
-
+Route::view('privacy','frontend.privacy')->name('privacy');
 Route::get('menus','MenuController@index')->name('menus');
 Route::get('menu/{menu}', 'MenuController@view')->name('menu.view');
 
@@ -46,6 +46,8 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 });
 
 Auth::routes();
+Route::get('login/{provider}', 'SocialController@redirect');
+Route::get('login/{provider}/callback','SocialController@Callback');
 Route::get('home', 'HomeController@dashboard')->name('home');
 include('user.php');
 include('admin.php');

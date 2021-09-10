@@ -38,6 +38,7 @@
                             <p class="mb-5"></p>
                             <form class="p-5">
                             <button class="social-signin facebook">Log in with facebook</button>
+                            {{-- <button href="{{ url('/login/facebook') }}" class="social-signin facebook">Log in with facebook</button> --}}
                             <button class="social-signin twitter">Log in with Twitter</button>
                             <button class="social-signin google">Log in with Google+</button>
                             <a href="{{route('register')}}" class="d-block">Create an account</a>
@@ -55,3 +56,17 @@
 
 
 @endsection
+@push('scripts')
+<script>
+    $('.facebook').click(function(){
+        // alert(window.location.host+'/login/facebook');
+        window.location.href(window.location.host+'/login/facebook');
+    })    
+    $('.twitter').click(function(){
+        location.href(window.location.origin+'/login/twitter');
+    })
+    $('.google').click(function(){
+        location.href(window.location.origin+'/login/google');
+    })
+</script>    
+@endpush

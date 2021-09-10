@@ -70,7 +70,7 @@
 														@endif
 													</th>
 													<td>{{$bookmark->calendar->meal->name}}</td>
-													<td>{{$bookmark->calendar->meal->calendar->sortDesc('start_at')->first()->day.''.$bookmark->calendar->meal->calendar->sortDesc('start_at')->first()->start_at->format('jS').' :'.$bookmark->calendar->meal->calendar->sortDesc('start_at')->first()->period}}</td>
+													<td>{{$bookmark->calendar->meal->calendars->sortByDesc('start_at')->first()->day.''.$bookmark->calendar->meal->calendars->sortByDesc('start_at')->first()->start_at->format('jS').' :'.$bookmark->calendar->meal->calendars->sortByDesc('start_at')->first()->period}}</td>
 													
 													
 												</tr>

@@ -4,9 +4,9 @@ namespace App;
 
 use App\Meal;
 use App\Media;
-use App\Order;
 use App\Comment;
 use App\Bookmark;
+use App\OrderDetail;
 use App\MealCalendar;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -31,8 +31,12 @@ class Meal extends Model
         ]);
     }
 
-    public function calendar(){
-        return $this->hasOne(MealCalendar::class);
+    public function calendars(){
+        return $this->hasMany(MealCalendar::class);
+    }
+    
+    public function orderItems(){
+        return $this->hasManyThrough(OrderDetail::class, MealCalendar::class);
     }
 
     public function comments(){
@@ -44,7 +48,7 @@ class Meal extends Model
             $q->whereBetween('start_at', [now(), today()->addDays(7)->addHours(21)]);
           })->with('calendar');
     }
-    public function orders(){
-        return $this->hasMany(Order::class);
+    public function bookmarks(){
+        return $this->hasManyThrough(Bookmark::class, MealCalendar::class);
     }
 }
