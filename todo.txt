@@ -14,6 +14,7 @@ enter LIVE PAYSTACK DETAILS
 change paystack callback url
 create a post, & let people book recurring order from post
 view post frontend
+419 page expired.. 404 page
 
 OTHERS
 buy domain

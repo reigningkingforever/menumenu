@@ -182,7 +182,7 @@
 				</form>
                 <small id="coupon_description" class="d-block text-info text-center"></small>
 				<hr class="mb-4">
-                @guest <small class="d-block text-danger">-------Please login-----------</small> @endguest
+                @guest <small id="login" class="d-block text-danger">-------Please login-----------</small> @endguest
                 <form id="checkoutform" method="POST" action="{{ route('checkout') }}">
                     @csrf
                     <input type="hidden" name="grandtotal" id="grandtotal" value="{{$order['grandtotal']}}">
@@ -363,7 +363,9 @@
     <script>
         $('#checkoutform').on('submit',function(e){
            e.preventDefault();
-           if($('.address_block')[0])
+           if($('#login').length)
+           $(this).unbind().submit();
+           else if($('.address_block')[0])
            $(this).unbind().submit();
            else
            $('#set-address').modal();
