@@ -25,7 +25,16 @@ class OrderObserver
      */
     public function updated(Order $order)
     {
-        //
+        if($order->status == 'success'){
+            //update coupon
+            if($payment->coupon && $payment->coupon->available){
+                --$payment->coupon->available;
+                $payment->coupon->save();
+            }
+            //send thank you email to user
+            //send email/sms to admin
+            $payment->user->notify(new PaymentNotification($payment));
+        }
     }
 
     /**

@@ -52,11 +52,11 @@ class OrderNotification extends Notification implements ShouldQueue
     public function message($status){
         $word = '';
         switch($status){
-            case 'pending': $word = 'order with order number '.$this->order->id.' was edited';
+            case 'cancelled': $word = 'Order with order number '.$this->order->id.' was cancelled';
             break;
-            case 'paid': $word = 'You paid for order with order number '.$this->order->id;
+            case 'finished': $word = 'Your meals with order number '.$this->order->id.' are ready and on the way to you';
             break;
-            case 'delivered': $word = 'order with order number '.$this->order->id.' has expired';
+            case 'delivered': $word = 'Your meals with order number '.$this->order->id.' has been delivered';
             break;
         }
         return $word;

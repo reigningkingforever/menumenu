@@ -75,6 +75,7 @@ class OrderController extends Controller
         return view('backend.order.view',compact('order'));
     }
     public function status(Request $request,Order $order){
+        //do order status
         return redirect()->back();
     }
     public function purchase(Request $request,Order $order){

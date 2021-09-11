@@ -59,7 +59,7 @@ class PostController extends Controller
         // $post->user_id = 1;
         $post->user_id = Auth::id();
         $post->title = $request->title;
-        $post->image = $request->file;
+        $post->image = str_replace(url('/'),'',$request->file);
         $post->tags = $request->tags;
         $post->status = $request->status;
         $post->body = $request->description;
