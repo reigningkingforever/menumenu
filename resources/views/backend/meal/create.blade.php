@@ -120,38 +120,6 @@
 @endsection
 @push('scripts')
     
-    {{-- <script>
-        function formatState (state) {
-            if (!state.id) {
-                return state.text;
-            }
-            
-            var $state = $(
-                '<span><img src="' + state.element.label+'" class="thumbnail mr-2" /> ' + state.text + '</span>'
-            );
-            // var $state = $(
-            //     '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-thumbnail" /> ' + state.text + '</span>'
-            // );
-            return $state;
-        }
-        function formatSelection (state) {
-            if (!state.id) {
-                return state.text;
-            }
-            var $state = $(
-                '<span><img src="' + state.element.label+ '" class="thumbnail mr-2" /> </span>'
-            );
-            // var $state = $(
-            //     '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-thumbnail" /> ' + state.text + '</span>'
-            // );
-            return $state;
-        }
-        $('.select2').select2({
-            templateResult: formatState,
-            templateSelection: formatSelection,
-            placeholder:"Click here",
-        });
-    </script> --}}
     <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
     <script>
         var route_prefix = "/laravel-filemanager";

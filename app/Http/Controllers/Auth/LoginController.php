@@ -40,6 +40,12 @@ class LoginController extends Controller
     }
     public function showLoginForm()
     {
+        // $url = secure_url('user/profile');
+        // $url = https://bolasmenu.herokuapp.com/storage/photos/1/bolifish.jpg
+        // $url = 'http://dailymenu.test/storage/photos/1/bolifish.jpg';
+        // $baseurl = url('/');
+        // $left = str_replace($baseurl,'',$url);
+
         return view('frontend.auth.login');
     }
 

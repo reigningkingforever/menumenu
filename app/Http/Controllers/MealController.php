@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Meal;
-use App\Menu;
 use App\Tag;
 use App\MealCalendar;
 use Illuminate\Http\Request;
@@ -64,7 +63,7 @@ class MealController extends Controller
         $meal = new Meal;
         $meal->name = $request->name;
         $meal->description = $request->description;
-        $meal->image = $request->file;
+        $meal->image = str_replace(url('/'),'',$request->file);
         $meal->category = $request->category;
         $meal->origin = $request->origin;
         $meal->diet = $request->diet;

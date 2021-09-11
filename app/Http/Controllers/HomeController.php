@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
-use App\City;
-use App\Town;
-use App\State;
 use App\MealCalendar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +23,14 @@ class HomeController extends Controller
     }
 
     public function front(){
+        $meals = \App\Meal::all();
+        $baseurl = url('/');
+        foreach($meals as $meal){
+            $meal->image = str_replace($baseurl,'',$meal->image);
+            $meal->save();
+        }
+
+
         $calendars = MealCalendar::available()->whereHas('meal')->get();
         $tags = Tag::where('status',true)->get();
         $filter = ['category'=>  $tags->where('type','category')->pluck('name')->toArray(),

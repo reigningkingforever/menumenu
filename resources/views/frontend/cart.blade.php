@@ -138,7 +138,7 @@
                         <div>
                             <h6 class="my-0 font-weight-bold">Delivery x <span id="deliveries">{{count($deliveries)}}</span></h6>
                             @if(Auth::user()->addresses->isNotEmpty())
-                            <small class="text-muted">
+                            <small class="text-muted address_block">
                                 {{Auth::user()->addresses->where('status',true)->first()->address}} ,
                                 {{Auth::user()->addresses->where('status',true)->first()->town->name}}
                                 {{Auth::user()->addresses->where('status',true)->first()->city->name}} LGA,
@@ -183,7 +183,7 @@
                 <small id="coupon_description" class="d-block text-info text-center"></small>
 				<hr class="mb-4">
                 @guest <small class="d-block text-danger">-------Please login-----------</small> @endguest
-                <form method="POST" action="{{ route('checkout') }}">
+                <form id="checkoutform" method="POST" action="{{ route('checkout') }}">
                     @csrf
                     <input type="hidden" name="grandtotal" id="grandtotal" value="{{$order['grandtotal']}}">
                     <input type="hidden" name="subtotal" id="subtotal" value="{{$order['subtotal']}}">
@@ -197,7 +197,7 @@
                         <input type="hidden" name="item[]" id="cal{{$item['id']}}" value="{{ json_encode( $array = ['id' => $item['id'],'quantity'=> $item['quantity'] ]  ) }}" >
                         @endforeach
                     @endif
-				    <button class="btn btn-primary btn-lg btn-block @guest disabled @endguest" type="submit">Continue to checkout</button>
+				    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                 </form>
 			</div>
         </div>
@@ -358,6 +358,15 @@
                     },
                 });
             }
+        });
+    </script>
+    <script>
+        $('#checkoutform').on('submit',function(e){
+           e.preventDefault();
+           if($('.address_block')[0])
+           $(this).unbind().submit();
+           else
+           $('#set-address').modal();
         });
     </script>
 @endpush

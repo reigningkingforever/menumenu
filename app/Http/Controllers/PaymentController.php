@@ -23,19 +23,6 @@ class PaymentController extends Controller
         $this->middleware('auth');
     }
 
-    // public function checkthis(){
-    //     $user = Auth::user();
-    //     $user_address = $user->addresses->where('status',true)->first()->address.' '.$user->addresses->where('status',true)->first()->town->name.' '.$user->addresses->where('status',true)->first()->city->name.' '.$user->addresses->where('status',true)->first()->state->name;
-        
-    //     $order = Order::find(5);
-    //     foreach($order->items->sortBy('required_at') as $item){
-
-    //         $deliver = Delivery::firstOrCreate(['user_id'=> $user->id,'order_id'=> $order->id,'delivery_date'=> $item->required_at->format('Y-m-d')],
-    //         ['delivery_time'=> $item->required_at->format('H:i:s'),'address'=> $user_address]);
-    //     }
-    //     return true;
-    // }
-
     public function checkout(Request $request)
     {
         $user = Auth::user();

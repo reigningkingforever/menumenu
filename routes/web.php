@@ -37,7 +37,6 @@ Route::post('applycoupon','CartController@applycoupon')->name('applycoupon');
 Route::get('checkoutOrder/{order}','OrderController@checkout')->name('checkoutOrder');
 
 Route::post('checkout','PaymentController@checkout')->name('checkout');
-Route::get('checkthis','PaymentController@checkthis');
 
 Route::get('paymentverification','PaymentController@verification')->name('paymentverify');
 

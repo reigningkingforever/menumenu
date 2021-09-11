@@ -37,10 +37,10 @@
                         <div class="mt-5 pt-5">
                             <p class="mb-5"></p>
                             <form class="p-5">
-                            <button class="social-signin facebook">Log in with facebook</button>
-                            {{-- <button href="{{ url('/login/facebook') }}" class="social-signin facebook">Log in with facebook</button> --}}
-                            <button class="social-signin twitter">Log in with Twitter</button>
-                            <button class="social-signin google">Log in with Google+</button>
+                            {{-- <button class="social-signin facebook">Log in with facebook</button> --}}
+                            <a href="{{ url('/login/facebook') }}" class="btn social-signin facebook">Log in with facebook</a>
+                            <a href="{{ url('/login/twitter') }}" class="btn social-signin twitter">Log in with Twitter</a>
+                            <a href="{{ url('/login/google') }}" class="btn social-signin google">Log in with Google+</a>
                             <a href="{{route('register')}}" class="d-block">Create an account</a>
                             </form>
                         </div>

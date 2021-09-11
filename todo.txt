@@ -11,6 +11,7 @@ create notifications - payments, signup, order change,
 TEST
 try to make an order
 enter LIVE PAYSTACK DETAILS
+change paystack callback url
 create a post, & let people book recurring order from post
 view post frontend
 

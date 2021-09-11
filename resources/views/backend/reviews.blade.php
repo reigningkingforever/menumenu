@@ -73,9 +73,9 @@
                                                 @else
                                                     <div class="meal">
                                                         @if($comment->commentable_type == "post")
-                                                        <img src="{{$comment->commentable->image}}" class="avatar rounded">
+                                                            <img src="{{$comment->commentable->image}}" class="avatar rounded">
                                                         @else
-                                                        <img src="{{$comment->commentable->image}}" class="avatar rounded">
+                                                            <img src="{{$comment->commentable->image}}" class="avatar rounded">
                                                         @endif
                                                     </div>
                                                 @endif
