@@ -13,7 +13,7 @@
 				<div class="dashboard-sidebar">
 					<div class="profile-top">
                         <div class="profile-image">
-                            @if($order->user->media)
+                            @if($order->user->image)
                             <img src="{{asset('storage/users/'.$order->user->image)}}" alt="" class="img-fluid">
                             @else
                             <img src="https://ui-avatars.com/api/?name={{$order->user->name}}" alt="" class="img-fluid">
@@ -88,12 +88,12 @@
                                     @foreach ($order->items as $item)
                                     <tr>
                                         <td>
-                                            <a href="{{route('meal.view',$item->meal)}}">
+                                            <a href="{{route('meal.view',$item->calendar->meal)}}">
                                                 <div class="meal d-flex flex-column">
-                                                    @if(!$item->meal->media)
+                                                    @if(!$item->calendar->meal->image)
                                                         <img src="{{asset('img/no-image.jpg')}}" class="avatar rounded m-0">
                                                     @else
-                                                        <img src="{{$item->meal->image}}" class="avatar rounded m-0">
+                                                        <img src="{{$item->calendar->meal->image}}" class="avatar rounded m-0">
                                                     @endif
                                                     <a href="#" class="text-danger visible-xs" href="#"><u>Review</u></a>
                                                 </div>
@@ -102,13 +102,13 @@
                                         <td class="text-left">
                                             <div class="d-flex flex-column">
                                                 <div class="d-flex justify-content-between">
-                                                    <span>{{$item->meal->name.' '.$item->meal->description}} <span class="visible-xs"> x {{$item->quantity}}</span></span>
-                                                    <span class="visible-xs">₦{{$item->amount}}</span>
+                                                    <span>{{$item->calendar->meal->name.' '.$item->calendar->meal->description}} <span class="visible-xs"> x {{$item->quantity}}</span></span>
+                                                    <span class="visible-xs">₦{{$item->calendar->meal->price}}</span>
                                                 </div>
                                                 <div class="d-flex justify-content-between mt-2 mt-sm-0">
                                                     <span>    
-                                                        {{$item->meal->description}}
-                                                        {{-- @foreach($item->meal->items as $food)
+                                                        {{$item->calendar->meal->description}}
+                                                        {{-- @foreach($item->calendar->meal->items as $food)
                                                             {{$food->name.' ('.$food->size.')'}}
                                                             @if(!$loop->last)+ @endif
                                                         @endforeach  --}}
@@ -118,7 +118,7 @@
                                             </div>
                                         </td>
                                         <td class="hidden-xs">
-                                            ₦{{$item->price}}
+                                            ₦{{$item->calendar->meal->price}}
                                         </td>
                                         <td class="hidden-xs">
                                             <div class="qty-box">
@@ -128,7 +128,7 @@
                                             </div>
                                         </td>
                                         <td class="hidden-xs">
-                                            ₦{{$item->amount}}
+                                            ₦{{$item->calendar->meal->price}}
                                         </td>
                                         <td class="hidden-xs">
                                             <div class="">
@@ -145,7 +145,7 @@
                                             <td colspan="5">
                                                 <div class="d-flex justify-content-between">
                                                     <span class="">SubTotal</span>
-                                                    <span>₦{{$order->items->sum('amount')}}</span>
+                                                    <span>₦{{$order->items->sum('calendar.meal.price')}}</span>
                                                 </div>     
                                             </td>
                                             

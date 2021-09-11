@@ -5,6 +5,7 @@ Manager needs to fill calendar a month ahead
 social logins
 create emails sending
 create notifications - payments, signup, order change, 
+paymentobserver - payment updated
 }
 
 
